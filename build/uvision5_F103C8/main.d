@@ -154,3 +154,4 @@
 .\build\uvision5_f103c8\main.o: mbed-os/./hal/sleep_api.h
 .\build\uvision5_f103c8\main.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5_f103c8\main.o: mbed-os/./platform/FunctionPointer.h
+.\build\uvision5_f103c8\main.o: .\src\modserial\MODSERIAL.h
