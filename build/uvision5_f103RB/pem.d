@@ -1,0 +1,14 @@
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/src/pem.c
+.\build\uvision5_f103rb\pem.o: mbed_config.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/config.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/platform/inc/platform_mbed.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/config-no-entropy.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/check_config.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/pem.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/base64.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/des.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/aes.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/md5.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/cipher.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/platform.h
+.\build\uvision5_f103rb\pem.o: mbed-os/features/mbedtls/inc/mbedtls/platform_time.h

@@ -1,0 +1,15 @@
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_System.c
+.\build\uvision5_f103rb\rt_system.o: mbed_config.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_TypeDef.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/RTX_Config.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Task.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_System.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Event.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_List.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Mailbox.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Semaphore.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Time.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Timer.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Robin.h
+.\build\uvision5_f103rb\rt_system.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_HAL_CM.h
