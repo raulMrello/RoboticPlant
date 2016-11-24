@@ -821,33 +821,33 @@ extern "C" void __cxa_guard_abort(int *guard_object_p)
 
 #endif
 
-void *operator new(std::size_t count)
-{
-    void *buffer = malloc(count);
-    if (NULL == buffer) {
-        error("Operator new out of memory\r\n");
-    }
-    return buffer;
-}
+//void *operator new(std::size_t count)
+//{
+//    void *buffer = malloc(count);
+//    if (NULL == buffer) {
+//        error("Operator new out of memory\r\n");
+//    }
+//    return buffer;
+//}
 
-void *operator new[](std::size_t count)
-{
-    void *buffer = malloc(count);
-    if (NULL == buffer) {
-        error("Operator new[] out of memory\r\n");
-    }
-    return buffer;
-}
+//void *operator new[](std::size_t count)
+//{
+//    void *buffer = malloc(count);
+//    if (NULL == buffer) {
+//        error("Operator new[] out of memory\r\n");
+//    }
+//    return buffer;
+//}
 
-void operator delete(void *ptr)
-{
-    if (ptr != NULL) {
-        free(ptr);
-    }
-}
-void operator delete[](void *ptr)
-{
-    if (ptr != NULL) {
-        free(ptr);
-    }
-}
+//void operator delete(void *ptr)
+//{
+//    if (ptr != NULL) {
+//        free(ptr);
+//    }
+//}
+//void operator delete[](void *ptr)
+//{
+//    if (ptr != NULL) {
+//        free(ptr);
+//    }
+//}
