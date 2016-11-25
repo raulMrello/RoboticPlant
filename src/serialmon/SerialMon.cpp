@@ -111,7 +111,8 @@ SerialMon::Result SerialMon::send(char* text){
 	}
 	if(!_f_sending){
 		_f_sending = true;
-		_serial->attach(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
+		_serial->attach(this, &SerialMon::txCallback, (SerialBase::IrqType)TxIrq);
+		//_serial->attach<SerialMon >(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
 	}
 	_txbuf.mtx.unlock();
 	return Ok;
