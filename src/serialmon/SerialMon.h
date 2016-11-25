@@ -44,7 +44,7 @@
 #include "mbed.h"
 
 
-class SerialMon : public RawSerial{
+class SerialMon {
 public:
     
     //! Non-blocking functions return code.
@@ -87,7 +87,7 @@ public:
      * @ingroup API
      * @return 1 if there is space to write a character, else 0
      */
-    int writeable() { return (_txbuf.cnt < _txbuf.sz)? 1 : 0; }
+    int writeable() { return ((_txbuf.in != _txbuf.ou)? 1 : 0); }
     
     /**
      * Function: readable
@@ -97,7 +97,7 @@ public:
      * @ingroup API
      * @return 1 if there is a character available to read, else 0
      */
-    int readable() { return (_rxbuf.cnt > 0)? 1 : 0; }
+    int readable() { return (((_rxbuf.in != _rxbuf.ou) || (_rxbuf.in == _rxbuf.ou && _f_rxfull))? 1 : 0); }
     
     
     /**
@@ -108,7 +108,7 @@ public:
      * @ingroup API
      * @return The number of bytes in the TX buffer
      */
-    int txBufferGetCount() { return _txbuf.cnt; }
+    int txBufferGetCount() { return (_txbuf.sz - (_txbuf.in >= _txbuf.ou)? ((_txbuf.limit-_txbuf.in)+(_txbuf.ou-_txbuf.mem)) : (_txbuf.ou-_txbuf.in)); }
     
     /**
      * Function: rxBufferGetCount
@@ -118,7 +118,7 @@ public:
      * @ingroup API
      * @return The number of bytes in the RX buffer
      */
-    int rxBufferGetCount() { return _rxbuf.cnt; }
+    int rxBufferGetCount() { return (_rxbuf.sz - (_rxbuf.in >= _rxbuf.ou)? ((_rxbuf.limit-_rxbuf.in)+(_rxbuf.ou-_rxbuf.mem)) : (_rxbuf.ou-_rxbuf.in)); }
     
     /**
      * Function: txBufferGetSize
@@ -148,7 +148,7 @@ public:
      * @ingroup API
      * @return true if the TX buffer is full, otherwise false
      */
-    bool txBufferFull() { return (_txbuf.cnt < _txbuf.sz)? false : true; }
+    bool txBufferFull() { return (((_txbuf.in == _txbuf.ou-1) || (_txbuf.in == _txbuf.mem && _txbuf.ou == _txbuf.limit))? 1 : 0); }
     
     /**
      * Function: rxBufferFull
@@ -158,7 +158,7 @@ public:
      * @ingroup API
      * @return true if the RX buffer is full, otherwise false
      */
-    bool rxBufferFull() { return (_rxbuf.cnt < _rxbuf.sz)? false : true; }
+		bool rxBufferFull() { return ((_rxbuf.in == _rxbuf.ou-1 && _f_rxfull)? true : false);}
     
     /**
      * Function: txBufferEmpty
@@ -168,7 +168,7 @@ public:
      * @ingroup API
      * @return true if the TX buffer is empty, otherwise false
      */
-    bool txBufferEmpty() { return (_txbuf.cnt == 0)? true : false; }
+    bool txBufferEmpty() { return ((_txbuf.in == _txbuf.ou)? true : false); }
     
     /**
      * Function: rxBufferEmpty
@@ -178,7 +178,7 @@ public:
      * @ingroup API
      * @return true if the RX buffer is empty, otherwise false
      */
-    bool rxBufferEmpty() { return (_rxbuf.cnt == 0)? true : false; }
+    bool rxBufferEmpty() { return ((_rxbuf.in == _rxbuf.ou && !_f_rxfull)? true : false);}
     
     /**
      * Function: autoDetectChar
@@ -261,7 +261,6 @@ protected:
 		char* in;
 		char* ou;
 		int sz;
-		int cnt;
 	};
 	bool _f_sending;
 	bool _f_rxfull;
@@ -276,6 +275,7 @@ protected:
 	char remove();
 	Mutex _tx_mut;
 	Mutex _rx_mut;
+	RawSerial *_serial;
 
 };
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\build\uvision5_F103C8\BluePill_mbedOS_F103C8.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\build\uvision5_F103C8\BluePill_mbedOS_F103C8.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Thu Nov 24 12:58:48 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Fri Nov 25 11:20:32 2016
 <BR><P>
 <H3>Maximum Stack Usage =        680 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -95,18 +95,16 @@ Function Pointers
  <LI><a href="#[50]">[local to arm_exceptions_c]::__default_terminate_handler()</a> from arm_exceptions_globs.o(.text) referenced from arm_exceptions_globs.o(.text)
  <LI><a href="#[55]">mbed::SerialBase::_irq_handler(unsigned, SerialIrq)</a> from serialbase.o(i._ZN4mbed10SerialBase12_irq_handlerEj9SerialIrq) referenced from serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
  <LI><a href="#[71]">mbed::SerialBase::interrupt_handler_asynch()</a> from serialbase.o(i._ZN4mbed10SerialBase24interrupt_handler_asynchEv) referenced from serialbase.o(.constdata)
- <LI><a href="#[79]">mbed::SerialBase::lock()</a> from serialbase.o(i._ZN4mbed10SerialBase4lockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
- <LI><a href="#[7a]">mbed::SerialBase::unlock()</a> from serialbase.o(i._ZN4mbed10SerialBase6unlockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
+ <LI><a href="#[77]">mbed::SerialBase::lock()</a> from serialbase.o(i._ZN4mbed10SerialBase4lockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
+ <LI><a href="#[78]">mbed::SerialBase::unlock()</a> from serialbase.o(i._ZN4mbed10SerialBase6unlockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
  <LI><a href="#[7b]">void mbed::Callback&lang;void()&rang;::function_call&lang;mbed::Callback&lang;void()&rang;::method_context&lang;SerialMon, void(SerialMon::*)()&rang;&rang;(const void*)</a> from serialmon.o(t._ZN4mbed8CallbackIFvvEE13function_callINS2_14method_contextI9SerialMonMS5_FvvEEEEEvPKv) referenced from serialmon.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateINS2_14method_contextI9SerialMonMS5_FvvEEEEEvRKT_E3ops)
  <LI><a href="#[7e]">void mbed::Callback&lang;void()&rang;::function_call&lang;void(*)()&rang;(const void*)</a> from main.o(t._ZN4mbed8CallbackIFvvEE13function_callIPS1_EEvPKv) referenced from main.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateIPS1_EEvRKT_E3ops)
  <LI><a href="#[7d]">void mbed::Callback&lang;void()&rang;::function_dtor&lang;mbed::Callback&lang;void()&rang;::method_context&lang;SerialMon, void(SerialMon::*)()&rang;&rang;(void*)</a> from serialmon.o(t._ZN4mbed8CallbackIFvvEE13function_dtorINS2_14method_contextI9SerialMonMS5_FvvEEEEEvPv) referenced from serialmon.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateINS2_14method_contextI9SerialMonMS5_FvvEEEEEvRKT_E3ops)
  <LI><a href="#[80]">void mbed::Callback&lang;void()&rang;::function_dtor&lang;void(*)()&rang;(void*)</a> from main.o(t._ZN4mbed8CallbackIFvvEE13function_dtorIPS1_EEvPv) referenced from main.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateIPS1_EEvRKT_E3ops)
  <LI><a href="#[7c]">void mbed::Callback&lang;void()&rang;::function_move&lang;mbed::Callback&lang;void()&rang;::method_context&lang;SerialMon, void(SerialMon::*)()&rang;&rang;(void*, const void*)</a> from serialmon.o(t._ZN4mbed8CallbackIFvvEE13function_moveINS2_14method_contextI9SerialMonMS5_FvvEEEEEvPvPKv) referenced from serialmon.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateINS2_14method_contextI9SerialMonMS5_FvvEEEEEvRKT_E3ops)
  <LI><a href="#[7f]">void mbed::Callback&lang;void()&rang;::function_move&lang;void(*)()&rang;(void*, const void*)</a> from main.o(t._ZN4mbed8CallbackIFvvEE13function_moveIPS1_EEvPvPKv) referenced from main.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateIPS1_EEvRKT_E3ops)
- <LI><a href="#[77]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from serialmon.o(.constdata__ZTV9SerialMon)
- <LI><a href="#[77]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
- <LI><a href="#[78]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from serialmon.o(.constdata__ZTV9SerialMon)
- <LI><a href="#[78]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+ <LI><a href="#[79]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+ <LI><a href="#[7a]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
  <LI><a href="#[52]">mbed::donothing()</a> from serialbase.o(i._ZN4mbed9donothingEv) referenced from serialbase.o(i._ZN4mbed10SerialBase6attachENS_8CallbackIFvvEEENS0_7IrqTypeE)
  <LI><a href="#[52]">mbed::donothing()</a> from serialbase.o(i._ZN4mbed9donothingEv) referenced from serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
  <LI><a href="#[56]">rtos::Thread::_thunk(const void*)</a> from thread.o(i._ZN4rtos6Thread6_thunkEPKv) referenced from thread.o(i._ZN4rtos6Thread5startEN4mbed8CallbackIFvvEEE)
@@ -691,7 +689,7 @@ Global Symbols
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*)
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
+<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_exceptions_buffer_init
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__cxa_get_globals
@@ -713,7 +711,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
+<BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
 </UL>
@@ -899,7 +897,7 @@ Global Symbols
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 
-<P><STRONG><a name="[169]"></a>strcpy</STRONG> (Thumb, 72 bytes, Stack size 12 bytes, strcpy.o(.text))
+<P><STRONG><a name="[16a]"></a>strcpy</STRONG> (Thumb, 72 bytes, Stack size 12 bytes, strcpy.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*)
@@ -990,7 +988,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
 </UL>
-<BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
+<BR>[Called By]<UL><LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 </UL>
 
 <P><STRONG><a name="[1e0]"></a>__use_no_heap</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, hguard.o(.text), UNUSED)
@@ -1620,23 +1618,23 @@ Global Symbols
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
 </UL>
-<BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
-<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_sdk_init
+<BR>[Called By]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_sdk_init
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
 <P><STRONG><a name="[125]"></a>HAL_InitTick</STRONG> (Thumb, 158 bytes, Stack size 16 bytes, hal_tick.o(i.HAL_InitTick))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetVector
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetVector
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
+<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_read
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_init
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 </UL>
 
@@ -1756,15 +1754,15 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[127]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, system_stm32f1xx.o(i.SystemCoreClockUpdate))
-<BR><BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_sdk_init
+<BR><BR>[Called By]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_sdk_init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[47]"></a>SystemInit</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, system_stm32f1xx.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = SystemInit &rArr; SetSysClock &rArr; HAL_RCC_ClockConfig &rArr; HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
-<BR>[Calls]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
+<BR>[Calls]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
+<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(.text)
 </UL>
@@ -1828,7 +1826,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialbase.o(.constdata)
 </UL>
-<P><STRONG><a name="[79]"></a>mbed::SerialBase::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, serialbase.o(i._ZN4mbed10SerialBase4lockEv))
+<P><STRONG><a name="[77]"></a>mbed::SerialBase::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, serialbase.o(i._ZN4mbed10SerialBase4lockEv))
 <BR>[Address Reference Count : 1]<UL><LI> serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
 </UL>
 <P><STRONG><a name="[144]"></a>mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, serialbase.o(i._ZN4mbed10SerialBase6attachENS_8CallbackIFvvEEENS0_7IrqTypeE))
@@ -1844,7 +1842,7 @@ Global Symbols
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
 </UL>
 
-<P><STRONG><a name="[7a]"></a>mbed::SerialBase::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, serialbase.o(i._ZN4mbed10SerialBase6unlockEv))
+<P><STRONG><a name="[78]"></a>mbed::SerialBase::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, serialbase.o(i._ZN4mbed10SerialBase6unlockEv))
 <BR>[Address Reference Count : 1]<UL><LI> serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
 </UL>
 <P><STRONG><a name="[148]"></a>mbed::SerialBase::SerialBase(PinName, PinName, int)</STRONG> (Thumb, 192 bytes, Stack size 32 bytes, serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i))
@@ -1935,9 +1933,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
 </UL>
 
-<P><STRONG><a name="[77]"></a>mbed::RawSerial::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial4lockEv))
-<BR>[Address Reference Count : 2]<UL><LI> serialmon.o(.constdata__ZTV9SerialMon)
-<LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+<P><STRONG><a name="[79]"></a>mbed::RawSerial::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial4lockEv))
+<BR>[Address Reference Count : 1]<UL><LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
 </UL>
 <P><STRONG><a name="[15c]"></a>mbed::RawSerial::putc(int)</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rawserial.o(i._ZN4mbed9RawSerial4putcEi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = mbed::RawSerial::putc(int) &rArr; mbed::SerialBase::_base_putc(int)
@@ -1947,9 +1944,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
 </UL>
 
-<P><STRONG><a name="[78]"></a>mbed::RawSerial::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial6unlockEv))
-<BR>[Address Reference Count : 2]<UL><LI> serialmon.o(.constdata__ZTV9SerialMon)
-<LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+<P><STRONG><a name="[7a]"></a>mbed::RawSerial::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial6unlockEv))
+<BR>[Address Reference Count : 1]<UL><LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
 </UL>
 <P><STRONG><a name="[15d]"></a>mbed::RawSerial::RawSerial(PinName, PinName, int)</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, rawserial.o(i._ZN4mbed9RawSerialC1E7PinNameS1_i))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = mbed::RawSerial::RawSerial(PinName, PinName, int) &rArr; mbed::SerialBase::SerialBase(PinName, PinName, int) &rArr; serial_init &rArr;  error (Cycle)
@@ -2053,14 +2049,14 @@ Global Symbols
 
 <P><STRONG><a name="[1f1]"></a>rtos::Semaphore::Semaphore__sub_object(int)</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, semaphore.o(i._ZN4rtos9SemaphoreC1Ei), UNUSED)
 
-<P><STRONG><a name="[6e]"></a>SerialMon::rxCallback()</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, serialmon.o(i._ZN9SerialMon10rxCallbackEv))
+<P><STRONG><a name="[6e]"></a>SerialMon::rxCallback()</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, serialmon.o(i._ZN9SerialMon10rxCallbackEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SerialMon::rxCallback() &rArr; mbed::RawSerial::getc()
 </UL>
 <BR>[Calls]<UL><LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::getc()
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
-<P><STRONG><a name="[6f]"></a>SerialMon::txCallback()</STRONG> (Thumb, 86 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon10txCallbackEv))
+<P><STRONG><a name="[6f]"></a>SerialMon::txCallback()</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon10txCallbackEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = SerialMon::txCallback() &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2069,7 +2065,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
-<P><STRONG><a name="[13d]"></a>SerialMon::send(char*)</STRONG> (Thumb, 196 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon4sendEPc))
+<P><STRONG><a name="[13d]"></a>SerialMon::send(char*)</STRONG> (Thumb, 180 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon4sendEPc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 408 + Unknown Stack Size
 <LI>Call Chain = SerialMon::send(char*) &rArr; SerialMon::start(char) &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2083,7 +2079,7 @@ Global Symbols
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
-<P><STRONG><a name="[167]"></a>SerialMon::start(char)</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon5startEc))
+<P><STRONG><a name="[167]"></a>SerialMon::start(char)</STRONG> (Thumb, 118 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon5startEc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = SerialMon::start(char) &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2092,30 +2088,31 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
 </UL>
 
-<P><STRONG><a name="[168]"></a>SerialMon::SerialMon(PinName, PinName, int, int, int, const char*)</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 520 + Unknown Stack Size
+<P><STRONG><a name="[168]"></a>SerialMon::SerialMon(PinName, PinName, int, int, int, const char*)</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 528 + Unknown Stack Size
 <LI>Call Chain = SerialMon::SerialMon(PinName, PinName, int, int, int, const char*) &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
 <LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::RawSerial(PinName, PinName, int)
+<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
-<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
+<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
-<P><STRONG><a name="[1f2]"></a>SerialMon::SerialMon__sub_object(PinName, PinName, int, int, int, const char*)</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKc), UNUSED)
+<P><STRONG><a name="[1f2]"></a>SerialMon::SerialMon__sub_object(PinName, PinName, int, int, int, const char*)</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKc), UNUSED)
 
 <P><STRONG><a name="[162]"></a>operator delete[] (void*)</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, array_del.o(i._ZdaPv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = operator delete[] (void*) &rArr; operator delete (void*) &rArr; free &rArr; _free_internal
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
+<BR>[Calls]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 </UL>
 
-<P><STRONG><a name="[16a]"></a>operator delete (void*)</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, delete.o(i._ZdlPv))
+<P><STRONG><a name="[16b]"></a>operator delete (void*)</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, delete.o(i._ZdlPv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = operator delete (void*) &rArr; free &rArr; _free_internal
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
@@ -2126,18 +2123,19 @@ Global Symbols
 <P><STRONG><a name="[161]"></a>operator new[] (unsigned)</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, array_new.o(i._Znaj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = operator new[] (unsigned) &rArr; operator new(unsigned) &rArr; malloc &rArr; _malloc_internal &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; _free_internal
 </UL>
-<BR>[Calls]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
+<BR>[Calls]<UL><LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 </UL>
 
-<P><STRONG><a name="[16b]"></a>operator new(unsigned)</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, new.o(i._Znwj))
+<P><STRONG><a name="[169]"></a>operator new(unsigned)</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, new.o(i._Znwj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = operator new(unsigned) &rArr; malloc &rArr; _malloc_internal &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; _free_internal
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_new_handler_addr
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
+<BR>[Called By]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*)
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new[] (unsigned)
 </UL>
 
@@ -2400,7 +2398,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreRelease
 </UL>
 
-<P><STRONG><a name="[11f]"></a>$Super$$main</STRONG> (Thumb, 226 bytes, Stack size 120 bytes, main.o(i.main))
+<P><STRONG><a name="[11f]"></a>$Super$$main</STRONG> (Thumb, 224 bytes, Stack size 120 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 664 + Unknown Stack Size
 <LI>Call Chain = $Super$$main &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2412,7 +2410,7 @@ Global Symbols
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::wait(unsigned)
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::constructor(osPriority, unsigned, unsigned char*)
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
+<LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
