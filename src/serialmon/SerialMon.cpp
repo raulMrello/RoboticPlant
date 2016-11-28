@@ -28,6 +28,15 @@
 
 #include "SerialMon.h"
 
+//SerialMon *me;
+//void isrTxIrq(){
+//	me->txCallback();
+//}
+
+//void isrRxIrq(){
+//	me->rxCallback();
+//}
+
 /*************************************************************************************/
 SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, const char* name ){    
 	_serial = new RawSerial(tx, rx, baud);
@@ -36,12 +45,14 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
 		_txbuf.limit = (char*)&_txbuf.mem[txSize];
 		_txbuf.in = _txbuf.mem;
 		_txbuf.ou = _txbuf.in;
+		memset(_txbuf.mem, 0, txSize);
 	}
 	_rxbuf.mem = (char*)malloc(rxSize);
 	if(_rxbuf.mem){
 		_rxbuf.limit = (char*)&_rxbuf.mem[rxSize];
 		_rxbuf.in = _rxbuf.mem;
 		_rxbuf.ou = _rxbuf.in;
+		memset(_rxbuf.mem, 0, rxSize);
 	}
 	if(name){
 		char* _name = (char*)malloc(strlen(name)+1);
@@ -49,9 +60,7 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
 			strcpy(_name, name);
 		}
 	}
-	_f_sending = false;	
-	_err_rx = 0;
-	_f_started = false;
+	start('\n');
 }
 
 /*************************************************************************************/
@@ -76,6 +85,13 @@ void SerialMon::start(char c){
 }
 
 /*************************************************************************************/
+bool SerialMon::busy() {
+	if(_txbuf.in == _txbuf.ou && !_f_sending)
+		return false;
+	return true;
+}
+
+/*************************************************************************************/
 int SerialMon::move(char *s, int max, char end) {
 	int counter = 0;
 	char c;
@@ -97,9 +113,6 @@ int SerialMon::move(char *s, int max, char end) {
 
 /*************************************************************************************/
 SerialMon::Result SerialMon::send(char* text){
-	if(!_f_started){
-		start('\n');
-	}
 	_txbuf.mtx.lock();	
 	int remaining = (_txbuf.in >= _txbuf.ou)? ((_txbuf.limit-_txbuf.in)+(_txbuf.ou-_txbuf.mem)) : (_txbuf.ou-_txbuf.in);
 	if(strlen(text) > remaining){
@@ -111,8 +124,9 @@ SerialMon::Result SerialMon::send(char* text){
 	}
 	if(!_f_sending){
 		_f_sending = true;
-		_serial->attach(this, &SerialMon::txCallback, (SerialBase::IrqType)TxIrq);
-		//_serial->attach<SerialMon >(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
+		//_serial->attach(&isrTxIrq, (SerialBase::IrqType)TxIrq);
+		//_serial->attach(this, &SerialMon::txCallback, (SerialBase::IrqType)TxIrq);
+		_serial->attach(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
 	}
 	_txbuf.mtx.unlock();
 	return Ok;
@@ -120,6 +134,7 @@ SerialMon::Result SerialMon::send(char* text){
 }
 
 /*************************************************************************************/
+
 void SerialMon::txCallback(){
 	if(_txbuf.ou != _txbuf.in){
 		_serial->putc(*_txbuf.ou);
@@ -127,7 +142,7 @@ void SerialMon::txCallback(){
 		_txbuf.ou = (_txbuf.ou >= _txbuf.limit)? _txbuf.mem : _txbuf.ou;
 		return;
 	}
-	_serial->attach(0, (SerialBase::IrqType)TxIrq);
+//	_serial->attach(0, (SerialBase::IrqType)TxIrq);
 	_f_sending = false;
 }
 

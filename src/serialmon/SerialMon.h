@@ -168,7 +168,7 @@ public:
      * @ingroup API
      * @return true if the TX buffer is empty, otherwise false
      */
-    bool txBufferEmpty() { return ((_txbuf.in == _txbuf.ou)? true : false); }
+    bool txBufferEmpty() { return (((char*)_txbuf.in == (char*)_txbuf.ou)? true : false); }
     
     /**
      * Function: rxBufferEmpty
@@ -190,6 +190,15 @@ public:
      */
     void autoDetectChar(char c) { _auto_detect_char = c; }
     
+    /**
+     * Function: busy
+     *
+     * Check is transmisor busy
+     *
+     * @ingroup API
+     */
+    bool busy();
+     
     /**
      * Function: move
      *
@@ -252,6 +261,8 @@ public:
      */
     int scanf(const char* format, ...);
     #endif
+	void rxCallback();
+	void txCallback();
 	
 protected:
 	struct buffer_t{
@@ -270,13 +281,10 @@ protected:
 	char _auto_detect_char;
 	buffer_t _txbuf;
 	buffer_t _rxbuf;
-	void rxCallback();
-	void txCallback();
 	char remove();
 	Mutex _tx_mut;
 	Mutex _rx_mut;
 	RawSerial *_serial;
-
 };
 
 

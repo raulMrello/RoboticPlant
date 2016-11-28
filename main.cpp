@@ -23,21 +23,21 @@ void led2_thread() {
 
 /************************************************************************************/
 int main() {
-	Serial s(PA_9,PA_10);
-	s.baud(115200);
-	s.printf("HELLO");
-//	logger = new SerialMon(PA_9, PA_10, 512, 512, 115200, "Logger_UART2");
-//	logger->send("Iniciando...\r\n");
-//	char *txt = (char*)"Task1 = 0000\r\n";
+//	Serial s(PA_9,PA_10);
+//	s.baud(115200);
+//	s.printf("HELLO");
+	logger = new SerialMon(PA_9, PA_10, 512, 512, 115200, "Logger_UART2");
+	logger->send((char*)"Iniciando...\r\n");
+//	char *txt = (char*)"Task1 = 000000000000\r\n";
 //    Thread tled;
 //	tled.start(led2_thread);
     while (true) {	
-	}		
 //        led1 = !led1;
 //		l2++;
 //		sprintf(txt, "Task1 = %d\r\n", l2);
-//		logger->send(txt);
+		logger->send("t\r\n");
+		while(logger->busy());
 //        Thread::wait(500);
-//    }
+    }
 }
 
