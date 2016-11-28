@@ -45,13 +45,22 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
 		_txbuf.limit = (char*)&_txbuf.mem[txSize];
 		_txbuf.in = _txbuf.mem;
 		_txbuf.ou = _txbuf.in;
+		_txbuf.sz = txSize;
 		memset(_txbuf.mem, 0, txSize);
 	}
+	#if defined(SERIALMON_ENABLE_SIMBUF)
+	_simbuf = (char*)malloc(txSize);
+	if(_simbuf){
+		memset(_simbuf, '#', txSize);
+	}
+	_simbuf_n = 0;
+	#endif
 	_rxbuf.mem = (char*)malloc(rxSize);
 	if(_rxbuf.mem){
 		_rxbuf.limit = (char*)&_rxbuf.mem[rxSize];
 		_rxbuf.in = _rxbuf.mem;
 		_rxbuf.ou = _rxbuf.in;
+		_rxbuf.sz = rxSize;
 		memset(_rxbuf.mem, 0, rxSize);
 	}
 	if(name){
@@ -124,8 +133,8 @@ SerialMon::Result SerialMon::send(char* text){
 	}
 	if(!_f_sending){
 		_f_sending = true;
-		//_serial->attach(&isrTxIrq, (SerialBase::IrqType)TxIrq);
-		//_serial->attach(this, &SerialMon::txCallback, (SerialBase::IrqType)TxIrq);
+		_serial->attach(0, (SerialBase::IrqType)TxIrq);
+		txCallback();
 		_serial->attach(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
 	}
 	_txbuf.mtx.unlock();
@@ -136,14 +145,19 @@ SerialMon::Result SerialMon::send(char* text){
 /*************************************************************************************/
 
 void SerialMon::txCallback(){
-	if(_txbuf.ou != _txbuf.in){
-		_serial->putc(*_txbuf.ou);
-		_txbuf.ou++;
+	if ((_serial->writeable()) && (_txbuf.in != _txbuf.ou)) {
+		char c = *_txbuf.ou;
+        _serial->putc(c);
+        _txbuf.ou++;
 		_txbuf.ou = (_txbuf.ou >= _txbuf.limit)? _txbuf.mem : _txbuf.ou;
+		#if defined(SERIALMON_ENABLE_SIMBUF)
+		_simbuf[_simbuf_n] = c;
+		_simbuf_n = (_simbuf_n < _txbuf.sz)? (_simbuf_n+1) : 0;
+		#endif
 		return;
-	}
-//	_serial->attach(0, (SerialBase::IrqType)TxIrq);
+    }
 	_f_sending = false;
+	_serial->attach(0, (SerialBase::IrqType)TxIrq);
 }
 
 /*************************************************************************************/

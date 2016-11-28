@@ -43,6 +43,7 @@
 
 #include "mbed.h"
 
+#define SERIALMON_ENABLE_SIMBUF
 
 class SerialMon {
 public:
@@ -285,6 +286,10 @@ protected:
 	Mutex _tx_mut;
 	Mutex _rx_mut;
 	RawSerial *_serial;
+	#if defined(SERIALMON_ENABLE_SIMBUF)
+	char * _simbuf;
+	int    _simbuf_n;
+	#endif
 };
 
 
