@@ -14,7 +14,14 @@
 #ifndef MSGBROKER_H_
 #define MSGBROKER_H_
 
-#define MSGBROKER_RELEASE   "1.0.20150420001"
+/** Changelog: 
+ *	This new release introduces the abstract class TopicHandler as the standard mechanism to deploy class member
+ *	callbacks for topic update handling.
+ *	As multiple classes can be registered as listeners of the same kind of topic, inheriting TopicHandler class
+ *	its member updateCallback will be fired on topic update events.
+ */
+#define MSGBROKER_RELEASE   "2.0.20161129001"		
+//#define MSGBROKER_RELEASE   "1.0.20150420001"
 
 #include <string.h>
 #include <stdlib.h>
@@ -46,6 +53,20 @@ extern Mutex broker_mutex;
  */
 class MsgBroker {
 public:
+	
+	/** \class TopicHandler
+	 *  \brief Common interface for topic update handling
+     */    
+	class TopicHandler{
+		public:
+		/** \fn updateCallback
+		 *  \brief Pure virtual class method for topic update handling
+		 *  \param topicname Topic name
+		 *  \param topicdata Topic data pointer
+		 */
+		virtual void updateCallback(const char * topicname, void * topicdata)=0;
+	};
+	
     /** \enum Exception
      *  \brief Common error codes thrown as Exceptions by this module
      */
@@ -59,7 +80,7 @@ public:
                     TOPIC_PENDING,          ///< At least one subscriber has not yet consumed a topic update
                     TOPIC_SIZE};            ///< Topic size is different than the preconfigured one
 
-    /** \def NotifyCallback
+    /** \def NotifyCallback (compatibility with release 1.0.20150420001)
      *  \brief Notification callback provided by a subscritor in order to receive topic update notifications
      *  \param subscriber Subscriber object (as void pointer)
      *  \param topicname Name of the topic which has been updated.
@@ -71,8 +92,8 @@ public:
      *  to topic updates, will be registered in the MsgBroker as Observer structures.
      */
     struct Observer{
-        void *observer;         ///< notification callback handler object
-        NotifyCallback notify;  ///< notification callback function
+		TopicHandler *observer; 	///< notification callback handler object
+        NotifyCallback notify;  	///< notification static callback function
     };
 
     /** \struct Topic
@@ -219,8 +240,37 @@ public:
             return 0;
         }
         MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
-        obs->observer = subscriber;
+        obs->observer = (TopicHandler*)subscriber;
         obs->notify = notify;
+        topic->observer_list->addItem(obs);
+        MUTEX_UNLOCK();
+        return obs;
+    }
+
+    /** \fn attach [static]
+     *  \brief Attaches a subscriber to topic by its topic name
+     *  \param name Topic name
+     *  \param subscriber TopicHandler inherited class Subscriber object
+     *  \param exception Int exception raised by the function. This param allow an exception
+     *  mechanism where "--exceptions" flags is disabled
+     *  \return Pointer to the allocated Topic object
+     */
+    static MsgBroker::Observer * attach (const char * topic_name, TopicHandler *subscriber, MsgBroker::Exception *exception = 0){
+        THROW(NO_ERRORS);
+        if(!MsgBroker::topic_list){
+            THROW(DEINIT);
+            return 0;
+        }
+        MUTEX_LOCK();
+        MsgBroker::Topic * topic = findTopic(topic_name);
+        if(!topic){
+            THROW(TOPIC_NOT_FOUND);
+            MUTEX_UNLOCK();
+            return 0;
+        }
+        MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
+        obs->observer = subscriber;
+		obs->notify = 0;
         topic->observer_list->addItem(obs);
         MUTEX_UNLOCK();
         return obs;
@@ -233,6 +283,16 @@ public:
      *  \param exception Exceptions raised by this function
      */
     static void detach (const char * topic_name, void * subscriber, MsgBroker::Exception *exception = 0){
+        detach(topic_name, (TopicHandler*)subscriber, exception);
+    }
+
+    /** \fn detach [static]
+     *  \brief Detaches a subscriber from a topic by its topic name
+     *  \param name Topic name
+     *  \param subscriber Subscriber object to be detached
+     *  \param exception Exceptions raised by this function
+     */
+    static void detach (const char * topic_name, TopicHandler * subscriber, MsgBroker::Exception *exception = 0){
         THROW(NO_ERRORS);
         if(!MsgBroker::topic_list){
             THROW(DEINIT);
@@ -255,7 +315,6 @@ public:
         Heap::FREE(obs);
         MUTEX_UNLOCK();
     }
-
     /** \fn publish [static]
      *  \brief Publishes a topic with a topic name, a data pointer and its size
      *  \param name Topic name
@@ -291,7 +350,12 @@ public:
         Observer * obs = topic->observer_list->getFirstItem();
         while(obs){
             topic->count++;
-            obs->notify(obs->observer, topic->name);
+			if(obs->notify){
+				obs->notify((void*)obs->observer, topic->name);
+			}
+			else{
+				obs->observer->updateCallback(topic->name, topic->data);
+			}
             obs = topic->observer_list->getNextItem();
         }
         MUTEX_UNLOCK();
@@ -388,7 +452,7 @@ private:
      *  \param subscriber Subscriber pointer attached to the observer to find
      *  \return Pointer to the observer or NULL if not found
      */
-    static MsgBroker::Observer * findObserver(List<MsgBroker::Observer> * list, void *subscriber){
+    static MsgBroker::Observer * findObserver(List<MsgBroker::Observer> * list, TopicHandler *subscriber){
         MsgBroker::Observer *obs = list->getFirstItem();
         while(obs){
             if(subscriber == obs->observer){
