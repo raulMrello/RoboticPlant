@@ -43,6 +43,7 @@
 
 #include "mbed.h"
 
+
 #define SERIALMON_ENABLE_SIMBUF
 
 class SerialMon {
@@ -265,6 +266,10 @@ public:
 	void rxCallback();
 	void txCallback();
 	
+	struct topic_t{
+		char * txt;
+	};
+	
 protected:
 	struct buffer_t{
 		Mutex mtx;
@@ -290,6 +295,7 @@ protected:
 	char * _simbuf;
 	int    _simbuf_n;
 	#endif
+	
 };
 
 

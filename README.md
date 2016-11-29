@@ -13,6 +13,10 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
   
 ## Changelog
 
+##### 23.11.2016 "Commit Incluyo MsgBroker"
+- [x] Incluyo MsgBroker y dejo funcionando.
+- [ ] Veriricar recepción de tramas en SerialMon y publicar mensajes "/cmd"
+
 ##### 23.11.2016 "Commit inicial"
 - [x] Dejo proyecto listo y funcionando en BluePill.
 

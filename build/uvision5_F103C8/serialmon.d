@@ -155,3 +155,7 @@
 .\build\uvision5_f103c8\serialmon.o: mbed-os/./hal/sleep_api.h
 .\build\uvision5_f103c8\serialmon.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5_f103c8\serialmon.o: mbed-os/./platform/FunctionPointer.h
+.\build\uvision5_f103c8\serialmon.o: .\src\MsgBroker\MsgBroker.h
+.\build\uvision5_f103c8\serialmon.o: .\src\MsgBroker\List.h
+.\build\uvision5_f103c8\serialmon.o: .\src\MsgBroker\List_tpp.h
+.\build\uvision5_f103c8\serialmon.o: .\src\MsgBroker\Heap.h

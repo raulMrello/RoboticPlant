@@ -155,3 +155,7 @@
 .\build\uvision5_f103c8\main.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5_f103c8\main.o: mbed-os/./platform/FunctionPointer.h
 .\build\uvision5_f103c8\main.o: .\src\serialmon\SerialMon.h
+.\build\uvision5_f103c8\main.o: .\src\MsgBroker\MsgBroker.h
+.\build\uvision5_f103c8\main.o: .\src\MsgBroker\List.h
+.\build\uvision5_f103c8\main.o: .\src\MsgBroker\List_tpp.h
+.\build\uvision5_f103c8\main.o: .\src\MsgBroker\Heap.h

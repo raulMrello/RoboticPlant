@@ -27,15 +27,23 @@
 */
 
 #include "SerialMon.h"
+#include "MsgBroker.h"
 
-//SerialMon *me;
-//void isrTxIrq(){
-//	me->txCallback();
-//}
 
-//void isrRxIrq(){
-//	me->rxCallback();
-//}
+/*************************************************************************************/
+static void topicUpdateCallback(void *subscriber, const char * topicname){
+	SerialMon *me = (SerialMon*)subscriber;
+	// si se recibe un update del topic /keyb...
+	if(strcmp(topicname, "/log") == 0){
+		// obtiene un puntero a los datos del topic con el formato correspondiente
+		SerialMon::topic_t *topic = (SerialMon::topic_t *)MsgBroker::getTopicData("/log");
+		// chequea el tipo de topic y activa los eventos habilitados en este módulo
+		if(topic){
+			me->send(topic->txt);
+			MsgBroker::consumed("/log");
+		}
+	}
+}
 
 /*************************************************************************************/
 SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, const char* name ){    
@@ -69,6 +77,12 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
 			strcpy(_name, name);
 		}
 	}
+	MsgBroker::Exception e;
+	// install a topic
+	MsgBroker::installTopic("/log", sizeof(SerialMon::topic_t));
+	// attaches to topic updates 
+	MsgBroker::attach("/log", this, &topicUpdateCallback, &e);
+
 	start('\n');
 }
 
@@ -184,3 +198,4 @@ void SerialMon::rxCallback(){
 	}
 	_rxbuf.in = (_rxbuf.in >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.in;
 }
+

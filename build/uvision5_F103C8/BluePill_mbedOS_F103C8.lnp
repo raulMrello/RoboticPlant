@@ -1,6 +1,7 @@
 --cpu Cortex-M3
 ".\build\uvision5_f103c8\main.o"
 ".\build\uvision5_f103c8\serialmon.o"
+".\build\uvision5_f103c8\msgbroker.o"
 ".\build\uvision5_f103c8\hal_cm.o"
 ".\build\uvision5_f103c8\rt_cmsis.o"
 ".\build\uvision5_f103c8\rt_event.o"
