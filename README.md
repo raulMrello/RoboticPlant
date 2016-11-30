@@ -13,10 +13,21 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
   
 ## Changelog
 
-##### 23.11.2016 "Commit Incluyo MsgBroker"
+----------------------------------------------------------------------------------------------
+##### 01.12.2016 ->commit :/"SerialMon envía y recibe cadenas de texto correctamente"
+- [x] Incluyo el envío del caracter\0 al final de enviar la cadena de texto.
+- [X] Modifico el comportamiento del envío y la recepción para no perder bytes en lectura.
+- [ ] Añadir el topic /stream para poder enviar bytes en bruto a través de un SerialMon y por
+      lo tanto no enviar un caracter \0 al final.
+- [ ] Integrar módulo ESP8266 y probar funcionamiento.
+- [ ] Continuar con la appnote de mbed.
+
+----------------------------------------------------------------------------------------------
+##### 23.11.2016 ->commit :/"Incluyo MsgBroker"
 - [x] Incluyo MsgBroker y dejo funcionando.
 - [ ] Veriricar recepción de tramas en SerialMon y publicar mensajes "/cmd"
 
-##### 23.11.2016 "Commit inicial"
+----------------------------------------------------------------------------------------------
+##### 23.11.2016 ->commit :/"Commit inicial"
 - [x] Dejo proyecto listo y funcionando en BluePill.
 

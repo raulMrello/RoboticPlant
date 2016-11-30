@@ -54,19 +54,21 @@ void SerialMon::txCallback(){
 
 /*************************************************************************************/
 void SerialMon::rxCallback(){
-	char c = _serial->getc();
-	if(_f_rxfull){
-		_err_rx++;
-		return;
-	}
-	_err_rx = 0;
-	if(_rxbuf.in == (_rxbuf.ou-1) || (_rxbuf.in == _rxbuf.limit && _rxbuf.ou == _rxbuf.mem)){
+	while(_serial->readable()){
+		char c = _serial->getc();
+		if(_f_rxfull){
+			_err_rx++;
+			return;
+		}
+		_err_rx = 0;
 		*_rxbuf.in++ = c;
-		_f_rxfull = true;
-	}
-	_rxbuf.in = (_rxbuf.in >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.in;
-	if(c == _auto_detect_char){
-		_thread.signal_set(CMD_EOL_RECV);
+		_rxbuf.in = (_rxbuf.in >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.in;
+		if(_rxbuf.in == _rxbuf.ou){
+			_f_rxfull = true;
+		}
+		if(c == _auto_detect_char){
+			_thread.signal_set(CMD_EOL_RECV);
+		}
 	}
 }
 
@@ -142,10 +144,15 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
 	_f_sending = false;
 	_f_rxfull = false;
 	_err_rx = 0;
-	_f_started = true;
+	_f_started = false;
 
+	// attaches RX interrupts
+	_serial->attach(callback(this, &SerialMon::rxCallback), (SerialBase::IrqType)RxIrq);
 	// starts reception decodification task
 	_thread.start(callback(this, &SerialMon::start));
+	// thread clearing flags
+	_thread.signal_clr(0xffff);
+
 }
 
 
@@ -169,12 +176,6 @@ void SerialMon::start(){
 	topic_t cmd_topic;
 	cmd_topic.txt = &cmd[0];
 	
-	// Starts execution clearing flags
-	_thread.signal_clr(0xffff);
-	
-	// Attaches RX interrupts
-	_serial->attach(callback(this, &SerialMon::rxCallback), (SerialBase::IrqType)RxIrq);
-
 	for(;;){
 		// Wait for a Command EOL character reception 
 		osEvent oe = _thread.signal_wait(CMD_EOL_RECV, osWaitForever);
@@ -218,14 +219,17 @@ SerialMon::Result SerialMon::send(char* text){
 	if(strlen(text) > remaining){
 		return BufferOversize;
 	}
-	for(int i=0;i<strlen(text);i++){
+	for(int i=0;i<strlen(text)+1;i++){
 		*_txbuf.in++ = text[i];
 		_txbuf.in = (_txbuf.in >= _txbuf.limit)? _txbuf.mem : _txbuf.in;
 	}
 	if(!_f_sending){
 		_f_sending = true;
-		_serial->attach(0, (SerialBase::IrqType)TxIrq);
-		txCallback();
+		if(_f_started){
+			_serial->attach(0, (SerialBase::IrqType)TxIrq);
+			txCallback();
+		}
+		_f_started = true;
 		_serial->attach(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
 	}
 	_txbuf.mtx.unlock();
