@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 09.12.2016 ->commit :/"Añado ESP8266 para mbed-os"
+- [x] Incluyo driver esp8266 desde ARMmbed/mbed-os-example-wifi
+- [X] Incluyo código de ejemplo de uso desde https://docs.mbed.com/docs/mbed-os-api-reference/en/5.2/APIs/communication/network_sockets/
+- [ ] Probar módulo ESP8266 y probar funcionamiento.
+- [ ] Continuar con la appnote de mbed.
+----------------------------------------------------------------------------------------------
 ##### 01.12.2016 ->commit :/"Añado pinout con esp8266"
 - [x] Incluyo el envío del caracter\0 al final de enviar la cadena de texto.
 - [X] Modifico el comportamiento del envío y la recepción para no perder bytes en lectura.

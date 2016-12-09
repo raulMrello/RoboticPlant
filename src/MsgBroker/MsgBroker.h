@@ -15,12 +15,12 @@
 #define MSGBROKER_H_
 
 /** Changelog: 
- *	This new release introduces the abstract class TopicHandler as the standard mechanism to deploy class member
- *	callbacks for topic update handling.
- *	As multiple classes can be registered as listeners of the same kind of topic, inheriting TopicHandler class
- *	its member updateCallback will be fired on topic update events.
+ *  This new release introduces the abstract class TopicHandler as the standard mechanism to deploy class member
+ *  callbacks for topic update handling.
+ *  As multiple classes can be registered as listeners of the same kind of topic, inheriting TopicHandler class
+ *  its member updateCallback will be fired on topic update events.
  */
-#define MSGBROKER_RELEASE   "2.0.20161129001"		
+#define MSGBROKER_RELEASE   "2.0.20161129001"       
 //#define MSGBROKER_RELEASE   "1.0.20150420001"
 
 #include <string.h>
@@ -53,20 +53,20 @@ extern Mutex broker_mutex;
  */
 class MsgBroker {
 public:
-	
-	/** \class TopicHandler
-	 *  \brief Common interface for topic update handling
+    
+    /** \class TopicHandler
+     *  \brief Common interface for topic update handling
      */    
-	class TopicHandler{
-		public:
-		/** \fn updateCallback
-		 *  \brief Pure virtual class method for topic update handling
-		 *  \param topicname Topic name
-		 *  \param topicdata Topic data pointer
-		 */
-		virtual void updateCallback(const char * topicname, void * topicdata)=0;
-	};
-	
+    class TopicHandler{
+        public:
+        /** \fn updateCallback
+         *  \brief Pure virtual class method for topic update handling
+         *  \param topicname Topic name
+         *  \param topicdata Topic data pointer
+         */
+        virtual void updateCallback(const char * topicname, void * topicdata)=0;
+    };
+    
     /** \enum Exception
      *  \brief Common error codes thrown as Exceptions by this module
      */
@@ -92,8 +92,8 @@ public:
      *  to topic updates, will be registered in the MsgBroker as Observer structures.
      */
     struct Observer{
-		TopicHandler *observer; 	///< notification callback handler object
-        NotifyCallback notify;  	///< notification static callback function
+        TopicHandler *observer;     ///< notification callback handler object
+        NotifyCallback notify;      ///< notification static callback function
     };
 
     /** \struct Topic
@@ -270,7 +270,7 @@ public:
         }
         MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
         obs->observer = subscriber;
-		obs->notify = 0;
+        obs->notify = 0;
         topic->observer_list->addItem(obs);
         MUTEX_UNLOCK();
         return obs;
@@ -350,12 +350,12 @@ public:
         Observer * obs = topic->observer_list->getFirstItem();
         while(obs){
             topic->count++;
-			if(obs->notify){
-				obs->notify((void*)obs->observer, topic->name);
-			}
-			else{
-				obs->observer->updateCallback(topic->name, topic->data);
-			}
+            if(obs->notify){
+                obs->notify((void*)obs->observer, topic->name);
+            }
+            else{
+                obs->observer->updateCallback(topic->name, topic->data);
+            }
             obs = topic->observer_list->getNextItem();
         }
         MUTEX_UNLOCK();

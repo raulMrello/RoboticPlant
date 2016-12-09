@@ -124,30 +124,30 @@ void List<T>::insertItem(T* item, List::Exception *exception){
     if(!_search){
         _first = listitem;
         _last = listitem;
-		_search = listitem;
+        _search = listitem;
         listitem->prev = 0;
         listitem->next = 0;
     }
-	else if(_search == _first){
+    else if(_search == _first){
         listitem->prev = 0;
         listitem->next = _search;
         _search->prev = listitem;
         _search = listitem;
-		_first = listitem;
+        _first = listitem;
     }
-	else if(_search == _last){
+    else if(_search == _last){
         listitem->prev = _search->prev;
         listitem->next = _search;
-		_search->prev->next = listitem;
+        _search->prev->next = listitem;
         _search->prev = listitem;
         _search = listitem;
     }
-	
-	else{
+    
+    else{
         listitem->prev = _search->prev;
         listitem->next = _search;
-		_search->prev->next = listitem;
-		_search->prev = listitem;
+        _search->prev->next = listitem;
+        _search->prev = listitem;
         _search = listitem;
     }
     _count++;
@@ -165,8 +165,8 @@ void List<T>::removeItem(T* item, List::Exception *exception){
     listitem = _first;
     do{
         if(listitem->item == item){
-			//updates point search to next one
-			getNextItem();
+            //updates point search to next one
+            getNextItem();
             removeItem(listitem);
             return;
         }

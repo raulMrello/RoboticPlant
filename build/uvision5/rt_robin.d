@@ -1,0 +1,10 @@
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Robin.c
+.\build\uvision5\rt_robin.o: mbed_config.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_TypeDef.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/RTX_Config.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_List.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Task.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Time.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_Robin.h
+.\build\uvision5\rt_robin.o: mbed-os/rtos/rtx/TARGET_CORTEX_M/rt_HAL_CM.h

@@ -16,18 +16,18 @@
 #include <stddef.h>
 #include <stdlib.h>
 namespace Heap{
-	static void * MALLOC(size_t size){
-		void *ptr = malloc(size);
-		if(!ptr){
-			volatile int i = 0;
-			while(i==0){
-			}
-		}
-		return ptr;
-	}
-	static void FREE(void* ptr){
-		free(ptr);
-	}
+    static void * MALLOC(size_t size){
+        void *ptr = malloc(size);
+        if(!ptr){
+            volatile int i = 0;
+            while(i==0){
+            }
+        }
+        return ptr;
+    }
+    static void FREE(void* ptr){
+        free(ptr);
+    }
 };
 
 #endif 

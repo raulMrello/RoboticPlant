@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *******************************************************************************
  */
-#if defined(TARGET_NUCLEO_F103RB)
+
 #include "PeripheralPins.h"
 
 // =====
@@ -177,4 +177,3 @@ const PinMap PinMap_CAN_TD[] = {
     {PB_9 ,  CAN_1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_NOPULL, 1)},
     {NC,    NC,    0}
 };
-#endif
