@@ -14,9 +14,17 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 14.12.2016 ->commit :/"ESP8266 funcionando OK"
+- [x] Verifico que el módulo se conecta a la wifi y escribe y recibe datos de un socket TCP.
+- [!] No he probado mi código basado en MsgBroker porque acabo de tener un dilema sobre la conveniencia
+	  del modelo pub-sub vs req-res en cierto tipo de casos. Y éste es uno de ellos, o sea que lo tengo
+	  que pensar un poco mejor para ver cómo lo dejo finalmente.
+
+- [ ] Continuar con la appnote de mbed.
+----------------------------------------------------------------------------------------------
 ##### 09.12.2016 ->commit :/"Añado ESP8266 para mbed-os"
 - [x] Incluyo driver esp8266 desde ARMmbed/mbed-os-example-wifi
-- [X] Incluyo código de ejemplo de uso desde https://docs.mbed.com/docs/mbed-os-api-reference/en/5.2/APIs/communication/network_sockets/
+- [x] Incluyo código de ejemplo de uso desde https://docs.mbed.com/docs/mbed-os-api-reference/en/5.2/APIs/communication/network_sockets/
 - [ ] Probar módulo ESP8266 y probar funcionamiento.
 - [ ] Continuar con la appnote de mbed.
 ----------------------------------------------------------------------------------------------

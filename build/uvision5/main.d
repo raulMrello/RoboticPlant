@@ -160,6 +160,7 @@
 .\build\uvision5\main.o: src/MsgBroker/List.h
 .\build\uvision5\main.o: src/MsgBroker/List_tpp.h
 .\build\uvision5\main.o: src/MsgBroker/Heap.h
+.\build\uvision5\main.o: src/CloudManager/CloudManager.h
 .\build\uvision5\main.o: esp8266-driver\ESP8266Interface.h
 .\build\uvision5\main.o: esp8266-driver/ESP8266/ESP8266.h
 .\build\uvision5\main.o: esp8266-driver/ESP8266/ATParser/ATParser.h

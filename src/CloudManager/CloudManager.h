@@ -60,6 +60,9 @@
 
 #include "mbed.h"
 #include "MsgBroker.h"
+#include "TCPSocket.h"
+#include "ESP8266Interface.h"
+#include "SerialMon.h"
 
 
 /** \class CloudManager
@@ -73,15 +76,10 @@ public:
     /**
      * CloudManager constructor. It initialises the serial object.
      *
-     * @param tx PinName of the TX pin.
-     * @param rx PinName of the RX pin.
-     * @param txBufferSize Integer of the TX buffer sizes.
-     * @param rxBufferSize Integer of the RX buffer sizes.
-	 * @param baud Baudrate
-	 * @param name Name of this instance
-	 * @param rx_detect Character to detect on reception mode, as command EOL
+     * @param tx ESP8266 TX pin
+	 * @param rx ESP8266 RX pin
      */    
-    CloudManager();
+    CloudManager(PinName tx, PinName rx);
  
 	
     /**
@@ -103,13 +101,30 @@ public:
      *
      */
     void start(); 
+
+
+    /**
+     * Starts internal thread
+     *
+     */
+    void setLogger(SerialMon *logger){ _logger = logger; } 
 	
 	
 	//! Topic structure for /iot_* topics
 	struct topic_iot_t{
+		int cmd;
 		void * data;
 		int size;
 	};
+		
+	//! Signals for thread control
+    enum Signal {
+          CMD_IOT_CONN = 1,		// Connect with remote server
+          CMD_IOT_DISC = 2,		// Disconnect with remote server
+          CMD_IOT_HTTPGET = 3,	// Command for http get tests
+          CMD_IOT_SOCKSEND = 4	// Command to request-response data from socket
+    };
+
 	
 protected:
 	
@@ -120,11 +135,6 @@ protected:
 //        , NoChar         = -1   /*!< No character in buffer. */
 //        , BufferOversize = -2   /*!< Oversized buffer. */
 //    };
-	
-	//! Signals for thread control
-    enum Signal {
-          CMD_IOT_SEND = 1		// Command iot_send received
-    };
 
 	
 //    /**
@@ -203,7 +213,10 @@ protected:
 //	#endif
 	Thread _thread;
 	topic_iot_t * _topic2send;
-	Mutex _mut_iot_send;
+	Mutex _mut_iot;
+	ESP8266Interface *_esp;
+	SerialMon * _logger;
+	Queue<topic_iot_t, 4> _queue;
 };
 
 

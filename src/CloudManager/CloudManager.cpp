@@ -30,47 +30,69 @@
 
 
 //--------------------------------------------------------------------------------------------------------------
-//-- ISR CALLBACKS ---------------------------------------------------------------------------------------------
+//-- STATIC  ---------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------
 
+///*************************************************************************************/
+static char* http_get(NetworkInterface *net, char * sbuffer) {
+    TCPSocket socket;
+
+    // Show the network address
+    const char *ip = net->get_ip_address();
+    printf("IP address is: %s\n", ip ? ip : "No IP");
+
+    // Open a socket on the network interface, and create a TCP connection to mbed.org
+    socket.open(net);
+    socket.connect("developer.mbed.org", 80);
+
+    // Send a simple http request
+    int scount = socket.send(sbuffer, sizeof sbuffer);
+    printf("sent %d [%.*s]\r\n", scount, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
+
+    // Recieve a simple http response and print out the response line
+    char rbuffer[64];
+    int rcount = socket.recv(rbuffer, sizeof rbuffer);
+    printf("recv %d [%.*s]\r\n", rcount, strstr(rbuffer, "\r\n")-rbuffer, rbuffer);
+
+    // Close the socket to return its memory and bring down the network interface
+    socket.close();
+	char *response = (char*)malloc(64);
+	if(response){
+		memcpy(response, rbuffer, 64);
+	}
+	return response;
+}
 
 ///*************************************************************************************/
-//void CloudManager::txCallback(){
-//	if ((_serial->writeable()) && (_txbuf.in != _txbuf.ou)) {
-//		char c = *_txbuf.ou;
-//        _serial->putc(c);
-//        _txbuf.ou++;
-//		_txbuf.ou = (_txbuf.ou >= _txbuf.limit)? _txbuf.mem : _txbuf.ou;
-//		#if defined(CLOUDMANAGER_ENABLE_SIMBUF)
-//		_simbuf[_simbuf_n] = c;
-//		_simbuf_n = (_simbuf_n < _txbuf.sz)? (_simbuf_n+1) : 0;
-//		#endif
-//		return;
-//    }
-//	_f_sending = false;
-//	_serial->attach(0, (SerialBase::IrqType)TxIrq);
-//}
+static char* sock_send(NetworkInterface *net, char *server, int port, char * data, int maxrecvsz, int *recvsz) {
+    TCPSocket socket;
 
+    // Show the network address
+    const char *ip = net->get_ip_address();
 
-///*************************************************************************************/
-//void CloudManager::rxCallback(){
-//	while(_serial->readable()){
-//		char c = _serial->getc();
-//		if(_f_rxfull){
-//			_err_rx++;
-//			return;
-//		}
-//		_err_rx = 0;
-//		*_rxbuf.in++ = c;
-//		_rxbuf.in = (_rxbuf.in >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.in;
-//		if(_rxbuf.in == _rxbuf.ou){
-//			_f_rxfull = true;
-//		}
-//		if(c == _auto_detect_char){
-//			_thread.signal_set(CMD_EOL_RECV);
-//		}
-//	}
-//}
+    // Open a socket on the network interface, and create a TCP connection to mbed.org
+    socket.open(net);
+    socket.connect(server, port);
+
+    // Send a simple http request
+    int scount = socket.send(data, strlen(data));
+
+    // Recieve a simple http response and print out the response line
+    char *rbuffer = (char*)malloc(maxrecvsz);
+	int rcount = 0;
+	if(rbuffer){
+		rcount = socket.recv(rbuffer, sizeof rbuffer);
+	}
+
+    // Close the socket to return its memory and bring down the network interface
+    socket.close();
+	*recvsz = rcount;
+	return rbuffer;
+}
+
+//--------------------------------------------------------------------------------------------------------------
+//-- ISR CALLBACKS ---------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
 
 
 //--------------------------------------------------------------------------------------------------------------
@@ -81,14 +103,28 @@
 /*************************************************************************************/
 void CloudManager::updateCallback(const char * topicname, void * topicdata){
 	// si se recibe un update del topic /keyb...
-	if(strcmp(topicname, "/iot_send") == 0){
+	if(strcmp(topicname, "/iot") == 0){
 		// obtiene un puntero a los datos del topic con el formato correspondiente
 		CloudManager::topic_iot_t *topic = (CloudManager::topic_iot_t *)topicdata;
 		// chequea el tipo de topic y activa los eventos habilitados en este módulo
 		if(topic){
-			_mut_iot_send.lock();
-			_topic2send = topic;
-			_thread.signal_set(CMD_IOT_SEND);
+			_mut_iot.lock();
+			topic_iot_t *tpc = (topic_iot_t*)malloc(sizeof(topic_iot_t));
+			char *data = 0;
+			if(topic->size){
+				data = (char*)malloc(topic->size);
+				if(data){
+					memcpy(data, (char*)topic->data, topic->size);
+				}
+			}
+			if(tpc){
+				tpc->cmd = topic->cmd;
+				tpc->data = data;
+				tpc->size = topic->size;
+				_queue.put(tpc);
+			}
+			MsgBroker::consumed("/iot");
+			_mut_iot.unlock();
 		}
 	}
 }
@@ -100,13 +136,16 @@ void CloudManager::updateCallback(const char * topicname, void * topicdata){
 
 
 /*************************************************************************************/
-CloudManager::CloudManager(){    
+CloudManager::CloudManager(PinName tx, PinName rx){    
 	MsgBroker::Exception e;
 	// install CloudManager topics /log and /cmd
-	MsgBroker::installTopic("/iot_send", sizeof(CloudManager::topic_iot_t));
+	MsgBroker::installTopic("/iot", sizeof(CloudManager::topic_iot_t));
 	// attaches to topic updates 
-	MsgBroker::attach("/iot_send", this, &e);
-	
+	MsgBroker::attach("/iot", this, &e);
+	// initializes logger
+	_logger = 0;
+	// reference WifiInterface
+	_esp = new ESP8266Interface(tx, rx);
 	// starts reception decodification task
 	_thread.start(callback(this, &CloudManager::start));
 	// thread clearing flags
@@ -127,70 +166,57 @@ void CloudManager::start(){
 	MsgBroker::Exception e;
 	
 	for(;;){
-		// Wait for a Command EOL character reception 
-		osEvent oe = _thread.signal_wait(CMD_IOT_SEND, osWaitForever);
-
-		// if event clear signal and continue to process state machine
-		if(oe.status == osEventSignal && (oe.value.signals & CMD_IOT_SEND) != 0){
-			/* TODO: process data to send */
-			MsgBroker::consumed("/iot_send");
-			_thread.signal_clr(CMD_IOT_SEND);			
+		// Wait for messages
+		osEvent oe = _queue.get();
+        if (oe.status == osEventMessage) {
+			// get referenced topic
+			topic_iot_t *topic = (topic_iot_t*)oe.value.p;	
+			
+			// process topic according with command type
+			switch(topic->cmd){
+				case CMD_IOT_CONN:{
+					char *essid = strtok((char*)topic->data, ",");
+					char *passw = strtok(0,",");
+					char *secur = strtok(0,",");
+					_esp->connect(essid, passw, (nsapi_security_t)(secur[0]-48));
+					break;
+				}
+				case CMD_IOT_DISC:{
+					_esp->disconnect();
+					break;
+				}
+				case CMD_IOT_SOCKSEND:{
+					char *server = strtok((char*)topic->data, ",");
+					char *port = strtok(0,",");
+					char *data = strtok(0,",");
+					int recvdata = 0;
+					char *response = sock_send(_esp, server, atoi(port), data, 32, &recvdata);
+					if(_logger){
+						SerialMon::topic_t topic;
+						topic.txt = response;
+						MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
+					}
+					free(response);
+					break;
+				}
+				case CMD_IOT_HTTPGET:{
+					char *response = http_get(_esp, (char*)topic->data);
+					if(_logger){
+						SerialMon::topic_t topic;
+						topic.txt = response;
+						MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
+					}
+					free(response);
+					break;
+				}
+			}
+			
+			// deallocates reserved memory
+			if(topic->data){
+				free(topic->data);
+			}
+			free(topic);
 		}
 	}	
 }
 
-
-///*************************************************************************************/
-//int CloudManager::move(char *s, int max, char end) {
-//	int counter = 0;
-//	char c;
-//	_rxbuf.mtx.lock();
-//	while(readable()) {
-//		c = *_rxbuf.ou++;
-//		_rxbuf.ou = (_rxbuf.ou >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.ou;
-//		if(_rxbuf.in != _rxbuf.ou){
-//			_f_rxfull = false;
-//		}
-//		if (c == end) break;
-//		*(s++) = c;
-//		counter++;
-//		if (counter == max) break;
-//	}
-//	_rxbuf.mtx.unlock();
-//	return counter;
-//}
-
-///*************************************************************************************/
-//CloudManager::Result CloudManager::send(char* text){
-//	_txbuf.mtx.lock();	
-//	int remaining = (_txbuf.in >= _txbuf.ou)? ((_txbuf.limit-_txbuf.in)+(_txbuf.ou-_txbuf.mem)) : (_txbuf.ou-_txbuf.in);
-//	if(strlen(text) > remaining){
-//		return BufferOversize;
-//	}
-//	for(int i=0;i<strlen(text)+1;i++){
-//		*_txbuf.in++ = text[i];
-//		_txbuf.in = (_txbuf.in >= _txbuf.limit)? _txbuf.mem : _txbuf.in;
-//	}
-//	if(!_f_sending){
-//		_f_sending = true;
-//		if(_f_started){
-//			_serial->attach(0, (SerialBase::IrqType)TxIrq);
-//			txCallback();
-//		}
-//		_f_started = true;
-//		_serial->attach(callback(this, &CloudManager::txCallback), (SerialBase::IrqType)TxIrq);
-//	}
-//	_txbuf.mtx.unlock();
-//	return Ok;
-//	
-//}
-
-///*************************************************************************************/
-//char CloudManager::remove(){
-//	char c = *_rxbuf.ou++;
-//	_rxbuf.ou = (_rxbuf.ou >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.ou;
-//	if(_rxbuf.in != _rxbuf.ou){
-//		_f_rxfull = false;
-//	}
-//	return c;	
-//}
