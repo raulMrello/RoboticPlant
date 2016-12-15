@@ -536,6 +536,11 @@
               <FileType>5</FileType>
               <FilePath>src/MsgBroker/MsgBroker.h</FilePath>
             </File>
+            <File>
+              <FileName>FPointer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\MsgBroker\FPointer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

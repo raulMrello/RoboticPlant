@@ -67,8 +67,6 @@ public:
         virtual void updateCallback(const char * topicname, void * topicdata)=0;
     };
     
-	class FPointerDummy;
-	
     /** \enum Exception
      *  \brief Common error codes thrown as Exceptions by this module
      */
@@ -96,7 +94,6 @@ public:
     struct Observer{
         TopicHandler *observer;     ///< notification callback handler object
         NotifyCallback notify;      ///< notification static callback function
-		void (FPointerDummy::*method_callback)(const char * topicname, void * topicdata);
     };
 
     /** \struct Topic
@@ -245,7 +242,6 @@ public:
         MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
         obs->observer = (TopicHandler*)subscriber;
         obs->notify = notify;
-		obs->method_callback = (void (FPointerDummy::*)(const char *, void *))0;
         topic->observer_list->addItem(obs);
         MUTEX_UNLOCK();
         return obs;
@@ -275,43 +271,11 @@ public:
         MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
         obs->observer = subscriber;
         obs->notify = 0;
-		obs->method_callback = (void (FPointerDummy::*)(const char *, void *))0;
         topic->observer_list->addItem(obs);
         MUTEX_UNLOCK();
         return obs;
     }
 
-    /** \fn attach [static]
-     *  \brief Attaches a subscriber to topic by its topic name
-     *  \param name Topic name
-     *  \param subscriber TopicHandler inherited class Subscriber object
-     *  \param exception Int exception raised by the function. This param allow an exception
-     *  mechanism where "--exceptions" flags is disabled
-     *  \return Pointer to the allocated Topic object
-     */
-	template<class T>
-    static MsgBroker::Observer * attach (const char * topic_name, T *subscriber, void (T::*method)(const char *, void *), MsgBroker::Exception *exception = 0){
-        THROW(NO_ERRORS);
-        if(!MsgBroker::topic_list){
-            THROW(DEINIT);
-            return 0;
-        }
-        MUTEX_LOCK();
-        MsgBroker::Topic * topic = findTopic(topic_name);
-        if(!topic){
-            THROW(TOPIC_NOT_FOUND);
-            MUTEX_UNLOCK();
-            return 0;
-        }
-        MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
-        obs->observer = subscriber;
-        obs->notify = 0;
-		obs->method_callback = (void (FPointerDummy::*)(const char *, void *))method; 
-        topic->observer_list->addItem(obs);
-        MUTEX_UNLOCK();
-        return obs;
-    }
-	
     /** \fn detach [static]
      *  \brief Detaches a subscriber from a topic by its topic name
      *  \param name Topic name
@@ -389,12 +353,9 @@ public:
             if(obs->notify){
                 obs->notify((void*)obs->observer, topic->name);
             }
-            else if(!obs->method_callback){
+            else{
                 obs->observer->updateCallback(topic->name, topic->data);
             }
-			else{
-				(((FPointerDummy*)obs->observer)->*obs->method_callback)(topic->name, topic->data);
-			}
             obs = topic->observer_list->getNextItem();
         }
         MUTEX_UNLOCK();
