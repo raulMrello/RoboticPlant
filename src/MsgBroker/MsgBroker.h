@@ -304,7 +304,7 @@ public:
             return 0;
         }
         MsgBroker::Observer *obs = (MsgBroker::Observer *)Heap::MALLOC(sizeof(MsgBroker::Observer));
-        obs->observer = subscriber;
+        obs->observer = (TopicHandler*)subscriber;
         obs->notify = 0;
 		obs->method_callback = (void (FPointerDummy::*)(const char *, void *))method; 
         topic->observer_list->addItem(obs);
@@ -389,7 +389,7 @@ public:
             if(obs->notify){
                 obs->notify((void*)obs->observer, topic->name);
             }
-            else if(!obs->method_callback){
+            else if(obs->method_callback == (void (FPointerDummy::*)(const char *, void *))0){
                 obs->observer->updateCallback(topic->name, topic->data);
             }
 			else{

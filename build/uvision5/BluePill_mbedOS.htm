@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\build\uvision5\BluePill_mbedOS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\build\uvision5\BluePill_mbedOS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060020: Last Updated: Thu Dec 15 16:48:33 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060020: Last Updated: Fri Dec 16 15:51:54 2016
 <BR><P>
 <H3>Maximum Stack Usage =        912 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -13,13 +13,13 @@ NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version) &rArr; n
 Mutually Recursive functions
 </H3> <LI><a href="#[53]">rt_alloc_box</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[53]">rt_alloc_box</a><BR>
  <LI><a href="#[235]">mbed_assert_internal</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[239]">core_util_critical_section_enter</a><BR>
- <LI><a href="#[1d7]">Set_GPIO_Clock</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
- <LI><a href="#[2b1]">pin_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[235]">mbed_assert_internal</a><BR>
- <LI><a href="#[23f]">serial_init</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
- <LI><a href="#[2b4]">pinmap_pinout</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
  <LI><a href="#[2af]">pin_function</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[235]">mbed_assert_internal</a><BR>
+ <LI><a href="#[1d7]">Set_GPIO_Clock</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
+ <LI><a href="#[2b4]">pinmap_pinout</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
+ <LI><a href="#[2b1]">pin_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[235]">mbed_assert_internal</a><BR>
  <LI><a href="#[2b3]">pinmap_peripheral</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
  <LI><a href="#[2b2]">pinmap_merge</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
+ <LI><a href="#[23f]">serial_init</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
  <LI><a href="#[23b]">core_util_critical_section_exit</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[235]">mbed_assert_internal</a><BR>
  <LI><a href="#[2a7]">mbed_error_printf</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[239]">core_util_critical_section_enter</a><BR>
  <LI><a href="#[238]">serial_baud</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1d8]">error</a><BR>
@@ -97,30 +97,30 @@ Function Pointers
  <LI><a href="#[28]">WWDG_IRQHandler</a> from startup_stm32f103xb.o(.text) referenced from startup_stm32f103xb.o(RESET)
  <LI><a href="#[73]">led2_thread()</a> from main.o(i._Z11led2_threadv) referenced from main.o(i.main)
  <LI><a href="#[6d]">__default_new_handler()</a> from arm_newhandler_noexceptions.o(.text) referenced from new.o(i._Znwj)
- <LI><a href="#[a1]">CloudManager::updateCallback(const char*, void*)</a> from cloudmanager.o(i._ZN12CloudManager14updateCallbackEPKcPv) referenced from cloudmanager.o(.constdata__ZTV12CloudManager)
- <LI><a href="#[99]">CloudManager::start()</a> from cloudmanager.o(i._ZN12CloudManager5startEv) referenced from cloudmanager.o(.constdata)
- <LI><a href="#[aa]">NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)</a> from networkstack.o(i._ZN12NetworkStack13gethostbynameEPKcP13SocketAddress13nsapi_version) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[a6]">BufferedSerial::getc()</a> from bufferedserial.o(i._ZN14BufferedSerial4getcEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[a7]">BufferedSerial::putc(int)</a> from bufferedserial.o(i._ZN14BufferedSerial4putcEi) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a2]">CloudManager::updateCallback(const char*, void*)</a> from cloudmanager.o(i._ZN12CloudManager14updateCallbackEPKcPv) referenced from cloudmanager.o(.constdata__ZTV12CloudManager)
+ <LI><a href="#[9a]">CloudManager::start()</a> from cloudmanager.o(i._ZN12CloudManager5startEv) referenced from cloudmanager.o(.constdata)
+ <LI><a href="#[ab]">NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)</a> from networkstack.o(i._ZN12NetworkStack13gethostbynameEPKcP13SocketAddress13nsapi_version) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[a7]">BufferedSerial::getc()</a> from bufferedserial.o(i._ZN14BufferedSerial4getcEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a8]">BufferedSerial::putc(int)</a> from bufferedserial.o(i._ZN14BufferedSerial4putcEi) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
  <LI><a href="#[93]">BufferedSerial::rxIrq()</a> from bufferedserial.o(i._ZN14BufferedSerial5rxIrqEv) referenced from bufferedserial.o(.constdata)
  <LI><a href="#[92]">BufferedSerial::txIrq()</a> from bufferedserial.o(i._ZN14BufferedSerial5txIrqEv) referenced from bufferedserial.o(.constdata)
- <LI><a href="#[a8]">BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)</a> from bufferedserial.o(i._ZN14BufferedSerial6attachEN4mbed8CallbackIFvvEEENS0_10SerialBase7IrqTypeE) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[a4]">BufferedSerial::readable()</a> from bufferedserial.o(i._ZN14BufferedSerial8readableEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[a5]">BufferedSerial::writeable()</a> from bufferedserial.o(i._ZN14BufferedSerial9writeableEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[b6]">ESP8266Interface::disconnect()</a> from esp8266interface.o(i._ZN16ESP8266Interface10disconnectEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[ab]">ESP8266Interface::socket_open(void**, nsapi_protocol)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_openEPPv14nsapi_protocol) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[af]">ESP8266Interface::socket_recv(void*, void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_recvEPvS0_j) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[ae]">ESP8266Interface::socket_send(void*, const void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_sendEPvPKvj) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[ac]">ESP8266Interface::socket_close(void*)</a> from esp8266interface.o(i._ZN16ESP8266Interface12socket_closeEPv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b2]">ESP8266Interface::socket_attach(void*, void(*)(void*), void*)</a> from esp8266interface.o(i._ZN16ESP8266Interface13socket_attachEPvPFvS0_ES0_) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b0]">ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface13socket_sendtoEPvRK13SocketAddressPKvj) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[a9]">ESP8266Interface::get_ip_address()</a> from esp8266interface.o(i._ZN16ESP8266Interface14get_ip_addressEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[ad]">ESP8266Interface::socket_connect(void*, const SocketAddress&)</a> from esp8266interface.o(i._ZN16ESP8266Interface14socket_connectEPvRK13SocketAddress) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b5]">ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)</a> from esp8266interface.o(i._ZN16ESP8266Interface15set_credentialsEPKcS1_14nsapi_security) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b1]">ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface15socket_recvfromEPvP13SocketAddressS0_j) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[a9]">BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)</a> from bufferedserial.o(i._ZN14BufferedSerial6attachEN4mbed8CallbackIFvvEEENS0_10SerialBase7IrqTypeE) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a5]">BufferedSerial::readable()</a> from bufferedserial.o(i._ZN14BufferedSerial8readableEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a6]">BufferedSerial::writeable()</a> from bufferedserial.o(i._ZN14BufferedSerial9writeableEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[b7]">ESP8266Interface::disconnect()</a> from esp8266interface.o(i._ZN16ESP8266Interface10disconnectEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[ac]">ESP8266Interface::socket_open(void**, nsapi_protocol)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_openEPPv14nsapi_protocol) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b0]">ESP8266Interface::socket_recv(void*, void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_recvEPvS0_j) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[af]">ESP8266Interface::socket_send(void*, const void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface11socket_sendEPvPKvj) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[ad]">ESP8266Interface::socket_close(void*)</a> from esp8266interface.o(i._ZN16ESP8266Interface12socket_closeEPv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b3]">ESP8266Interface::socket_attach(void*, void(*)(void*), void*)</a> from esp8266interface.o(i._ZN16ESP8266Interface13socket_attachEPvPFvS0_ES0_) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b1]">ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface13socket_sendtoEPvRK13SocketAddressPKvj) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[aa]">ESP8266Interface::get_ip_address()</a> from esp8266interface.o(i._ZN16ESP8266Interface14get_ip_addressEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[ae]">ESP8266Interface::socket_connect(void*, const SocketAddress&)</a> from esp8266interface.o(i._ZN16ESP8266Interface14socket_connectEPvRK13SocketAddress) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b6]">ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)</a> from esp8266interface.o(i._ZN16ESP8266Interface15set_credentialsEPKcS1_14nsapi_security) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b2]">ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)</a> from esp8266interface.o(i._ZN16ESP8266Interface15socket_recvfromEPvP13SocketAddressS0_j) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
  <LI><a href="#[95]">ESP8266Interface::event()</a> from esp8266interface.o(i._ZN16ESP8266Interface5eventEv) referenced from esp8266interface.o(.constdata)
- <LI><a href="#[b4]">ESP8266Interface::connect(const char*, const char*, nsapi_security, unsigned char)</a> from esp8266interface.o(i._ZN16ESP8266Interface7connectEPKcS1_14nsapi_securityh) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b3]">ESP8266Interface::connect()</a> from esp8266interface.o(i._ZN16ESP8266Interface7connectEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b5]">ESP8266Interface::connect(const char*, const char*, nsapi_security, unsigned char)</a> from esp8266interface.o(i._ZN16ESP8266Interface7connectEPKcS1_14nsapi_securityh) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b4]">ESP8266Interface::connect()</a> from esp8266interface.o(i._ZN16ESP8266Interface7connectEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
  <LI><a href="#[60]">[local to arm_exceptions_c]::__default_terminate_handler()</a> from arm_exceptions_globs.o(.text) referenced from arm_exceptions_globs.o(.text)
  <LI><a href="#[c4]">__rw::__rw_facet_base::_C_initfacet(const std::locale&)</a> from char.o(i._ZN4__rw15__rw_facet_base12_C_initfacetERKSt6locale) referenced from rwstdexcept.o(.constdata__ZTVNSt6locale5facetE)
  <LI><a href="#[c4]">__rw::__rw_facet_base::_C_initfacet(const std::locale&)</a> from char.o(i._ZN4__rw15__rw_facet_base12_C_initfacetERKSt6locale) referenced from rwstdexcept.o(.constdata__ZTVSt8messagesIcE)
@@ -129,7 +129,7 @@ Function Pointers
  <LI><a href="#[6c]">__rw::__rw_locale_vector&lang;std::__rw_open_cat_data&rang;::~__rw_locale_vector()</a> from messages.o(t._ZN4__rw18__rw_locale_vectorISt18__rw_open_cat_dataED1Ev) referenced from messages.o(i._ZSt13__rw_get_catsv)
  <LI><a href="#[1d]">__rw::__rw_throw_exception_noex(int, char*)</a> from rwthrowproc_impl_noex.o(i._ZN4__rw25__rw_throw_exception_noexEiPc) referenced 2 times from rwthrowproc_noex.o(.data)
  <LI><a href="#[68]">mbed::SerialBase::_irq_handler(unsigned, SerialIrq)</a> from serialbase.o(i._ZN4mbed10SerialBase12_irq_handlerEj9SerialIrq) referenced from serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
- <LI><a href="#[9b]">mbed::SerialBase::interrupt_handler_asynch()</a> from serialbase.o(i._ZN4mbed10SerialBase24interrupt_handler_asynchEv) referenced from serialbase.o(.constdata)
+ <LI><a href="#[9c]">mbed::SerialBase::interrupt_handler_asynch()</a> from serialbase.o(i._ZN4mbed10SerialBase24interrupt_handler_asynchEv) referenced from serialbase.o(.constdata)
  <LI><a href="#[c1]">mbed::SerialBase::lock()</a> from serialbase.o(i._ZN4mbed10SerialBase4lockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
  <LI><a href="#[c2]">mbed::SerialBase::unlock()</a> from serialbase.o(i._ZN4mbed10SerialBase6unlockEv) referenced from serialbase.o(.constdata__ZTVN4mbed10SerialBaseE)
  <LI><a href="#[d0]">void mbed::Callback&lang;void()&rang;::function_call&lang;mbed::Callback&lang;void()&rang;::method_context&lang;CloudManager, void(CloudManager::*)()&rang;&rang;(const void*)</a> from cloudmanager.o(t._ZN4mbed8CallbackIFvvEE13function_callINS2_14method_contextI12CloudManagerMS5_FvvEEEEEvPKv) referenced from cloudmanager.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateINS2_14method_contextI12CloudManagerMS5_FvvEEEEEvRKT_E3ops)
@@ -154,20 +154,20 @@ Function Pointers
  <LI><a href="#[e0]">void mbed::Callback&lang;void()&rang;::function_move&lang;mbed::Callback&lang;void()&rang;::method_context&lang;SerialMon, void(SerialMon::*)()&rang;&rang;(void*, const void*)</a> from serialmon.o(t._ZN4mbed8CallbackIFvvEE13function_moveINS2_14method_contextI9SerialMonMS5_FvvEEEEEvPvPKv) referenced from serialmon.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateINS2_14method_contextI9SerialMonMS5_FvvEEEEEvRKT_E3ops)
  <LI><a href="#[e3]">void mbed::Callback&lang;void()&rang;::function_move&lang;void(*)()&rang;(void*, const void*)</a> from main.o(t._ZN4mbed8CallbackIFvvEE13function_moveIPS1_EEvPvPKv) referenced from main.o(.constdata__ZZN4mbed8CallbackIFvvEE8generateIPS1_EEvRKT_E3ops)
  <LI><a href="#[6a]">mbed::Callback&lang;void()&rang;::thunk(void*)</a> from socket.o(t._ZN4mbed8CallbackIFvvEE5thunkEPv) referenced from socket.o(i._ZN6Socket4openEP12NetworkStack)
- <LI><a href="#[a2]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[a2]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
- <LI><a href="#[a3]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
- <LI><a href="#[a3]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+ <LI><a href="#[a3]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a3]">mbed::RawSerial::lock()</a> from rawserial.o(i._ZN4mbed9RawSerial4lockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
+ <LI><a href="#[a4]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from bufferedserial.o(.constdata__ZTV14BufferedSerial)
+ <LI><a href="#[a4]">mbed::RawSerial::unlock()</a> from rawserial.o(i._ZN4mbed9RawSerial6unlockEv) referenced from rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
  <LI><a href="#[65]">mbed::donothing()</a> from serialbase.o(i._ZN4mbed9donothingEv) referenced from serialbase.o(i._ZN4mbed10SerialBase6attachENS_8CallbackIFvvEEENS0_7IrqTypeE)
  <LI><a href="#[65]">mbed::donothing()</a> from serialbase.o(i._ZN4mbed9donothingEv) referenced from serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
  <LI><a href="#[70]">rtos::Mutex::~Mutex()</a> from mutex.o(i._ZN4rtos5MutexD1Ev) referenced from msgbroker.o(i.__sti___13_MsgBroker_cpp_ead47833)
  <LI><a href="#[69]">rtos::Thread::_thunk(const void*)</a> from thread.o(i._ZN4rtos6Thread6_thunkEPKv) referenced from thread.o(i._ZN4rtos6Thread5startEN4mbed8CallbackIFvvEEE)
  <LI><a href="#[66]">CThunk&lang;mbed::SerialBase&rang;::trampoline(mbed::SerialBase*, void*, void(mbed::SerialBase::**)(void*))</a> from serialbase.o(t._ZN6CThunkIN4mbed10SerialBaseEE10trampolineEPS1_PvPMS1_FvS4_E) referenced from serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
  <LI><a href="#[94]">ESP8266::_packet_handler()</a> from esp8266.o(i._ZN7ESP826615_packet_handlerEv) referenced from esp8266.o(.constdata)
- <LI><a href="#[96]">SerialMon::rxCallback()</a> from serialmon.o(i._ZN9SerialMon10rxCallbackEv) referenced from serialmon.o(.constdata)
- <LI><a href="#[98]">SerialMon::txCallback()</a> from serialmon.o(i._ZN9SerialMon10txCallbackEv) referenced from serialmon.o(.constdata)
- <LI><a href="#[ba]">SerialMon::updateCallback(const char*, void*)</a> from serialmon.o(i._ZN9SerialMon14updateCallbackEPKcPv) referenced from serialmon.o(.constdata__ZTV9SerialMon)
- <LI><a href="#[97]">SerialMon::start()</a> from serialmon.o(i._ZN9SerialMon5startEv) referenced from serialmon.o(.constdata)
+ <LI><a href="#[97]">SerialMon::rxCallback()</a> from serialmon.o(i._ZN9SerialMon10rxCallbackEv) referenced from serialmon.o(.constdata)
+ <LI><a href="#[99]">SerialMon::txCallback()</a> from serialmon.o(i._ZN9SerialMon10txCallbackEv) referenced from serialmon.o(.constdata)
+ <LI><a href="#[96]">SerialMon::onUpdateCallback(const char*, void*)</a> from serialmon.o(i._ZN9SerialMon16onUpdateCallbackEPKcPv) referenced from serialmon.o(.constdata)
+ <LI><a href="#[98]">SerialMon::start()</a> from serialmon.o(i._ZN9SerialMon5startEv) referenced from serialmon.o(.constdata)
  <LI><a href="#[bd]">TCPSocket::event()</a> from tcpsocket.o(i._ZN9TCPSocket5eventEv) referenced from tcpsocket.o(.constdata__ZTV9TCPSocket)
  <LI><a href="#[bc]">TCPSocket::get_proto()</a> from tcpsocket.o(i._ZN9TCPSocket9get_protoEv) referenced from tcpsocket.o(.constdata__ZTV9TCPSocket)
  <LI><a href="#[bb]">TCPSocket::~TCPSocket()</a> from tcpsocket.o(i._ZN9TCPSocketD1Ev) referenced from tcpsocket.o(.constdata__ZTV9TCPSocket)
@@ -193,10 +193,10 @@ Function Pointers
  <LI><a href="#[6b]">std::locale::~locale()</a> from locale.o(i._ZNSt6localeD1Ev) referenced from locale.o(i._ZNSt6locale7classicEv)
  <LI><a href="#[cd]">std::messages&lang;char&rang;::~messages__deallocating()</a> from rwstdexcept.o(i._ZNSt8messagesIcED0Ev) referenced from rwstdexcept.o(.constdata__ZTVSt8messagesIcE)
  <LI><a href="#[cc]">std::messages&lang;char&rang;::~messages()</a> from rwstdexcept.o(i._ZNSt8messagesIcED1Ev) referenced from rwstdexcept.o(.constdata__ZTVSt8messagesIcE)
- <LI><a href="#[b7]">thunk{-4} to ESP8266Interface::get_ip_address()</a> from esp8266interface.o(i._ZThn4_N16ESP8266Interface14get_ip_addressEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
- <LI><a href="#[b8]">thunk{-4} to ESP8266Interface::get_stack()</a> from esp8266interface.o(i._ZThn4_N16ESP8266Interface9get_stackEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b8]">thunk{-4} to ESP8266Interface::get_ip_address()</a> from esp8266interface.o(i._ZThn4_N16ESP8266Interface14get_ip_addressEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
+ <LI><a href="#[b9]">thunk{-4} to ESP8266Interface::get_stack()</a> from esp8266interface.o(i._ZThn4_N16ESP8266Interface9get_stackEv) referenced from esp8266interface.o(.constdata__ZTV16ESP8266Interface)
  <LI><a href="#[6e]">operator delete[] (void*)</a> from array_del.o(i._ZdaPv) referenced from cxa_vec_new.o(i.__cxa_vec_new)
- <LI><a href="#[b9]">__cxa_pure_virtual</a> from pure_virt.o(i.__cxa_pure_virtual) referenced 2 times from socket.o(.constdata__ZTV6Socket)
+ <LI><a href="#[ba]">__cxa_pure_virtual</a> from pure_virt.o(i.__cxa_pure_virtual) referenced 2 times from socket.o(.constdata__ZTV6Socket)
  <LI><a href="#[e9]">__main</a> from __main.o(!!!main) referenced from startup_stm32f103xb.o(.text)
  <LI><a href="#[e7]">__sti___10_locale_cpp_ff99fc7b</a> from locale.o(i.__sti___10_locale_cpp_ff99fc7b) referenced from locale.o(.init_array)
  <LI><a href="#[e8]">__sti___10_rwcats_cpp_64e8068e</a> from rwcats.o(i.__sti___10_rwcats_cpp_64e8068e) referenced from rwcats.o(.init_array)
@@ -213,7 +213,7 @@ Function Pointers
  <LI><a href="#[1c]">default_idle_hook</a> from rtos_idle.o(i.default_idle_hook) referenced 2 times from rtos_idle.o(.data)
  <LI><a href="#[5d]">isspace</a> from isspace.o(.text) referenced from scanf_char.o(.text)
  <LI><a href="#[8e]">osThreadExit</a> from rt_cmsis.o(i.osThreadExit) referenced from rt_cmsis.o(i.svcThreadCreate)
- <LI><a href="#[9a]">osTimerThread</a> from rt_cmsis.o(i.osTimerThread) referenced from rtx_conf_cm.o(.constdata)
+ <LI><a href="#[9b]">osTimerThread</a> from rt_cmsis.o(i.osTimerThread) referenced from rtx_conf_cm.o(.constdata)
  <LI><a href="#[8a]">os_idle_demon</a> from rtx_conf_cm.o(i.os_idle_demon) referenced from rt_task.o(i.rt_sys_init)
  <LI><a href="#[1b]">pre_main</a> from rtx_conf_cm.o(i.pre_main) referenced 2 times from rtx_conf_cm.o(.data)
  <LI><a href="#[53]">rt_alloc_box</a> from rt_membox.o(i.rt_alloc_box) referenced from hal_cm3.o(.emb_text)
@@ -251,11 +251,11 @@ Function Pointers
  <LI><a href="#[8b]">uart1_irq</a> from serial_api.o(i.uart1_irq) referenced from serial_api.o(i.serial_irq_set)
  <LI><a href="#[8c]">uart2_irq</a> from serial_api.o(i.uart2_irq) referenced from serial_api.o(i.serial_irq_set)
  <LI><a href="#[8d]">uart3_irq</a> from serial_api.o(i.uart3_irq) referenced from serial_api.o(i.serial_irq_set)
- <LI><a href="#[9f]">us_ticker_clear_interrupt</a> from us_ticker.o(i.us_ticker_clear_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
- <LI><a href="#[9e]">us_ticker_disable_interrupt</a> from us_ticker.o(i.us_ticker_disable_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
- <LI><a href="#[9c]">us_ticker_init</a> from us_ticker.o(i.us_ticker_init) referenced from mbed_us_ticker_api.o(.constdata)
- <LI><a href="#[9d]">us_ticker_read</a> from us_ticker.o(i.us_ticker_read) referenced from mbed_us_ticker_api.o(.constdata)
- <LI><a href="#[a0]">us_ticker_set_interrupt</a> from us_ticker.o(i.us_ticker_set_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
+ <LI><a href="#[a0]">us_ticker_clear_interrupt</a> from us_ticker.o(i.us_ticker_clear_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
+ <LI><a href="#[9f]">us_ticker_disable_interrupt</a> from us_ticker.o(i.us_ticker_disable_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
+ <LI><a href="#[9d]">us_ticker_init</a> from us_ticker.o(i.us_ticker_init) referenced from mbed_us_ticker_api.o(.constdata)
+ <LI><a href="#[9e]">us_ticker_read</a> from us_ticker.o(i.us_ticker_read) referenced from mbed_us_ticker_api.o(.constdata)
+ <LI><a href="#[a1]">us_ticker_set_interrupt</a> from us_ticker.o(i.us_ticker_set_interrupt) referenced from mbed_us_ticker_api.o(.constdata)
 </UL>
 <P>
 <H3>
@@ -525,12 +525,12 @@ Global Symbols
 <P><STRONG><a name="[ee]"></a>__rt_entry</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, rtx_conf_cm.o(.emb_text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = __rt_entry &rArr; osThreadCreate &rArr; svcThreadCreate &rArr; rt_tsk_create &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_stack_heap
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_platform_post_stackheap_init
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
+<BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelStart
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelInitialize
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_stack_heap
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_platform_post_stackheap_init
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
@@ -789,12 +789,12 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::_packet_handler()
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
@@ -819,9 +819,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::recv(int, void*, unsigned)
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::recv(int, void*, unsigned)
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::_packet_handler()
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
@@ -864,7 +864,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[135]"></a>__2sprintf</STRONG> (Thumb, 38 bytes, Stack size 32 bytes, __2sprintf.o(.text))
@@ -874,8 +874,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led2_thread()
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::get_ip_address() const
+<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::get_ip_address() const
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led2_thread()
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
@@ -1007,7 +1007,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[31b]"></a>_fclose$unlocked</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, fclose.o(.text), UNUSED)
@@ -1070,7 +1070,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__strtok_internal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[186]"></a>strcspn</STRONG> (Thumb, 32 bytes, Stack size 12 bytes, strcspn.o(.text))
@@ -1083,7 +1083,7 @@ Global Symbols
 <P><STRONG><a name="[1f9]"></a>strstr</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, strstr.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strstr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[26a]"></a>memcmp</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, memcmp.o(.text))
@@ -1104,12 +1104,12 @@ Global Symbols
 <P><STRONG><a name="[1dc]"></a>strlen</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, strlen.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led2_thread()
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::oob(const char*, mbed::Callback&lang;void()&rang;)
 <LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::ESP8266(PinName, PinName, bool)
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::__rw_exception::_C_vformat(int, std::__va_list)
@@ -1126,12 +1126,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[15a]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
+<LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
 <LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::recv(int, void*, unsigned)
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memmove
 <LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcpy
@@ -1179,9 +1179,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[161]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyBuffer&lang;char&rang;::MyBuffer(unsigned)
+<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)
+<LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyBuffer&lang;char&rang;::MyBuffer(unsigned)
 <LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
 </UL>
 
@@ -1216,19 +1216,19 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)
 </UL>
 
 <P><STRONG><a name="[1ef]"></a>strcmp</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, strcmpv7m.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::onUpdateCallback(const char*, void*)
+<LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
 <LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::updateCallback(const char*, void*)
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_get_lc_ctype
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_get_lc_numeric
@@ -1439,9 +1439,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_common
 <LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ll_udiv10
 </UL>
-<BR>[Called By]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_llu
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lld
+<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lld
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lli
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_llu
 </UL>
 
 <P><STRONG><a name="[16d]"></a>_printf_longlong_oct</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, _printf_oct_int_ll.o(.text))
@@ -1472,8 +1472,8 @@ Global Symbols
 
 <P><STRONG><a name="[145]"></a>_chval</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, _chval.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_int
-<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_longlong
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
+<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_longlong
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_hex_real
 </UL>
 
@@ -1496,9 +1496,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__vfscanf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
+<BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sscanf
+<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsscanf
-<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sscanf
 </UL>
 
 <P><STRONG><a name="[59]"></a>_sgetc</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, _sgetc.o(.text))
@@ -1645,7 +1645,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGPVFN_inner
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sig_exit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__cxa_pure_virtual
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__cxa_pure_virtual
 </UL>
 
 <P><STRONG><a name="[156]"></a>__strtok_internal</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, strtok_int.o(.text))
@@ -1788,12 +1788,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = __vfscanf &rArr; _scanf_real &rArr; _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
 <BR>[Calls]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_int
-<LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_string
-<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_longlong
 <LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_real
 <LI><a href="#[175]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_wstring
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_wctomb
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_mbtowc
+<LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_string
+<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_longlong
 </UL>
 <BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__vfscanf_char
 </UL>
@@ -1814,8 +1814,8 @@ Global Symbols
 <P><STRONG><a name="[170]"></a>_strtoul</STRONG> (Thumb, 158 bytes, Stack size 40 bytes, _strtoul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
-<BR>[Calls]<UL><LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
-<LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
+<BR>[Calls]<UL><LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
+<LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
 </UL>
 <BR>[Called By]<UL><LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
 </UL>
@@ -2209,7 +2209,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1bb]"></a>main</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, retarget.o(i.$Sub$$main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 768 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 776 + Unknown Stack Size
 <LI>Call Chain = main &rArr; $Super$$main &rArr; SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char) &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_main
@@ -2270,9 +2270,9 @@ Global Symbols
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_read
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_init
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_read
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_init
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 </UL>
 
@@ -2386,8 +2386,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
-<LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
+<BR>[Called By]<UL><LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
+<LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
 </UL>
 
 <P><STRONG><a name="[1c6]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, system_stm32f1xx.o(i.SystemCoreClockUpdate))
@@ -2442,11 +2442,11 @@ Global Symbols
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::set_addr(nsapi_addr)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
 </UL>
 
 <P><STRONG><a name="[1f5]"></a>nsapi_create_stack(NetworkStack*)</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, networkstack.o(i._Z18nsapi_create_stackP12NetworkStack))
-<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[1e9]"></a>catgets(__rw::__rw_cat*, int, int, const char*)</STRONG> (Thumb, 28 bytes, Stack size 24 bytes, rwcats.o(i._Z7catgetsPN4__rw8__rw_catEiiPKc))
@@ -2466,24 +2466,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::__rw_messages_base::_C_cat_open(const std::basic_string&lang;char, std::char_traits&lang;char&rang;, std::allocator&lang;char&rang;&rang;&, const std::locale&) const
 </UL>
 
-<P><STRONG><a name="[a1]"></a>CloudManager::updateCallback(const char*, void*)</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, cloudmanager.o(i._ZN12CloudManager14updateCallbackEPKcPv))
+<P><STRONG><a name="[a2]"></a>CloudManager::updateCallback(const char*, void*)</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, cloudmanager.o(i._ZN12CloudManager14updateCallbackEPKcPv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 560 + Unknown Stack Size
 <LI>Call Chain = CloudManager::updateCallback(const char*, void*) &rArr; osMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<BR>[Calls]<UL><LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessagePut
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
-<LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessagePut
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> cloudmanager.o(.constdata__ZTV12CloudManager)
 </UL>
-<P><STRONG><a name="[99]"></a>CloudManager::start()</STRONG> (Thumb, 1164 bytes, Stack size 200 bytes, cloudmanager.o(i._ZN12CloudManager5startEv))
+<P><STRONG><a name="[9a]"></a>CloudManager::start()</STRONG> (Thumb, 1164 bytes, Stack size 200 bytes, cloudmanager.o(i._ZN12CloudManager5startEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 736 + Unknown Stack Size
 <LI>Call Chain = CloudManager::start() &rArr; osMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::~TCPSocket()
+<BR>[Calls]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageGet
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::~TCPSocket()
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::TCPSocket()
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::send(const void*, unsigned)
@@ -2493,8 +2494,6 @@ Global Symbols
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_create_stack(NetworkStack*)
-<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageGet
-<LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
@@ -2503,6 +2502,7 @@ Global Symbols
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
 <LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtok
+<LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> cloudmanager.o(.constdata)
 </UL>
@@ -2510,7 +2510,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 632 + Unknown Stack Size
 <LI>Call Chain = CloudManager::CloudManager(PinName, PinName) &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
+<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageCreate
+<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_clr(int)
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
 <LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::Semaphore(int)
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::constructor(osPriority, unsigned, unsigned char*)
@@ -2518,8 +2520,6 @@ Global Symbols
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::ESP8266Interface(PinName, PinName, bool)
-<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageCreate
-<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_clr(int)
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
@@ -2529,7 +2529,7 @@ Global Symbols
 
 <P><STRONG><a name="[336]"></a>CloudManager::CloudManager__sub_object(PinName, PinName)</STRONG> (Thumb, 0 bytes, Stack size 88 bytes, cloudmanager.o(i._ZN12CloudManagerC1E7PinNameS0_), UNUSED)
 
-<P><STRONG><a name="[aa]"></a>NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)</STRONG> (Thumb, 132 bytes, Stack size 120 bytes, networkstack.o(i._ZN12NetworkStack13gethostbynameEPKcP13SocketAddress13nsapi_version))
+<P><STRONG><a name="[ab]"></a>NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)</STRONG> (Thumb, 132 bytes, Stack size 120 bytes, networkstack.o(i._ZN12NetworkStack13gethostbynameEPKcP13SocketAddress13nsapi_version))
 <BR><BR>[Stack]<UL><LI>Max Depth = 912 + Unknown Stack Size
 <LI>Call Chain = NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version) &rArr; nsapi_dns_query(NetworkStack*, const char*, SocketAddress*, nsapi_version) &rArr; nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version) &rArr; UDPSocket::UDPSocket() &rArr; Socket::Socket__sub_object() &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2544,11 +2544,11 @@ Global Symbols
 <P><STRONG><a name="[202]"></a>SocketAddress::set_ip_address(const char*)</STRONG> (Thumb, 478 bytes, Stack size 48 bytes, socketaddress.o(i._ZN13SocketAddress14set_ip_addressEPKc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 544<LI>Call Chain = SocketAddress::set_ip_address(const char*) &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real &rArr; _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
-<BR>[Calls]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
-<LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<BR>[Calls]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memmove
+<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
 </UL>
 
 <P><STRONG><a name="[1e1]"></a>SocketAddress::set_addr(nsapi_addr)</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, socketaddress.o(i._ZN13SocketAddress8set_addrE10nsapi_addr))
@@ -2564,18 +2564,18 @@ Global Symbols
 <P><STRONG><a name="[1e5]"></a>SocketAddress::SocketAddress(nsapi_addr, unsigned short)</STRONG> (Thumb, 34 bytes, Stack size 12 bytes, socketaddress.o(i._ZN13SocketAddressC1E10nsapi_addrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = SocketAddress::SocketAddress(nsapi_addr, unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
+<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 </UL>
 
 <P><STRONG><a name="[337]"></a>SocketAddress::SocketAddress__sub_object(nsapi_addr, unsigned short)</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, socketaddress.o(i._ZN13SocketAddressC1E10nsapi_addrt), UNUSED)
 
-<P><STRONG><a name="[a6]"></a>BufferedSerial::getc()</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial4getcEv))
+<P><STRONG><a name="[a7]"></a>BufferedSerial::getc()</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial4getcEv))
 <BR>[Address Reference Count : 1]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 </UL>
-<P><STRONG><a name="[a7]"></a>BufferedSerial::putc(int)</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, bufferedserial.o(i._ZN14BufferedSerial4putcEi))
+<P><STRONG><a name="[a8]"></a>BufferedSerial::putc(int)</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, bufferedserial.o(i._ZN14BufferedSerial4putcEi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 408 + Unknown Stack Size
 <LI>Call Chain = BufferedSerial::putc(int) &rArr; BufferedSerial::prime() &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -2591,7 +2591,7 @@ Global Symbols
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_putc
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::putc(int)
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::putc(int)
 </UL>
 
 <P><STRONG><a name="[93]"></a>BufferedSerial::rxIrq()</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, bufferedserial.o(i._ZN14BufferedSerial5rxIrqEv))
@@ -2612,17 +2612,17 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> bufferedserial.o(.constdata)
 </UL>
-<P><STRONG><a name="[a8]"></a>BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, bufferedserial.o(i._ZN14BufferedSerial6attachEN4mbed8CallbackIFvvEEENS0_10SerialBase7IrqTypeE))
+<P><STRONG><a name="[a9]"></a>BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, bufferedserial.o(i._ZN14BufferedSerial6attachEN4mbed8CallbackIFvvEEENS0_10SerialBase7IrqTypeE))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::attach(mbed::Callback&lang;void()&rang;)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 </UL>
-<P><STRONG><a name="[a4]"></a>BufferedSerial::readable()</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial8readableEv))
+<P><STRONG><a name="[a5]"></a>BufferedSerial::readable()</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial8readableEv))
 <BR>[Address Reference Count : 1]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 </UL>
-<P><STRONG><a name="[a5]"></a>BufferedSerial::writeable()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial9writeableEv))
+<P><STRONG><a name="[a6]"></a>BufferedSerial::writeable()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, bufferedserial.o(i._ZN14BufferedSerial9writeableEv))
 <BR>[Address Reference Count : 1]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 </UL>
 <P><STRONG><a name="[20b]"></a>BufferedSerial::BufferedSerial(PinName, PinName, unsigned, unsigned, const char*)</STRONG> (Thumb, 102 bytes, Stack size 32 bytes, bufferedserial.o(i._ZN14BufferedSerialC1E7PinNameS0_jjPKc))
@@ -2639,7 +2639,7 @@ Global Symbols
 
 <P><STRONG><a name="[338]"></a>BufferedSerial::BufferedSerial__sub_object(PinName, PinName, unsigned, unsigned, const char*)</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, bufferedserial.o(i._ZN14BufferedSerialC1E7PinNameS0_jjPKc), UNUSED)
 
-<P><STRONG><a name="[b6]"></a>ESP8266Interface::disconnect()</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, esp8266interface.o(i._ZN16ESP8266Interface10disconnectEv))
+<P><STRONG><a name="[b7]"></a>ESP8266Interface::disconnect()</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, esp8266interface.o(i._ZN16ESP8266Interface10disconnectEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 600 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::disconnect() &rArr; ESP8266::disconnect() &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -2648,7 +2648,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[ab]"></a>ESP8266Interface::socket_open(void**, nsapi_protocol)</STRONG> (Thumb, 168 bytes, Stack size 56 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_openEPPv14nsapi_protocol))
+<P><STRONG><a name="[ac]"></a>ESP8266Interface::socket_open(void**, nsapi_protocol)</STRONG> (Thumb, 168 bytes, Stack size 56 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_openEPPv14nsapi_protocol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = ESP8266Interface::socket_open(void**, nsapi_protocol) &rArr; operator new(unsigned) &rArr; malloc &rArr; _malloc_internal &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; _free_internal
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::SocketAddress(nsapi_addr, unsigned short)
@@ -2657,7 +2657,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[af]"></a>ESP8266Interface::socket_recv(void*, void*, unsigned)</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_recvEPvS0_j))
+<P><STRONG><a name="[b0]"></a>ESP8266Interface::socket_recv(void*, void*, unsigned)</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_recvEPvS0_j))
 <BR><BR>[Stack]<UL><LI>Max Depth = 632 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::socket_recv(void*, void*, unsigned) &rArr; ESP8266::recv(int, void*, unsigned) &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -2666,7 +2666,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[ae]"></a>ESP8266Interface::socket_send(void*, const void*, unsigned)</STRONG> (Thumb, 48 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_sendEPvPKvj))
+<P><STRONG><a name="[af]"></a>ESP8266Interface::socket_send(void*, const void*, unsigned)</STRONG> (Thumb, 48 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface11socket_sendEPvPKvj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 632 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::socket_send(void*, const void*, unsigned) &rArr; ESP8266::send(int, const void*, unsigned) &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -2675,7 +2675,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[ac]"></a>ESP8266Interface::socket_close(void*)</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface12socket_closeEPv))
+<P><STRONG><a name="[ad]"></a>ESP8266Interface::socket_close(void*)</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface12socket_closeEPv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 616 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::socket_close(void*) &rArr; ESP8266::close(int) &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -2685,21 +2685,21 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b2]"></a>ESP8266Interface::socket_attach(void*, void(*)(void*), void*)</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, esp8266interface.o(i._ZN16ESP8266Interface13socket_attachEPvPFvS0_ES0_))
+<P><STRONG><a name="[b3]"></a>ESP8266Interface::socket_attach(void*, void(*)(void*), void*)</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, esp8266interface.o(i._ZN16ESP8266Interface13socket_attachEPvPFvS0_ES0_))
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b0]"></a>ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface13socket_sendtoEPvRK13SocketAddressPKvj))
+<P><STRONG><a name="[b1]"></a>ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface13socket_sendtoEPvRK13SocketAddressPKvj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 624 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned) &rArr; ESP8266::close(int) &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::close(int)
+<BR>[Calls]<UL><LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator !=(const SocketAddress&, const SocketAddress&)
+<LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::close(int)
 <LI><a href="#[20f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::setTimeout(unsigned)
-<LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator !=(const SocketAddress&, const SocketAddress&)
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[a9]"></a>ESP8266Interface::get_ip_address()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, esp8266interface.o(i._ZN16ESP8266Interface14get_ip_addressEv))
+<P><STRONG><a name="[aa]"></a>ESP8266Interface::get_ip_address()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, esp8266interface.o(i._ZN16ESP8266Interface14get_ip_addressEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 592 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::get_ip_address() &rArr; ESP8266::getIPAddress() &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -2707,18 +2707,18 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[ad]"></a>ESP8266Interface::socket_connect(void*, const SocketAddress&)</STRONG> (Thumb, 82 bytes, Stack size 32 bytes, esp8266interface.o(i._ZN16ESP8266Interface14socket_connectEPvRK13SocketAddress))
+<P><STRONG><a name="[ae]"></a>ESP8266Interface::socket_connect(void*, const SocketAddress&)</STRONG> (Thumb, 82 bytes, Stack size 32 bytes, esp8266interface.o(i._ZN16ESP8266Interface14socket_connectEPvRK13SocketAddress))
 <BR><BR>[Stack]<UL><LI>Max Depth = 632 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::socket_connect(void*, const SocketAddress&) &rArr; ESP8266::open(const char*, int, const char*, int) &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::open(const char*, int, const char*, int)
-<LI><a href="#[20f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::setTimeout(unsigned)
-<LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::get_port() const
+<BR>[Calls]<UL><LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::get_port() const
 <LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::get_ip_address() const
+<LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::open(const char*, int, const char*, int)
+<LI><a href="#[20f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266::setTimeout(unsigned)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b5]"></a>ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface15set_credentialsEPKcS1_14nsapi_security))
+<P><STRONG><a name="[b6]"></a>ESP8266Interface::set_credentials(const char*, const char*, nsapi_security)</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, esp8266interface.o(i._ZN16ESP8266Interface15set_credentialsEPKcS1_14nsapi_security))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = ESP8266Interface::set_credentials(const char*, const char*, nsapi_security) &rArr; strncpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
@@ -2726,7 +2726,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b1]"></a>ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface15socket_recvfromEPvP13SocketAddressS0_j))
+<P><STRONG><a name="[b2]"></a>ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface15socket_recvfromEPvP13SocketAddressS0_j))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ESP8266Interface::socket_recvfrom(void*, SocketAddress*, void*, unsigned)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
@@ -2738,12 +2738,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata)
 </UL>
-<P><STRONG><a name="[b4]"></a>ESP8266Interface::connect(const char*, const char*, nsapi_security, unsigned char)</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, esp8266interface.o(i._ZN16ESP8266Interface7connectEPKcS1_14nsapi_securityh))
+<P><STRONG><a name="[b5]"></a>ESP8266Interface::connect(const char*, const char*, nsapi_security, unsigned char)</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, esp8266interface.o(i._ZN16ESP8266Interface7connectEPKcS1_14nsapi_securityh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ESP8266Interface::connect(const char*, const char*, nsapi_security, unsigned char)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b3]"></a>ESP8266Interface::connect()</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface7connectEv))
+<P><STRONG><a name="[b4]"></a>ESP8266Interface::connect()</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, esp8266interface.o(i._ZN16ESP8266Interface7connectEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 792 + Unknown Stack Size
 <LI>Call Chain = ESP8266Interface::connect() &rArr; ESP8266::startup(int) &rArr; ATParser::oob(const char*, mbed::Callback&lang;void()&rang;) &rArr; __rw::__rw_allocate(unsigned, int) &rArr; __rw::__rw_throw(int, ...) &rArr; std::__rw_exception::_C_vformat(int, std::__va_list) &rArr; [local to rwstdexcept_cpp]::__rw::__rw_vfmatstr(char*, unsigned, int, std::__va_list) &rArr; sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real &rArr; _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
@@ -2903,7 +2903,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i)
 </UL>
-<P><STRONG><a name="[9b]"></a>mbed::SerialBase::interrupt_handler_asynch()</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, serialbase.o(i._ZN4mbed10SerialBase24interrupt_handler_asynchEv))
+<P><STRONG><a name="[9c]"></a>mbed::SerialBase::interrupt_handler_asynch()</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, serialbase.o(i._ZN4mbed10SerialBase24interrupt_handler_asynchEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = mbed::SerialBase::interrupt_handler_asynch() &rArr; serial_irq_handler_asynch &rArr; HAL_UART_IRQHandler &rArr; HAL_UART_ErrorCallback
 </UL>
 <BR>[Calls]<UL><LI><a href="#[236]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_irq_handler_asynch
@@ -2929,12 +2929,12 @@ Global Symbols
 <LI><a href="#[23b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_exit
 <LI><a href="#[239]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_enter
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::BufferedSerial(PinName, PinName, unsigned, unsigned, const char*)
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::txIrq()
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::prime()
-<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
 </UL>
 
 <P><STRONG><a name="[c2]"></a>mbed::SerialBase::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, serialbase.o(i._ZN4mbed10SerialBase6unlockEv))
@@ -2945,7 +2945,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_readable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
 </UL>
 
 <P><STRONG><a name="[23d]"></a>mbed::SerialBase::writeable()</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, serialbase.o(i._ZN4mbed10SerialBase9writeableEv))
@@ -2954,7 +2954,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_writable
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
 </UL>
 
 <P><STRONG><a name="[23e]"></a>mbed::SerialBase::SerialBase(PinName, PinName, int)</STRONG> (Thumb, 192 bytes, Stack size 32 bytes, serialbase.o(i._ZN4mbed10SerialBaseC1E7PinNameS1_i))
@@ -3026,12 +3026,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 528 + Unknown Stack Size
 <LI>Call Chain = mbed::FileBase::lookup(const char*, unsigned) &rArr; SingletonPtr&lang;rtos::Mutex&rang;::operator -&rang;() &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
+<BR>[Calls]<UL><LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
-<LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingletonPtr&lang;rtos::Mutex&rang;::operator -&rang;()
 <LI><a href="#[248]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
@@ -3087,10 +3087,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::_base_getc()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
 </UL>
 
-<P><STRONG><a name="[a2]"></a>mbed::RawSerial::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial4lockEv))
+<P><STRONG><a name="[a3]"></a>mbed::RawSerial::lock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial4lockEv))
 <BR>[Address Reference Count : 2]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 <LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
 </UL>
@@ -3100,10 +3100,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[234]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::_base_putc(int)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::txCallback()
 </UL>
 
-<P><STRONG><a name="[a3]"></a>mbed::RawSerial::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial6unlockEv))
+<P><STRONG><a name="[a4]"></a>mbed::RawSerial::unlock()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, rawserial.o(i._ZN4mbed9RawSerial6unlockEv))
 <BR>[Address Reference Count : 2]<UL><LI> bufferedserial.o(.constdata__ZTV14BufferedSerial)
 <LI> rawserial.o(.constdata__ZTVN4mbed9RawSerialE)
 </UL>
@@ -3121,7 +3121,13 @@ Global Symbols
 <P><STRONG><a name="[1f0]"></a>rtos::Mutex::lock(unsigned)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mutex.o(i._ZN4rtos5Mutex4lockEj))
 <BR><BR>[Calls]<UL><LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
+<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::onUpdateCallback(const char*, void*)
+<LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::send(const void*, unsigned)
 <LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::recv(void*, unsigned)
@@ -3130,12 +3136,6 @@ Global Symbols
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::open(NetworkStack*)
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
-<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::updateCallback(const char*, void*)
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::recvfrom(SocketAddress*, void*, unsigned)
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::sendto(const SocketAddress&, const void*, unsigned)
@@ -3148,7 +3148,13 @@ Global Symbols
 <P><STRONG><a name="[1f2]"></a>rtos::Mutex::unlock()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mutex.o(i._ZN4rtos5Mutex6unlockEv))
 <BR><BR>[Calls]<UL><LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
+<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::onUpdateCallback(const char*, void*)
+<LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::send(const void*, unsigned)
 <LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::recv(void*, unsigned)
@@ -3157,12 +3163,6 @@ Global Symbols
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::open(NetworkStack*)
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
-<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::updateCallback(const char*, void*)
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::recvfrom(SocketAddress*, void*, unsigned)
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::sendto(const SocketAddress&, const void*, unsigned)
@@ -3175,12 +3175,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 496 + Unknown Stack Size
 <LI>Call Chain = rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
-<LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
+<BR>[Calls]<UL><LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sti___13_MsgBroker_cpp_ead47833
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sti___13_MsgBroker_cpp_ead47833
 <LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingletonPtr&lang;rtos::Mutex&rang;::operator -&rang;()
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::Socket__sub_object()
@@ -3205,9 +3205,9 @@ Global Symbols
 <P><STRONG><a name="[201]"></a>rtos::Thread::signal_clr(int)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, thread.o(i._ZN4rtos6Thread10signal_clrEi))
 <BR><BR>[Calls]<UL><LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalClear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
 </UL>
 
 <P><STRONG><a name="[255]"></a>rtos::Thread::signal_set(int)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, thread.o(i._ZN4rtos6Thread10signal_setEi))
@@ -3216,7 +3216,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalSet
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::rxCallback()
 </UL>
 
 <P><STRONG><a name="[1fd]"></a>rtos::Thread::constructor(osPriority, unsigned, unsigned char*)</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, thread.o(i._ZN4rtos6Thread11constructorE10osPriorityjPh))
@@ -3230,7 +3230,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::start()
 </UL>
 
 <P><STRONG><a name="[1dd]"></a>rtos::Thread::wait(unsigned)</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, thread.o(i._ZN4rtos6Thread4waitEj))
@@ -3245,10 +3245,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 544 + Unknown Stack Size
 <LI>Call Chain = rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
 <LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::release()
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new[] (unsigned)
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete[] (void*)
@@ -3331,7 +3331,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 </UL>
 
@@ -3341,8 +3341,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::~TCPSocket()
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::~TCPSocket()
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::~UDPSocket()
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 </UL>
@@ -3364,17 +3364,17 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::disconnect()
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::disconnect()
 </UL>
 
 <P><STRONG><a name="[20f]"></a>ESP8266::setTimeout(unsigned)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, esp8266.o(i._ZN7ESP826610setTimeoutEj))
-<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::disconnect()
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_send(void*, const void*, unsigned)
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recv(void*, void*, unsigned)
+<BR><BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_send(void*, const void*, unsigned)
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recv(void*, void*, unsigned)
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::disconnect()
 </UL>
 
 <P><STRONG><a name="[215]"></a>ESP8266::getIPAddress()</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, esp8266.o(i._ZN7ESP826612getIPAddressEv))
@@ -3384,9 +3384,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thunk{-4} to ESP8266Interface::get_ip_address()
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::get_ip_address()
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thunk{-4} to ESP8266Interface::get_ip_address()
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::get_ip_address()
 </UL>
 
 <P><STRONG><a name="[94]"></a>ESP8266::_packet_handler()</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, esp8266.o(i._ZN7ESP826615_packet_handlerEv))
@@ -3407,7 +3407,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
 </UL>
 
 <P><STRONG><a name="[218]"></a>ESP8266::open(const char*, int, const char*, int)</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, esp8266.o(i._ZN7ESP82664openEPKciS1_i))
@@ -3417,7 +3417,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
 </UL>
 
 <P><STRONG><a name="[211]"></a>ESP8266::recv(int, void*, unsigned)</STRONG> (Thumb, 150 bytes, Stack size 24 bytes, esp8266.o(i._ZN7ESP82664recvEiPvj))
@@ -3429,7 +3429,7 @@ Global Symbols
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memmove
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recv(void*, void*, unsigned)
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_recv(void*, void*, unsigned)
 </UL>
 
 <P><STRONG><a name="[212]"></a>ESP8266::send(int, const void*, unsigned)</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, esp8266.o(i._ZN7ESP82664sendEiPKvj))
@@ -3440,7 +3440,7 @@ Global Symbols
 <LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_send(void*, const void*, unsigned)
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_send(void*, const void*, unsigned)
 </UL>
 
 <P><STRONG><a name="[213]"></a>ESP8266::close(int)</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, esp8266.o(i._ZN7ESP82665closeEi))
@@ -3450,8 +3450,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
+<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
 </UL>
 
 <P><STRONG><a name="[266]"></a>ESP8266::reset()</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, esp8266.o(i._ZN7ESP82665resetEv), UNUSED)
@@ -3462,7 +3462,7 @@ Global Symbols
 <P><STRONG><a name="[21d]"></a>ESP8266::attach(mbed::Callback&lang;void()&rang;)</STRONG> (Thumb, 50 bytes, Stack size 32 bytes, esp8266.o(i._ZN7ESP82666attachEN4mbed8CallbackIFvvEEE))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ESP8266::attach(mbed::Callback&lang;void()&rang;) &rArr; BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::ESP8266Interface(PinName, PinName, bool)
 </UL>
@@ -3474,7 +3474,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::send(const char*, ...)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
 </UL>
 
 <P><STRONG><a name="[219]"></a>ESP8266::startup(int)</STRONG> (Thumb, 166 bytes, Stack size 32 bytes, esp8266.o(i._ZN7ESP82667startupEi))
@@ -3485,7 +3485,7 @@ Global Symbols
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::oob(const char*, mbed::Callback&lang;void()&rang;)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::connect()
 </UL>
 
 <P><STRONG><a name="[21c]"></a>ESP8266::ESP8266(PinName, PinName, bool)</STRONG> (Thumb, 118 bytes, Stack size 32 bytes, esp8266.o(i._ZN7ESP8266C1E7PinNameS0_b))
@@ -3571,11 +3571,11 @@ Global Symbols
 <LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::Timer::read_ms()
 <LI><a href="#[241]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::Timer::start()
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsscanf
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sscanf
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[26a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
+<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsscanf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::recv(const char*, ...)
@@ -3628,7 +3628,7 @@ Global Symbols
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
-<P><STRONG><a name="[96]"></a>SerialMon::rxCallback()</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, serialmon.o(i._ZN9SerialMon10rxCallbackEv))
+<P><STRONG><a name="[97]"></a>SerialMon::rxCallback()</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, serialmon.o(i._ZN9SerialMon10rxCallbackEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 544 + Unknown Stack Size
 <LI>Call Chain = SerialMon::rxCallback() &rArr; rtos::Thread::signal_set(int) &rArr; osSignalSet &rArr; isr_evt_set &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
@@ -3638,57 +3638,59 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
-<P><STRONG><a name="[98]"></a>SerialMon::txCallback()</STRONG> (Thumb, 116 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon10txCallbackEv))
+<P><STRONG><a name="[99]"></a>SerialMon::txCallback()</STRONG> (Thumb, 116 bytes, Stack size 32 bytes, serialmon.o(i._ZN9SerialMon10txCallbackEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = SerialMon::txCallback() &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
-<LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::putc(int)
+<BR>[Calls]<UL><LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::putc(int)
 <LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::writeable()
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
-<P><STRONG><a name="[ba]"></a>SerialMon::updateCallback(const char*, void*)</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, serialmon.o(i._ZN9SerialMon14updateCallbackEPKcPv))
+<P><STRONG><a name="[96]"></a>SerialMon::onUpdateCallback(const char*, void*)</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, serialmon.o(i._ZN9SerialMon16onUpdateCallbackEPKcPv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 432 + Unknown Stack Size
-<LI>Call Chain = SerialMon::updateCallback(const char*, void*) &rArr; SerialMon::send(char*) &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
+<LI>Call Chain = SerialMon::onUpdateCallback(const char*, void*) &rArr; SerialMon::send(char*) &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<BR>[Calls]<UL><LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
-<LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::send(char*)
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata__ZTV9SerialMon)
+<BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
 <P><STRONG><a name="[26c]"></a>SerialMon::send(char*)</STRONG> (Thumb, 310 bytes, Stack size 64 bytes, serialmon.o(i._ZN9SerialMon4sendEPc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 408 + Unknown Stack Size
 <LI>Call Chain = SerialMon::send(char*) &rArr; mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType) &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<BR>[Calls]<UL><LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::putc(int)
+<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::writeable()
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
-<LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::putc(int)
-<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::writeable()
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::updateCallback(const char*, void*)
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::onUpdateCallback(const char*, void*)
 </UL>
 
-<P><STRONG><a name="[97]"></a>SerialMon::start()</STRONG> (Thumb, 410 bytes, Stack size 120 bytes, serialmon.o(i._ZN9SerialMon5startEv))
+<P><STRONG><a name="[98]"></a>SerialMon::start()</STRONG> (Thumb, 410 bytes, Stack size 120 bytes, serialmon.o(i._ZN9SerialMon5startEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = SerialMon::start() &rArr; rtos::Thread::signal_wait(int, unsigned)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
-<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
-<LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_wait(int, unsigned)
+<BR>[Calls]<UL><LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_wait(int, unsigned)
 <LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_clr(int)
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serialmon.o(.constdata)
 </UL>
-<P><STRONG><a name="[26d]"></a>SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)</STRONG> (Thumb, 586 bytes, Stack size 88 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKcc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 632 + Unknown Stack Size
+<P><STRONG><a name="[26d]"></a>SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)</STRONG> (Thumb, 584 bytes, Stack size 96 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKcc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 640 + Unknown Stack Size
 <LI>Call Chain = SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char) &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::Semaphore(int)
+<BR>[Calls]<UL><LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_clr(int)
+<LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::Semaphore(int)
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::constructor(osPriority, unsigned, unsigned char*)
 <LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
@@ -3696,8 +3698,6 @@ Global Symbols
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::RawSerial::RawSerial(PinName, PinName, int)
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::attach(mbed::Callback&lang;void()&rang;, mbed::SerialBase::IrqType)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
-<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::signal_clr(int)
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new(unsigned)
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
@@ -3709,7 +3709,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
-<P><STRONG><a name="[347]"></a>SerialMon::SerialMon__sub_object(PinName, PinName, int, int, int, const char*, char)</STRONG> (Thumb, 0 bytes, Stack size 88 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKcc), UNUSED)
+<P><STRONG><a name="[347]"></a>SerialMon::SerialMon__sub_object(PinName, PinName, int, int, int, const char*, char)</STRONG> (Thumb, 0 bytes, Stack size 96 bytes, serialmon.o(i._ZN9SerialMonC1E7PinNameS0_iiiPKcc), UNUSED)
 
 <P><STRONG><a name="[1f8]"></a>TCPSocket::recv(void*, unsigned)</STRONG> (Thumb, 138 bytes, Stack size 32 bytes, tcpsocket.o(i._ZN9TCPSocket4recvEPvj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 336 + Unknown Stack Size
@@ -3720,7 +3720,7 @@ Global Symbols
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::wait(unsigned)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[1f7]"></a>TCPSocket::send(const void*, unsigned)</STRONG> (Thumb, 138 bytes, Stack size 32 bytes, tcpsocket.o(i._ZN9TCPSocket4sendEPKvj))
@@ -3732,7 +3732,7 @@ Global Symbols
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::wait(unsigned)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[bd]"></a>TCPSocket::event()</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, tcpsocket.o(i._ZN9TCPSocket5eventEv))
@@ -3747,13 +3747,13 @@ Global Symbols
 <P><STRONG><a name="[1f6]"></a>TCPSocket::connect(const char*, unsigned short)</STRONG> (Thumb, 130 bytes, Stack size 112 bytes, tcpsocket.o(i._ZN9TCPSocket7connectEPKct))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = TCPSocket::connect(const char*, unsigned short) &rArr; SocketAddress::SocketAddress(nsapi_addr, unsigned short)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
-<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
-<LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::SocketAddress(nsapi_addr, unsigned short)
+<BR>[Calls]<UL><LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::SocketAddress(nsapi_addr, unsigned short)
 <LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_memcpy4_5
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
+<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[26e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::set_port(unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[bc]"></a>TCPSocket::get_proto()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tcpsocket.o(i._ZN9TCPSocket9get_protoEv))
@@ -3766,7 +3766,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::Semaphore(int)
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::Socket__sub_object()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[348]"></a>TCPSocket::TCPSocket__sub_object()</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, tcpsocket.o(i._ZN9TCPSocketC1Ev), UNUSED)
@@ -3774,11 +3774,11 @@ Global Symbols
 <P><STRONG><a name="[bb]"></a>TCPSocket::~TCPSocket()</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, tcpsocket.o(i._ZN9TCPSocketD1Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TCPSocket::~TCPSocket() &rArr; Socket::close()
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::~Mutex()
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::~Mutex()
+<LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::~Semaphore()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tcpsocket.o(.constdata__ZTV9TCPSocket)
 </UL>
@@ -3831,8 +3831,8 @@ Global Symbols
 <P><STRONG><a name="[be]"></a>UDPSocket::~UDPSocket()</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, udpsocket.o(i._ZN9UDPSocketD1Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = UDPSocket::~UDPSocket() &rArr; Socket::close()
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::~Mutex()
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::~Mutex()
+<LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::~Semaphore()
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
@@ -3847,15 +3847,15 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
 </UL>
 
 <P><STRONG><a name="[203]"></a>SocketAddress::get_ip_version() const</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, socketaddress.o(i._ZNK13SocketAddress14get_ip_versionEv))
-<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
+<BR><BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
 </UL>
 
 <P><STRONG><a name="[216]"></a>SocketAddress::get_port() const</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, socketaddress.o(i._ZNK13SocketAddress8get_portEv))
-<BR><BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
+<BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_connect(void*, const SocketAddress&)
 </UL>
 
 <P><STRONG><a name="[c9]"></a>std::__rw_exception::what() const</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, rwstdexcept.o(i._ZNKSt14__rw_exception4whatEv))
@@ -4222,7 +4222,7 @@ Global Symbols
 <LI><a href="#[26f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::__rw_messages_base::_C_cat_open(const std::basic_string&lang;char, std::char_traits&lang;char&rang;, std::allocator&lang;char&rang;&rang;&, const std::locale&) const
 </UL>
 
-<P><STRONG><a name="[b7]"></a>thunk{-4} to ESP8266Interface::get_ip_address()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, esp8266interface.o(i._ZThn4_N16ESP8266Interface14get_ip_addressEv))
+<P><STRONG><a name="[b8]"></a>thunk{-4} to ESP8266Interface::get_ip_address()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, esp8266interface.o(i._ZThn4_N16ESP8266Interface14get_ip_addressEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 592 + Unknown Stack Size
 <LI>Call Chain = thunk{-4} to ESP8266Interface::get_ip_address() &rArr; ESP8266::getIPAddress() &rArr; ATParser::recv(const char*, ...) &rArr; ATParser::vrecv(const char*, std::__va_list) &rArr;  ATParser::vrecv(const char*, std::__va_list) (Cycle)
 </UL>
@@ -4230,7 +4230,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
-<P><STRONG><a name="[b8]"></a>thunk{-4} to ESP8266Interface::get_stack()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, esp8266interface.o(i._ZThn4_N16ESP8266Interface9get_stackEv))
+<P><STRONG><a name="[b9]"></a>thunk{-4} to ESP8266Interface::get_stack()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, esp8266interface.o(i._ZThn4_N16ESP8266Interface9get_stackEv))
 <BR>[Address Reference Count : 1]<UL><LI> esp8266interface.o(.constdata__ZTV16ESP8266Interface)
 </UL>
 <P><STRONG><a name="[6e]"></a>operator delete[] (void*)</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, array_del.o(i._ZdaPv))
@@ -4258,8 +4258,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[229]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rw::__rw_deallocate(void*, unsigned, int)
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_close(void*)
+<LI><a href="#[229]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rw::__rw_deallocate(void*, unsigned, int)
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete[] (void*)
 <LI><a href="#[285]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::locale::_C_init()
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::messages&lang;char&rang;::~messages__deallocating()
@@ -4303,7 +4303,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[289]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator ==(const SocketAddress&, const SocketAddress&)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
+<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_sendto(void*, const SocketAddress&, const void*, unsigned)
 </UL>
 
 <P><STRONG><a name="[1ec]"></a>operator new(unsigned)</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, new.o(i._Znwj))
@@ -4312,11 +4312,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_new_handler_addr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
+<BR>[Called By]<UL><LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
+<LI><a href="#[26d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char)
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
 <LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rw::__rw_allocate(unsigned, int)
-<LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::installTopic(const char*, unsigned, MsgBroker::Exception*)
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new[] (unsigned)
 <LI><a href="#[285]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::locale::_C_init()
@@ -4336,9 +4336,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1e0]"></a>__ARM_common_memcpy4_5</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, esp8266interface.o(i.__ARM_common_memcpy4_5))
-<BR><BR>[Called By]<UL><LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
+<BR><BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NetworkStack::gethostbyname(const char*, SocketAddress*, nsapi_version)
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266Interface::socket_open(void**, nsapi_protocol)
+<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::connect(const char*, unsigned short)
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version)
 <LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nsapi_dns_query(NetworkStack*, const char*, SocketAddress*, nsapi_version)
 </UL>
@@ -4393,7 +4393,7 @@ Global Symbols
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std::locale::classic()
 </UL>
 
-<P><STRONG><a name="[b9]"></a>__cxa_pure_virtual</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pure_virt.o(i.__cxa_pure_virtual))
+<P><STRONG><a name="[ba]"></a>__cxa_pure_virtual</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pure_virt.o(i.__cxa_pure_virtual))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = __cxa_pure_virtual &rArr; __rt_SIGPVFN &rArr; __rt_SIGPVFN_inner &rArr; __default_signal_display &rArr; _ttywrch
 </UL>
 <BR>[Calls]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGPVFN
@@ -4487,8 +4487,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 504 + Unknown Stack Size
 <LI>Call Chain = _mutex_initialize &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
-<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_init
+<BR>[Calls]<UL><LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_init
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
 </UL>
 <BR>[Called By]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Initialize
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
@@ -4534,12 +4534,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 576 + Unknown Stack Size
 <LI>Call Chain = _sys_open &rArr; mbed::FilePath::FilePath(const char*) &rArr; mbed::FileBase::lookup(const char*, unsigned) &rArr; SingletonPtr&lang;rtos::Mutex&rang;::operator -&rang;() &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
+<BR>[Calls]<UL><LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
-<LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 <LI><a href="#[238]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_baud
 <LI><a href="#[24f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::FilePath(const char*)
@@ -4548,8 +4548,8 @@ Global Symbols
 <LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::exists()
 <LI><a href="#[24d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::file()
 <LI><a href="#[24b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::fileSystem()
-<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
+<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 </UL>
@@ -4609,14 +4609,14 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_vfprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_GPIO_Clock
-<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
-<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
+<BR>[Called By]<UL><LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_error
 <LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 <LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_peripheral
 <LI><a href="#[2b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_merge
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
-<LI><a href="#[2ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_error
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
+<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::CloudManager(PinName, PinName)
+<LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_GPIO_Clock
 <LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 <LI><a href="#[238]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_baud
 </UL>
@@ -4704,7 +4704,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1bd]"></a>$Super$$main</STRONG> (Thumb, 226 bytes, Stack size 128 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 760 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 768 + Unknown Stack Size
 <LI>Call Chain = $Super$$main &rArr; SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char) &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgBroker::publish(const char*, void*, unsigned, MsgBroker::Exception*)
@@ -4732,12 +4732,12 @@ Global Symbols
 <LI><a href="#[2a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_printf
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_die
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
+<BR>[Called By]<UL><LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::send(const void*, unsigned)
 <LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPSocket::recv(void*, unsigned)
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATParser::vrecv(const char*, std::__va_list)
-<LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
+<LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
 <LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 <LI><a href="#[23b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_exit
 <LI><a href="#[239]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_enter
@@ -4832,7 +4832,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_mbx_receive
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::start()
 </UL>
 
 <P><STRONG><a name="[1f1]"></a>osMessagePut</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, rt_cmsis.o(i.osMessagePut))
@@ -4842,7 +4842,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_check
 <LI><a href="#[2a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_mbx_send
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
+<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloudManager::updateCallback(const char*, void*)
 </UL>
 
 <P><STRONG><a name="[252]"></a>osMutexCreate</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, rt_cmsis.o(i.osMutexCreate))
@@ -4850,8 +4850,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
-<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pre_main
+<BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pre_main
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
 </UL>
 
 <P><STRONG><a name="[253]"></a>osMutexDelete</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, rt_cmsis.o(i.osMutexDelete))
@@ -4919,8 +4919,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadCreate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 </UL>
 
 <P><STRONG><a name="[8e]"></a>osThreadExit</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, rt_cmsis.o(i.osThreadExit))
@@ -4928,20 +4928,20 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.svcThreadCreate)
 </UL>
-<P><STRONG><a name="[9a]"></a>osTimerThread</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerThread))
+<P><STRONG><a name="[9b]"></a>osTimerThread</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerThread))
 <BR>[Address Reference Count : 1]<UL><LI> rtx_conf_cm.o(.constdata)
 </UL>
 <P><STRONG><a name="[2ad]"></a>os_error</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, rtx_conf_cm.o(i.os_error))
 <BR><BR>[Stack]<UL><LI>Max Depth = 496 + Unknown Stack Size
 <LI>Call Chain = os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
+<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
 </UL>
-<BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_stk_check
-<LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR>[Called By]<UL><LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_psq_enq
 <LI><a href="#[2d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_stk_check
 </UL>
 
 <P><STRONG><a name="[8a]"></a>os_idle_demon</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, rtx_conf_cm.o(i.os_idle_demon))
@@ -4961,9 +4961,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + In Cycle
 <LI>Call Chain = pin_function &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[2b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_GPIO_Clock
-<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 </UL>
@@ -4972,8 +4972,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 32 + In Cycle
 <LI>Call Chain = pin_mode &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_GPIO_Clock
-<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_GPIO_Clock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 <LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
@@ -5001,15 +5001,15 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + In Cycle
 <LI>Call Chain = pinmap_pinout &rArr;  error (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
+<BR>[Calls]<UL><LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
 <LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
-<LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_function
+<LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 </UL>
 
 <P><STRONG><a name="[1b]"></a>pre_main</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, rtx_conf_cm.o(i.pre_main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 776 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 784 + Unknown Stack Size
 <LI>Call Chain = pre_main &rArr; main &rArr; $Super$$main &rArr; SerialMon::SerialMon(PinName, PinName, int, int, int, const char*, char) &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
@@ -5122,10 +5122,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> hal_cm3.o(.emb_text)
 </UL>
 <P><STRONG><a name="[2b8]"></a>rt_get_first</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, rt_list.o(i.rt_get_first))
-<BR><BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_systick
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_pop_req
-<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
-<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
+<BR><BR>[Called By]<UL><LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
 <LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
 <LI><a href="#[2d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
@@ -5137,6 +5134,9 @@ Global Symbols
 <LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
 <LI><a href="#[2b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_block
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_systick
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_pop_req
+<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 </UL>
 
 <P><STRONG><a name="[2d1]"></a>rt_init_robin</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, rt_robin.o(i.rt_init_robin))
@@ -5216,10 +5216,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[299]"></a>rt_mut_init</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, rt_mutex.o(i.rt_mut_init))
-<BR><BR>[Called By]<UL><LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexCreate
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexCreate
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcKernelInitialize
 <LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
+<LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
 </UL>
 
 <P><STRONG><a name="[72]"></a>rt_mut_release</STRONG> (Thumb, 218 bytes, Stack size 24 bytes, rt_mutex.o(i.rt_mut_release))
@@ -5250,12 +5250,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 536 + Unknown Stack Size
 <LI>Call Chain = rt_pop_req &rArr; rt_mbx_psh &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
-<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
-<LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR>[Calls]<UL><LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_rdy_first
 <LI><a href="#[2be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_psh
 <LI><a href="#[2b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
+<LI><a href="#[2ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
+<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
 </UL>
@@ -5286,8 +5286,7 @@ Global Symbols
 <P><STRONG><a name="[2ba]"></a>rt_put_prio</STRONG> (Thumb, 66 bytes, Stack size 4 bytes, rt_list.o(i.rt_put_prio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = rt_put_prio
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
-<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
+<BR>[Called By]<UL><LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
 <LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_psh
 <LI><a href="#[2da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
@@ -5300,12 +5299,13 @@ Global Symbols
 <LI><a href="#[2c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
+<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 </UL>
 
 <P><STRONG><a name="[2bc]"></a>rt_put_rdy_first</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, rt_list.o(i.rt_put_rdy_first))
-<BR><BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_systick
+<BR><BR>[Called By]<UL><LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_systick
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_pop_req
-<LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
 </UL>
 
 <P><STRONG><a name="[2c8]"></a>rt_resort_prio</STRONG> (Thumb, 136 bytes, Stack size 4 bytes, rt_list.o(i.rt_resort_prio))
@@ -5317,14 +5317,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[2c4]"></a>rt_ret_val</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, hal_cm.o(i.rt_ret_val))
-<BR><BR>[Called By]<UL><LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
-<LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR><BR>[Called By]<UL><LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[2cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_send
 <LI><a href="#[2cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_delete
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 <LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_delete
 <LI><a href="#[2c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
+<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 </UL>
 
 <P><STRONG><a name="[2c0]"></a>rt_ret_val2</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, hal_cm.o(i.rt_ret_val2))
@@ -5335,8 +5335,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[2bf]"></a>rt_rmv_dly</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, rt_list.o(i.rt_rmv_dly))
-<BR><BR>[Called By]<UL><LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
-<LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR><BR>[Called By]<UL><LI><a href="#[2c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[2be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_psh
 <LI><a href="#[2d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[2cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_send
@@ -5346,6 +5345,7 @@ Global Symbols
 <LI><a href="#[2c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_set
+<LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 </UL>
 
 <P><STRONG><a name="[2d9]"></a>rt_rmv_list</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, rt_list.o(i.rt_rmv_list))
@@ -5439,12 +5439,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 560 + Unknown Stack Size
 <LI>Call Chain = rt_systick &rArr; sysTimerTick &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
-<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
+<BR>[Calls]<UL><LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
 <LI><a href="#[2bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_rdy_first
 <LI><a href="#[2d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dec_dly
 <LI><a href="#[2b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
 <LI><a href="#[2d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
+<LI><a href="#[2ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
 </UL>
 <BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Tick_Handler
 <LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
@@ -5464,15 +5464,15 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 528 + Unknown Stack Size
 <LI>Call Chain = rt_tsk_delete &rArr; rt_stk_check &rArr; os_error &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_PSP
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_stk_check
-<LI><a href="#[2c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val
+<BR>[Calls]<UL><LI><a href="#[2c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val
 <LI><a href="#[2d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_rmv_list
 <LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_rmv_dly
 <LI><a href="#[2ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_prio
 <LI><a href="#[2b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_free_box
 <LI><a href="#[2bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
+<LI><a href="#[2d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_PSP
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_stk_check
 </UL>
 <BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadTerminate
 </UL>
@@ -5489,8 +5489,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[298]"></a>rt_tsk_self</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, rt_task.o(i.rt_tsk_self))
-<BR><BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perthread_libspace
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
+<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perthread_libspace
 </UL>
 
 <P><STRONG><a name="[2ae]"></a>rtos_idle_loop</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rtos_idle.o(i.rtos_idle_loop))
@@ -5519,12 +5519,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + In Cycle
 <LI>Call Chain = serial_init &rArr;  error (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
-<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
-<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
-<LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
+<BR>[Calls]<UL><LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 <LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_peripheral
 <LI><a href="#[2b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_merge
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error
+<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
 <LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
@@ -5544,7 +5544,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::interrupt_handler_asynch()
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::interrupt_handler_asynch()
 </UL>
 
 <P><STRONG><a name="[23a]"></a>serial_irq_set</STRONG> (Thumb, 186 bytes, Stack size 16 bytes, serial_api.o(i.serial_irq_set))
@@ -5565,14 +5565,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[209]"></a>serial_readable</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, serial_api.o(i.serial_readable))
-<BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::rxIrq()
-<LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::readable()
+<BR><BR>[Called By]<UL><LI><a href="#[23c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::readable()
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::rxIrq()
 </UL>
 
 <P><STRONG><a name="[206]"></a>serial_writable</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, serial_api.o(i.serial_writable))
-<BR><BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::txIrq()
+<BR><BR>[Called By]<UL><LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::writeable()
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::txIrq()
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BufferedSerial::prime()
-<LI><a href="#[23d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::SerialBase::writeable()
 </UL>
 
 <P><STRONG><a name="[2de]"></a>set_compare</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, us_ticker.o(i.set_compare))
@@ -5794,13 +5794,13 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> hal_tick.o(i.HAL_InitTick)
 </UL>
-<P><STRONG><a name="[9f]"></a>us_ticker_clear_interrupt</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_clear_interrupt))
+<P><STRONG><a name="[a0]"></a>us_ticker_clear_interrupt</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_clear_interrupt))
 <BR>[Address Reference Count : 1]<UL><LI> mbed_us_ticker_api.o(.constdata)
 </UL>
-<P><STRONG><a name="[9e]"></a>us_ticker_disable_interrupt</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_disable_interrupt))
+<P><STRONG><a name="[9f]"></a>us_ticker_disable_interrupt</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_disable_interrupt))
 <BR>[Address Reference Count : 1]<UL><LI> mbed_us_ticker_api.o(.constdata)
 </UL>
-<P><STRONG><a name="[9c]"></a>us_ticker_init</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_init))
+<P><STRONG><a name="[9d]"></a>us_ticker_init</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, us_ticker.o(i.us_ticker_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = us_ticker_init &rArr; HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
@@ -5813,10 +5813,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[2e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ticker_irq_handler
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_irq_handler
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_set_interrupt
 </UL>
 
-<P><STRONG><a name="[9d]"></a>us_ticker_read</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, us_ticker.o(i.us_ticker_read))
+<P><STRONG><a name="[9e]"></a>us_ticker_read</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, us_ticker.o(i.us_ticker_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = us_ticker_read &rArr; HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
@@ -5825,7 +5825,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> mbed_us_ticker_api.o(.constdata)
 </UL>
-<P><STRONG><a name="[a0]"></a>us_ticker_set_interrupt</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, us_ticker.o(i.us_ticker_set_interrupt))
+<P><STRONG><a name="[a1]"></a>us_ticker_set_interrupt</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, us_ticker.o(i.us_ticker_set_interrupt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = us_ticker_set_interrupt &rArr; HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_irq_handler
@@ -5837,7 +5837,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = wait_ms &rArr; us_ticker_read &rArr; HAL_InitTick &rArr; __NVIC_SetVector &rArr; __aeabi_memcpy4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::wait(unsigned)
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_read
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;us_ticker_read
 <LI><a href="#[2e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_are_interrupts_enabled
 </UL>
 <BR>[Called By]<UL><LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_die
@@ -5866,10 +5866,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 512 + Unknown Stack Size
 <LI>Call Chain = SingletonPtr&lang;rtos::Mutex&rang;::operator -&rang;() &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
-<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
-<LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<BR>[Calls]<UL><LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[24a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
+<LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 </UL>
@@ -6333,8 +6333,8 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 504 + Unknown Stack Size
 <LI>Call Chain = __sti___13_MsgBroker_cpp_ead47833 &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
-<LI><a href="#[288]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_atexit
+<BR>[Calls]<UL><LI><a href="#[288]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_atexit
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::Mutex()
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> msgbroker.o(.init_array)
 </UL>
@@ -6404,10 +6404,10 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 752 + Unknown Stack Size
 <LI>Call Chain = nsapi_dns_query_multiple(NetworkStack*, const char*, nsapi_addr*, unsigned, nsapi_version) &rArr; UDPSocket::UDPSocket() &rArr; Socket::Socket__sub_object() &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; mbed_error_vfprintf &rArr; core_util_critical_section_enter &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
-<LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::open(NetworkStack*)
-<LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::SocketAddress(nsapi_addr, unsigned short)
+<BR>[Calls]<UL><LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SocketAddress::SocketAddress(nsapi_addr, unsigned short)
 <LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_memcpy4_5
+<LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::close()
+<LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Socket::open(NetworkStack*)
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::~UDPSocket()
 <LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::UDPSocket()
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UDPSocket::recvfrom(SocketAddress*, void*, unsigned)

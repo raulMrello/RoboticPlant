@@ -64,12 +64,10 @@
 
 /** \class SerialMon
  *  \brief This class provides an ISR based buffered serial port IO operation. In combination with MsgBroker
- *  class, it is able to handle topic update event notifications. For that purpose, it must provide its own
- *  implementation of MsgBroker::TopicHandler interface, who exposes a unique pure virtual method for such
- *  purpose (updateCallback method).
+ *  class, it is able to handle topic update event notifications. 
  */
 
-class SerialMon : public MsgBroker::TopicHandler {
+class SerialMon {
 public:
     
     /**
@@ -92,12 +90,12 @@ public:
     virtual ~SerialMon();
     
     /**
-     * TopicHandler updateCallback pure virtual function implementation
+     * Topic updates' listener
      *
      * @param topicname Name of the handled topic
      * @param topicdata Topic data pointer
      */    
-    virtual void updateCallback(const char * topicname, void * topicdata);
+    void onNewTopic(const char * topicname, void * topicdata);
 
 
     /**

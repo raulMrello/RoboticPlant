@@ -101,7 +101,7 @@ static char* sock_send(NetworkInterface *net, char *server, int port, char * dat
 
 
 /*************************************************************************************/
-void CloudManager::updateCallback(const char * topicname, void * topicdata){
+void CloudManager::onNewTopic(const char * topicname, void * topicdata){
 	// si se recibe un update del topic /keyb...
 	if(strcmp(topicname, "/iot") == 0){
 		// obtiene un puntero a los datos del topic con el formato correspondiente
@@ -141,7 +141,7 @@ CloudManager::CloudManager(PinName tx, PinName rx){
 	// install CloudManager topics /log and /cmd
 	MsgBroker::installTopic("/iot", sizeof(CloudManager::topic_iot_t));
 	// attaches to topic updates 
-	MsgBroker::attach("/iot", this, &e);
+	MsgBroker::attach("/iot", this, &CloudManager::onNewTopic, &e);
 	// initializes logger
 	_logger = 0;
 	// reference WifiInterface

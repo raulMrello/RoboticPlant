@@ -79,7 +79,7 @@ void SerialMon::rxCallback(){
 
 
 /*************************************************************************************/
-void SerialMon::updateCallback(const char * topicname, void * topicdata){
+void SerialMon::onNewTopic(const char * topicname, void * topicdata){
     // si se recibe un update del topic /keyb...
     if(strcmp(topicname, "/log") == 0){
         // obtiene un puntero a los datos del topic con el formato correspondiente
@@ -135,7 +135,7 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
     MsgBroker::installTopic("/log", sizeof(SerialMon::topic_t));
     MsgBroker::installTopic("/cmd", sizeof(SerialMon::topic_t));
     // attaches to topic updates 
-    MsgBroker::attach("/log", this, &e);
+    MsgBroker::attach("/log", this, &SerialMon::onNewTopic, &e);
     
     // setup initial conditions
     _serial->attach(0, (SerialBase::IrqType)TxIrq);

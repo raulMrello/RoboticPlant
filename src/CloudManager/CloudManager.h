@@ -70,7 +70,7 @@
  *	to carry out blocking operations.
  */
 
-class CloudManager : public MsgBroker::TopicHandler {
+class CloudManager {
 public:
 	
     /**
@@ -88,12 +88,12 @@ public:
     virtual ~CloudManager();
 	
     /**
-     * TopicHandler updateCallback pure virtual function implementation
+     * Topic updates' listener
      *
      * @param topicname Name of the handled topic
      * @param topicdata Topic data pointer
      */    
-	virtual void updateCallback(const char * topicname, void * topicdata);
+	virtual void onNewTopic(const char * topicname, void * topicdata);
 
 
     /**
