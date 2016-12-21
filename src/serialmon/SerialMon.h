@@ -30,6 +30,18 @@
 #define SERIALMON_H
 
 
+/** \def SERIALMON_ENABLE_THREAD
+ *  \brief Enable Threaded behaviour. Set 0 to disable or 1 to enable
+ */
+#define SERIALMON_ENABLE_THREAD		1
+
+
+/** \def SERIALMON_ENABLE_MSGBOX
+ *  \brief Enable MsgBox topic handling. Set 0 to disable or 1 to enable
+ */
+#define SERIALMON_ENABLE_MSGBOX		1
+
+
 /** \def SERIALMON_ENABLE_SIMBUF
  *  \brief Enable data buffer for debugging tx isr execution
  */
@@ -59,7 +71,9 @@
 
 
 #include "mbed.h"
+#if SERIALMON_ENABLE_MSGBOX==1
 #include "MsgBroker.h"
+#endif
 
 
 /** \class SerialMon
@@ -89,6 +103,7 @@ public:
      */    
     virtual ~SerialMon();
     
+	#if SERIALMON_ENABLE_MSGBOX==1
     /**
      * Topic updates' listener
      *
@@ -96,15 +111,51 @@ public:
      * @param topicdata Topic data pointer
      */    
     void onNewTopic(const char * topicname, void * topicdata);
+	#endif
 
-
+	#if SERIALMON_ENABLE_THREAD==1
     /**
      * Starts internal thread
      *
      */
     void start(); 
+	#endif
+	
+    /** Attach a function to call when the EOC char is received
+     *  @param func A pointer to a void function, or 0 to set as none
+     */
+    void attachRxCallback(void (*func)()){
+		_fp_rx.attach(func);
+	}
 
-    
+    /** Attach a member function to call when the EOC char is received
+     *
+     *  @param obj pointer to the object to call the member function on
+     *  @param method pointer to the member function to be called
+     */
+    template<typename T, typename M>
+    void attachRxCallback(T *obj, M method) {
+        _fp_rx.attach(obj,method);
+    }
+	
+    /** Attach a function to call when TX is completed
+     *  @param func A pointer to a void function, or 0 to set as none
+     */
+    void attachTxCallback(void (*func)()){
+		_fp_tx.attach(func);
+	}
+
+    /** Attach a member function to call when TX is completed
+     *
+     *  @param obj pointer to the object to call the member function on
+     *  @param method pointer to the member function to be called
+     */
+    template<typename T, typename M>
+    void attachTxCallback(T *obj, M method) {
+        _fp_tx.attach(obj,method);
+    }    
+	
+	
     /**
      * Reception ISR callback
      */
@@ -121,7 +172,7 @@ public:
     struct topic_t{
         char * txt;
     };
-    
+	
 protected:
     
     //! Common functions return code.
@@ -132,10 +183,12 @@ protected:
         , BufferOversize = -2   /*!< Oversized buffer. */
     };
     
-    //! Signals for thread control
+    #if SERIALMON_ENABLE_THREAD==1
+	//! Signals for thread control
     enum Signal {
           CMD_EOL_RECV = 1      // Command EOL received flag
     };
+	#endif
 
     
     /**
@@ -205,14 +258,18 @@ protected:
     char _auto_detect_char;
     buffer_t _txbuf;
     buffer_t _rxbuf;
+	#if SERIALMON_ENABLE_THREAD==1
     Mutex _tx_mut;
     Mutex _rx_mut;
     Thread _thread;
+	#endif
     RawSerial *_serial;
     #if defined(SERIALMON_ENABLE_SIMBUF)
     char * _simbuf;
     int    _simbuf_n;
     #endif
+	FunctionPointer _fp_rx;
+	FunctionPointer _fp_tx;
 };
 
 

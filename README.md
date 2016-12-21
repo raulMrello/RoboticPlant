@@ -14,6 +14,15 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 21.12.2016 ->commit :/"SerialMon con isr callbacks y configurable"
+- [x] Modifico SerialMon para que pueda utilizarse sin MsgBox y sin RTOS, únicamente con callbacks tx y 
+	  rx complete.
+- [!] No he probado mi código basado en MsgBroker porque acabo de tener un dilema sobre la conveniencia
+	  del modelo pub-sub vs req-res en cierto tipo de casos. Y éste es uno de ellos, o sea que lo tengo
+	  que pensar un poco mejor para ver cómo lo dejo finalmente.
+
+- [ ] Continuar con la appnote de mbed.
+----------------------------------------------------------------------------------------------
 ##### 16.12.2016 ->commit :/"MsgBox con FPointerDummy"
 - [x] Modifico MsgBox para que se puedan registrar listeneres clase::metodo
 - [x] Actualizo todas las tareas para adaptarse a la nueva funcionalidad de MsgBox.
