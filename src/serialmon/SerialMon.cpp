@@ -36,6 +36,7 @@
 
 /*************************************************************************************/
 void SerialMon::txCallback(){
+	// si hay datos pendientes, los envía
     if ((_serial->writeable()) && (_txbuf.in != _txbuf.ou)) {
         char c = *_txbuf.ou;
         _serial->putc(c);
@@ -47,30 +48,40 @@ void SerialMon::txCallback(){
         #endif
         return;
     }
-    _f_sending = false;
-    _serial->attach(0, (SerialBase::IrqType)TxIrq);
+	// si ha terminado, borra el flag de envío y activa el EOT
+    _stat &= ~FLAG_SENDING; 
+	_stat |= FLAG_EOT;
+	// invoca la callback registrada
 	_fp_tx.call();
+	// se desconecta del dispositivo de transmisión
+    _serial->attach(0, (SerialBase::IrqType)TxIrq);
 }
 
 
 /*************************************************************************************/
 void SerialMon::rxCallback(){
+	// mientras haya datos pendientes, los almacena en el buffer
     while(_serial->readable()){
         char c = _serial->getc();
-        if(_f_rxfull){
+		// si el buffer está lleno, notifica error
+        if((_stat & FLAG_RXFULL)!=0){
             _err_rx++;
             return;
         }
         _err_rx = 0;
         *_rxbuf.in++ = c;
         _rxbuf.in = (_rxbuf.in >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.in;
+		// si se completa el buffer, marca estado
         if(_rxbuf.in == _rxbuf.ou){
-            _f_rxfull = true;
+            _stat |= FLAG_RXFULL;
         }
+		// al detectar el caracter de fín de recepción, notifica en callback
         if(c == _auto_detect_char){
+			_stat |= FLAG_EOR;
 			_fp_rx.call();
+			// en caso de trabajar en modo thread, notifica el flag a su hilo
 			#if SERIALMON_ENABLE_THREAD==1
-            _thread.signal_set(CMD_EOL_RECV);
+            _thread.signal_set(FLAG_EOR);
 			#endif
         }
     }
@@ -81,21 +92,22 @@ void SerialMon::rxCallback(){
 //-- TOPIC UPDATE CALLBACKS ------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------
 
-#if SERIALMON_ENABLE_MSGBOX==1
 /*************************************************************************************/
 void SerialMon::onNewTopic(const char * topicname, void * topicdata){
+	#if SERIALMON_ENABLE_MSGBOX==1
     // si se recibe un update del topic /keyb...
     if(strcmp(topicname, "/log") == 0){
         // obtiene un puntero a los datos del topic con el formato correspondiente
         SerialMon::topic_t *topic = (SerialMon::topic_t *)topicdata;
         // chequea el tipo de topic y activa los eventos habilitados en este módulo
         if(topic){
-            send(topic->txt);
+            send(topic->data, topic->size);
             MsgBroker::consumed("/log");
         }
     }
+	#endif
 }
-#endif
+
 
 //--------------------------------------------------------------------------------------------------------------
 //-- PUBLIC METHODS --------------------------------------------------------------------------------------------
@@ -103,8 +115,15 @@ void SerialMon::onNewTopic(const char * topicname, void * topicdata){
 
 
 /*************************************************************************************/
-SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, const char* name, char rx_detect ){    
+SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, const char* name, char rx_detect ){  
+	// inicia el dispositivo serie, en función de la versión de mbed
+	#if MBED_LIBRARY_VERSION >= 130	
     _serial = new RawSerial(tx, rx, baud);
+	#else
+	_serial = new RawSerial(tx, rx); _serial->baud(baud);
+	#endif
+	
+	// inicializa buffers
     _txbuf.mem = (char*)malloc(txSize);
     if(_txbuf.mem){
         _txbuf.limit = (char*)&_txbuf.mem[txSize];
@@ -113,13 +132,6 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
         _txbuf.sz = txSize;
         memset(_txbuf.mem, 0, txSize);
     }
-    #if defined(SERIALMON_ENABLE_SIMBUF)
-    _simbuf = (char*)malloc(txSize);
-    if(_simbuf){
-        memset(_simbuf, '#', txSize);
-    }
-    _simbuf_n = 0;
-    #endif
     _rxbuf.mem = (char*)malloc(rxSize);
     if(_rxbuf.mem){
         _rxbuf.limit = (char*)&_rxbuf.mem[rxSize];
@@ -128,41 +140,51 @@ SerialMon::SerialMon( PinName tx, PinName rx, int txSize, int rxSize, int baud, 
         _rxbuf.sz = rxSize;
         memset(_rxbuf.mem, 0, rxSize);
     }
+    #if defined(SERIALMON_ENABLE_SIMBUF)
+    _simbuf = (char*)malloc(txSize);
+    if(_simbuf){
+        memset(_simbuf, '#', txSize);
+    }
+    _simbuf_n = 0;
+    #endif
     if(name){
         char* _name = (char*)malloc(strlen(name)+1);
         if(_name){
+			memset(_name, 0, strlen(name)+1);
             strcpy(_name, name);
         }
     }
 	#if SERIALMON_ENABLE_MSGBOX==1
+    // instala topics para envío (/log) y recepción (/cmd)
     MsgBroker::Exception e;
-    // install SerialMon topics /log and /cmd
     MsgBroker::installTopic("/log", sizeof(SerialMon::topic_t));
     MsgBroker::installTopic("/cmd", sizeof(SerialMon::topic_t));
-    // attaches to topic updates 
+    // se subscribe a topics de envío (/log)
     MsgBroker::attach("/log", this, &SerialMon::onNewTopic, &e);
 	#endif
 	
-    // disables isr callbacks
+    // desactiva las callbacks de nivel superior
 	_fp_rx.attach(0);
 	_fp_tx.attach(0);
-    // setup initial conditions
+	
+    // se desconecta del dispositivo, registra caracter EOR e inicializa estado
     _serial->attach(0, (SerialBase::IrqType)TxIrq);
     _serial->attach(0, (SerialBase::IrqType)RxIrq);
     _auto_detect_char = rx_detect;
-    _f_sending = false;
-    _f_rxfull = false;
+	_stat = 0;
     _err_rx = 0;
-    _f_started = false;
 
-    // attaches RX interrupts
+    // se conecta al módulo de recepción
+	#if MBED_LIBRARY_VERSION >= 130
     _serial->attach(callback(this, &SerialMon::rxCallback), (SerialBase::IrqType)RxIrq);
+	#else
+	_serial->attach(this, &SerialMon::rxCallback, (SerialBase::IrqType)RxIrq);
+	#endif
 	
 	#if SERIALMON_ENABLE_THREAD==1
-    // starts reception decodification task
+    // inicia la ejecución del hilo de recepción, en caso de que esté permitido
     _thread.start(callback(this, &SerialMon::start));
-	
-    // thread clearing flags
+    // borra los flags del thread asociado
     _thread.signal_clr(0xffff);
 	#endif
 }
@@ -181,34 +203,33 @@ SerialMon::~SerialMon(){
     free(_rxbuf.mem);
 }
 
-#if SERIALMON_ENABLE_THREAD==1
 /*************************************************************************************/
 void SerialMon::start(){
+	#if SERIALMON_ENABLE_THREAD==1
 	#if SERIALMON_ENABLE_MSGBOX==1
     MsgBroker::Exception e;
 	#endif
-    // define command storage and set topic reference
-    char cmd[SERIALMON_MAX_COMMAND_LENGTH];
-    topic_t cmd_topic;
-    cmd_topic.txt = &cmd[0];
     
     for(;;){
-        // Wait for a Command EOL character reception 
-        osEvent oe = _thread.signal_wait(CMD_EOL_RECV, osWaitForever);
+        // Espera un flag EOR
+        osEvent oe = _thread.signal_wait(FLAG_EOR, osWaitForever);
 
-        // if event clear signal and continue to process state machine
-        if(oe.status == osEventSignal && (oe.value.signals & CMD_EOL_RECV) != 0){
-            _thread.signal_clr(CMD_EOL_RECV);
-            // copy received command
-            move(&cmd[0], SERIALMON_MAX_COMMAND_LENGTH);
+        // si es un flag de fin de recepción, lo procesa
+        if(oe.status == osEventSignal && (oe.value.signals & FLAG_EOR) != 0){
+			_thread.signal_clr(FLAG_EOR);
+            // extrae del buffer y lo copia en _cmd
+            int n = move(&_cmd[0], SERIALMON_MAX_COMMAND_LENGTH);
 			#if SERIALMON_ENABLE_MSGBOX==1
-            // publish command to listeners
-            MsgBroker::publish("/cmd", &cmd_topic, sizeof(topic_t), &e);
+            // publica el mensaje a los subscriptores
+			_cmd_topic.data = (uint8_t*)_cmd;
+			_cmd_topic.size = n;
+            MsgBroker::publish("/cmd", &_cmd_topic, sizeof(topic_t), &e);
 			#endif
         }
     }   
+	#endif
 }
-#endif
+
 
 /*************************************************************************************/
 int SerialMon::move(char *s, int max, char end) {
@@ -221,7 +242,7 @@ int SerialMon::move(char *s, int max, char end) {
         c = *_rxbuf.ou++;
         _rxbuf.ou = (_rxbuf.ou >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.ou;
         if(_rxbuf.in != _rxbuf.ou){
-            _f_rxfull = false;
+			_stat &= ~FLAG_RXFULL;
         }
         if (c == end) break;
         *(s++) = c;
@@ -235,35 +256,49 @@ int SerialMon::move(char *s, int max, char end) {
 }
 
 /*************************************************************************************/
-SerialMon::Result SerialMon::send(char* text){
+bool SerialMon::send(uint8_t* data, int size){
 	#if SERIALMON_ENABLE_THREAD==1
     _txbuf.mtx.lock();  
 	#endif
     int remaining = (_txbuf.in >= _txbuf.ou)? ((_txbuf.limit-_txbuf.in)+(_txbuf.ou-_txbuf.mem)) : (_txbuf.ou-_txbuf.in);
-    if(strlen(text) > remaining){
+    if(size > remaining){
 		#if SERIALMON_ENABLE_THREAD==1
 		_txbuf.mtx.unlock();
 		#endif
-        return BufferOversize;
+        return false;
     }
-    for(int i=0;i<strlen(text)+1;i++){
-        *_txbuf.in++ = text[i];
+    for(int i=0;i<size;i++){
+        *_txbuf.in++ = data[i];
         _txbuf.in = (_txbuf.in >= _txbuf.limit)? _txbuf.mem : _txbuf.in;
     }
-    if(!_f_sending){
-        _f_sending = true;
-        if(_f_started){
+    if((_stat & FLAG_SENDING)==0){
+        _stat |= FLAG_SENDING;
+		_stat &= ~FLAG_EOT;
+        if((_stat & FLAG_STARTED)!=0){
             _serial->attach(0, (SerialBase::IrqType)TxIrq);
             txCallback();
         }
-        _f_started = true;
+        _stat |= FLAG_STARTED;
+		#if MBED_LIBRARY_VERSION >= 130
         _serial->attach(callback(this, &SerialMon::txCallback), (SerialBase::IrqType)TxIrq);
+		#else
+		_serial->attach(this, &SerialMon::txCallback, (SerialBase::IrqType)TxIrq);		
+		#endif
     }
 	#if SERIALMON_ENABLE_THREAD==1
     _txbuf.mtx.unlock();
 	#endif
-    return Ok;
+    return true;
     
+}
+
+/*************************************************************************************/
+bool SerialMon::sendComplete(uint8_t* data, int size){
+	if(!send(data, size)){
+		return false;
+	}
+	while((_stat & FLAG_EOT)==0);
+	return true;
 }
 
 /*************************************************************************************/
@@ -271,7 +306,7 @@ char SerialMon::remove(){
     char c = *_rxbuf.ou++;
     _rxbuf.ou = (_rxbuf.ou >= _rxbuf.limit)? _rxbuf.mem : _rxbuf.ou;
     if(_rxbuf.in != _rxbuf.ou){
-        _f_rxfull = false;
+        _stat &= ~FLAG_RXFULL;
     }
     return c;   
 }

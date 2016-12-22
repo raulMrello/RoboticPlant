@@ -26,7 +26,8 @@ void led2_thread() {
     while (true) {
         count++;
         sprintf(txt, "Task2 = %d\r\n", count);
-        topic.txt = txt;
+        topic.data = (uint8_t*)txt;
+		topic.size = strlen(txt)+1;
         MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);  
 		if(count == 5){
 			iot.cmd = CloudManager::CMD_IOT_CONN;
@@ -74,7 +75,8 @@ int main() {
     /** Envía traza */
     MsgBroker::Exception e;
     SerialMon::topic_t topic;
-    topic.txt = (char*)"Iniciando...\r\n";
+    topic.data = (uint8_t*)"Iniciando...\r\n";
+	topic.size = strlen((char*)topic.data)+1;
     MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
 //  logger->send((char*)"Iniciando...\r\n");
     static char txt[128];
@@ -84,7 +86,8 @@ int main() {
     while (true) {  
         count++;        
         std::sprintf(txt, "Task1 = %d\r\n", count);
-        topic.txt = txt;
+        topic.data = (uint8_t*)txt;
+		topic.size = strlen(txt)+1;
         MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
 //      logger->send(txt);
         Thread::wait(100);

@@ -20,7 +20,7 @@
     THE SOFTWARE.
     
     @file          SerialMon.h 
-    @purpose       Extends Serial to provide fully buffered IO
+    @purpose       Monitor Serie tx/rx con buffer
     @version       see ChangeLog.c
     @date          Nov 2016
     @author        raulMrello
@@ -31,45 +31,49 @@
 
 
 /** \def SERIALMON_ENABLE_THREAD
- *  \brief Enable Threaded behaviour. Set 0 to disable or 1 to enable
+ *  \brief Habilita todo lo relacionado con su propio hilo de ejecución.
+ *		   Si es 0 está desactivado y funciona en modo pasivo + ISR
+ *		   Si es 1 está activado y se ejecuta en su propia tarea
  */
 #define SERIALMON_ENABLE_THREAD		1
 
 
 /** \def SERIALMON_ENABLE_MSGBOX
- *  \brief Enable MsgBox topic handling. Set 0 to disable or 1 to enable
+ *  \brief Habilita la comunicación pub-sub mediante topics
  */
 #define SERIALMON_ENABLE_MSGBOX		1
 
 
 /** \def SERIALMON_ENABLE_SIMBUF
- *  \brief Enable data buffer for debugging tx isr execution
+ *  \brief Habilita un buffer RAM en el que se simulan operaciones tx/rx 
+ *		   Válido para depuración. Comentar para desactivar
  */
-#define SERIALMON_ENABLE_SIMBUF
+//#define SERIALMON_ENABLE_SIMBUF
 
 
 /** \def SERIALMON_MAX_COMMAND_LENGTH
- *  \brief Max command length
+ *  \brief Tamaño máximo por defecto de los comandos Rx
  */
-#define SERIALMON_MAX_COMMAND_LENGTH    64u
+#define SERIALMON_MAX_COMMAND_LENGTH    32u
 
 
 /** \def SERIALMON_DEFAULT_RX_BUFFER_SIZE
- *  \brief Default reception buffer size
+ *  \brief Tamaño por defecto del buffer de recepción
  */
 #ifndef SERIALMON_DEFAULT_RX_BUFFER_SIZE
-#define SERIALMON_DEFAULT_RX_BUFFER_SIZE    256
+#define SERIALMON_DEFAULT_RX_BUFFER_SIZE    64
 #endif
 
 
 /** \def SERIALMON_DEFAULT_TX_BUFFER_SIZE
- *  \brief Default transmission buffer size
+ *  \brief Tamaño por defecto del buffer de transmisión
  */
 #ifndef SERIALMON_DEFAULT_TX_BUFFER_SIZE
-#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    256
+#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    64
 #endif
 
 
+/** Archivos de cabecera */
 #include "mbed.h"
 #if SERIALMON_ENABLE_MSGBOX==1
 #include "MsgBroker.h"
@@ -77,199 +81,228 @@
 
 
 /** \class SerialMon
- *  \brief This class provides an ISR based buffered serial port IO operation. In combination with MsgBroker
- *  class, it is able to handle topic update event notifications. 
+ *  \brief Este componente permite gestionar comunicaciones serie, proporcionando buffers
+ *         de envío y recepción. Puede ejecutarse en su propio hilo, utilizar callbacks de
+ *         notificación y/o mensajería pub-sub 
  */
 
 class SerialMon {
 public:
     
     /**
-     * SerialMon constructor. It initialises the serial object.
-     *
-     * @param tx PinName of the TX pin.
-     * @param rx PinName of the RX pin.
-     * @param txBufferSize Integer of the TX buffer sizes.
-     * @param rxBufferSize Integer of the RX buffer sizes.
+     * Constructor
+     * @param tx PinName TX pin.
+     * @param rx PinName RX pin.
+     * @param txBufferSize Tamaño buffer envío
+     * @param rxBufferSize Tamaño buffer recepción
      * @param baud Baudrate
-     * @param name Name of this instance
-     * @param rx_detect Character to detect on reception mode, as command EOL
+     * @param name Nombre del objeto
+     * @param rx_detect Caracter de fin de recepción
      */    
     SerialMon(PinName tx, PinName rx, int txBufferSize = SERIALMON_DEFAULT_TX_BUFFER_SIZE, int rxBufferSize = SERIALMON_DEFAULT_RX_BUFFER_SIZE, int baud=9600, const char* name = (const char*)"NO NAME", char rx_detect = 0);
  
     
-    /**
-     * SerialMon destructor
-     */    
+    /** Destructor */    
     virtual ~SerialMon();
     
-	#if SERIALMON_ENABLE_MSGBOX==1
-    /**
-     * Topic updates' listener
-     *
-     * @param topicname Name of the handled topic
-     * @param topicdata Topic data pointer
+	/** 
+	 * Listener que se invoca cuando se recibe una actualización de un topic
+     * en el modelo de comunicación pub-sub.
+     * @param topicname Descripción del topic actualizado
+     * @param topicdata Datos asociados al topic
      */    
     void onNewTopic(const char * topicname, void * topicdata);
-	#endif
-
-	#if SERIALMON_ENABLE_THREAD==1
-    /**
-     * Starts internal thread
-     *
+	
+	/**
+	 * Método de ejecución del hilo propio en caso de estar permitida la ejecución
+     * como thread. En otro caso, no hace nada
      */
     void start(); 
-	#endif
 	
-    /** Attach a function to call when the EOC char is received
-     *  @param func A pointer to a void function, or 0 to set as none
+    /**
+	 * Método para registrar callback a invocar tras recibir el caracter de fin de
+	 * recepción (flag EOR)
+     * @param func callback a registrar
      */
     void attachRxCallback(void (*func)()){
+		#if MBED_LIBRARY_VERSION >= 130
+		_fp_rx.attach(callback(func));
+		#else
 		_fp_rx.attach(func);
+		#endif
 	}
 
-    /** Attach a member function to call when the EOC char is received
-     *
-     *  @param obj pointer to the object to call the member function on
-     *  @param method pointer to the member function to be called
+    /**
+	 * Idem que el anterior, pero registrando un método de un objeto
+     * @param obj objeto
+     * @param method método público
      */
     template<typename T, typename M>
     void attachRxCallback(T *obj, M method) {
-        _fp_rx.attach(obj,method);
+		#if MBED_LIBRARY_VERSION >= 130
+		_fp_rx.attach(callback(obj,method));
+		#else
+		_fp_rx.attach(obj,method);
+		#endif
     }
 	
-    /** Attach a function to call when TX is completed
-     *  @param func A pointer to a void function, or 0 to set as none
+    /**
+	 * Método para registrar callback a invocar tras terminar de enviar los datos
+	 * pendientes (flag EOT)
+     * @param func callback a registrar
      */
     void attachTxCallback(void (*func)()){
+		#if MBED_LIBRARY_VERSION >= 130
+		_fp_tx.attach(callback(func));
+		#else
 		_fp_tx.attach(func);
+		#endif
 	}
 
-    /** Attach a member function to call when TX is completed
-     *
-     *  @param obj pointer to the object to call the member function on
-     *  @param method pointer to the member function to be called
+    /**
+	 * Idem que el anterior, pero registrando un método de un objeto
+     * @param obj objeto
+     * @param method método público
      */
     template<typename T, typename M>
     void attachTxCallback(T *obj, M method) {
-        _fp_tx.attach(obj,method);
+		#if MBED_LIBRARY_VERSION >= 130
+		_fp_tx.attach(callback(obj,method));
+		#else
+		_fp_tx.attach(obj,method);
+		#endif
     }    
 	
+    /** 
+     * Método para enviar un buffer de datos con un tamaño concreto
+     * @param data buffer a enviar
+	 * @param size tamaño del buffer a enviar
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
+     */
+    bool send(uint8_t *data, int size);	
 	
     /**
-     * Reception ISR callback
+     * Método para enviar un string
+     * @param data string a enviar
+	 * @param ntc flag para indicar si hay que enviar el caracter de terminación '\0' o no.
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
      */
-    void rxCallback();
+    bool send(char *text, bool ntc=true){
+		return send((uint8_t*)text, ((ntc)? (strlen(text)+1) : strlen(text)));
+	}		
 
+    /**
+     * Idem que el anterior, pero bloqueante hasta que no se detecta el flag EOT
+     * @param data buffer a enviar
+	 * @param size tamaño del buffer a enviar
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
+     */
+    bool sendComplete(uint8_t *data, int size);
+		
+    /**
+     * Idem que el anterior, pero bloqueante hasta que no se detecta el flag EOT
+     * @param data string a enviar
+	 * @param ntc flag para indicar si hay que enviar el caracter de terminación '\0' o no.
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
+     */
+    bool sendComplete(char* text, bool ntc=true){
+		return sendComplete((uint8_t*)text, ((ntc)? (strlen(text)+1) : strlen(text)));
+	}		
     
     /**
-     * Transmission ISR callback
+     * Método para leer los datos recibidos del buffer de recepción, hasta un máximo y sólo
+     * hasta el primer caracter EOR leído
+	 * @param s buffer para recibir los datos
+     * @param max Máximo tamaño del buffer a recibir
+	 * @param eor Caracter a detectar, si es distinto del registrado por defecto
+     * @return Número de bytes leídos
+     */
+    int move(char *s, int max, char eor);	
+    int move(char *s, int max){
+		return move(s, max, _auto_detect_char);
+	}
+	
+    /**
+     * Callback propia para manejar las interrupciones de recepción del puerto serie
+     */
+    void rxCallback();
+    
+    /**
+     * Callback propia para manejar las interrupciones de transmisión del puerto serie
      */
     void txCallback(); 
     
-    
-    //! Topic structure for /log and /cmd topics
+    /**
+     * Estructura de datos por defecto para los topics aceptados por este componente en el
+	 * mecanismo pub-sub
+     */
     struct topic_t{
-        char * txt;
+        uint8_t * data;
+		int size;
     };
 	
 protected:
-    
-    //! Common functions return code.
-    enum Result {
-          Ok = 0                /*!< Ok. */
-        , NoMemory       = -1   /*!< Memory allocation failed. */
-        , NoChar         = -1   /*!< No character in buffer. */
-        , BufferOversize = -2   /*!< Oversized buffer. */
-    };
-    
-    #if SERIALMON_ENABLE_THREAD==1
-	//! Signals for thread control
-    enum Signal {
-          CMD_EOL_RECV = 1      // Command EOL received flag
-    };
-	#endif
-
-    
+     
     /**
-     * Determine if there is a byte available to  from the reception buffer
-     *
-     * @return true if there is a character available to read, else false
+     * Rutina para determinar si datos pendientes por leer en el buffer de recepción
+     * @return true si hay datos, false en caso contrario
      */
-    bool readable() { return (((_rxbuf.in != _rxbuf.ou) || (_rxbuf.in == _rxbuf.ou && _f_rxfull))? true : false); }
-
+    bool readable() { return (((_rxbuf.in != _rxbuf.ou) || (_rxbuf.in == _rxbuf.ou && (_stat & FLAG_RXFULL)!=0))? true : false); }
     
     /**
-     * Function: move (overloaded)
-     *
-     * Move contents of RX buffer to external buffer. Stops if auto_detect_char detected.
-     *
-     * @param int max The maximum number of chars to move.
-     * @param char *s The destination buffer address
-     */
-    int move(char *s, int max) {
-        return move(s, max, _auto_detect_char);
-    }
-    
-    
-    /**
-     * Function: move
-     *
-     * Move contents of RX buffer to external buffer. Stops if "end" detected.
-     *
-     * @param char *s The destination buffer address
-     * @param int max The maximum number of chars to move.
-     * @param char end If this char is detected stop moving.
-     */
-    int move(char *s, int max, char end);
-    
-    
-    /**
-     * Write a string
-     *
-     * @param string to send.
-     */
-    Result send(char* text);
-    
-    
-    /**
-     * Extract a byte from the reception buffer
-     *
-     * @return byte extracted
+     * Extrae un byte del buffer de recepción
+     * @return byte extraído
      */
     char remove();  
     
-    
-    //! Buffer structure
-    struct buffer_t{
-        Mutex mtx;
-        char* mem;
-        char* limit;
-        char* in;
-        char* ou;
-        int sz;
+    /**
+     * Estructura de datos del buffer utilizado en transmisión y recepción
+     */
+     struct buffer_t{
+		#if SERIALMON_ENABLE_THREAD==1
+        Mutex mtx;			///< Mutex de control de acceso, únicamente válido en entornos multithread
+		#endif
+        char* mem;			///< Puntero a la memoria reservada al buffer
+        char* limit;		///< Ultima posición del buffer
+        char* in;			///< Posición de escritura en el buffer
+        char* ou;			///< Posición de lectura del buffer
+        int sz;				///< Tamaño del buffer
+    };
+   
+    /**
+     * Flags de señalización de estados 
+     */
+    enum Flags {
+        FLAG_EOT = 		1,  ///< Flag de fin de transmisión
+		FLAG_EOR = 		2,	///< Flag de fin de recepción
+		FLAG_SENDING = 	4,	///< Flag para indicar que hay un proceso de envío en marcha
+		FLAG_RXFULL = 	8,	///< Flag para indicar que el buffer de recepción está lleno
+		FLAG_STARTED = 16,	///< Flag para indicar que el objeto está iniciado
     };
 
-    bool _f_sending;
-    bool _f_rxfull;
-    bool _f_started;
+	int _stat;
     int _err_rx;
     char * _name;
     char _auto_detect_char;
     buffer_t _txbuf;
     buffer_t _rxbuf;
+    RawSerial *_serial;
+	#if MBED_LIBRARY_VERSION >= 130
+	Callback<void()> _fp_rx;
+	Callback<void()> _fp_tx;
+	#else
+	FunctionPointer _fp_rx;
+	FunctionPointer _fp_tx;
+	#endif
+	topic_t _cmd_topic;
+	char _cmd[SERIALMON_MAX_COMMAND_LENGTH];
 	#if SERIALMON_ENABLE_THREAD==1
-    Mutex _tx_mut;
-    Mutex _rx_mut;
     Thread _thread;
 	#endif
-    RawSerial *_serial;
     #if defined(SERIALMON_ENABLE_SIMBUF)
     char * _simbuf;
     int    _simbuf_n;
     #endif
-	FunctionPointer _fp_rx;
-	FunctionPointer _fp_tx;
 };
 
 

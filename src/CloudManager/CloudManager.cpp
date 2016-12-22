@@ -193,7 +193,8 @@ void CloudManager::start(){
 					char *response = sock_send(_esp, server, atoi(port), data, 32, &recvdata);
 					if(_logger){
 						SerialMon::topic_t topic;
-						topic.txt = response;
+						topic.data = (uint8_t*)response;
+						topic.size = strlen(response)+1;
 						MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
 					}
 					free(response);
@@ -203,7 +204,8 @@ void CloudManager::start(){
 					char *response = http_get(_esp, (char*)topic->data);
 					if(_logger){
 						SerialMon::topic_t topic;
-						topic.txt = response;
+						topic.data = (uint8_t*)response;
+						topic.size = strlen(response)+1;
 						MsgBroker::publish("/log", &topic, sizeof(SerialMon::topic_t), &e);
 					}
 					free(response);
