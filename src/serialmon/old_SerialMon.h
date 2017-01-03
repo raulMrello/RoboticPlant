@@ -35,13 +35,13 @@
  *		   Si es 0 está desactivado y funciona en modo pasivo + ISR
  *		   Si es 1 está activado y se ejecuta en su propia tarea
  */
-#define SERIALMON_ENABLE_THREAD		0
+#define SERIALMON_ENABLE_THREAD		1
 
 
 /** \def SERIALMON_ENABLE_MSGBOX
  *  \brief Habilita la comunicación pub-sub mediante topics
  */
-#define SERIALMON_ENABLE_MSGBOX		0
+#define SERIALMON_ENABLE_MSGBOX		1
 
 
 /** \def SERIALMON_ENABLE_SIMBUF
@@ -54,14 +54,14 @@
 /** \def SERIALMON_MAX_COMMAND_LENGTH
  *  \brief Tamaño máximo por defecto de los comandos Rx
  */
-#define SERIALMON_MAX_COMMAND_LENGTH    16u
+#define SERIALMON_MAX_COMMAND_LENGTH    32u
 
 
 /** \def SERIALMON_DEFAULT_RX_BUFFER_SIZE
  *  \brief Tamaño por defecto del buffer de recepción
  */
 #ifndef SERIALMON_DEFAULT_RX_BUFFER_SIZE
-#define SERIALMON_DEFAULT_RX_BUFFER_SIZE    32
+#define SERIALMON_DEFAULT_RX_BUFFER_SIZE    64
 #endif
 
 
@@ -69,7 +69,7 @@
  *  \brief Tamaño por defecto del buffer de transmisión
  */
 #ifndef SERIALMON_DEFAULT_TX_BUFFER_SIZE
-#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    32
+#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    64
 #endif
 
 
@@ -106,14 +106,6 @@ public:
     virtual ~SerialMon();
     
 	/** 
-	 * Cambia el flag de fin de recepción
-     * @param rx_detect Flag a detectar como fin de recepción
-     */    
-    void setRxDetectChar(char rx_detect){
-		_auto_detect_char = rx_detect;
-	}
-    
-	/** 
 	 * Listener que se invoca cuando se recibe una actualización de un topic
      * en el modelo de comunicación pub-sub.
      * @param topicname Descripción del topic actualizado
@@ -130,47 +122,28 @@ public:
     /**
 	 * Método para registrar callback a invocar tras recibir el caracter de fin de
 	 * recepción (flag EOR)
-     * @param func callback a registrar para la recepción
-	 * @param timedfunc callback a registrar para el timeout
-	 * @param us timeout para recibir una trama completa. Dejar a 0 para desactivar el timeout
+     * @param func callback a registrar
      */
-    void attachRxCallback(void (*func)(), void (*timedfunc)()=0, uint32_t us=0){
+    void attachRxCallback(void (*func)()){
 		#if MBED_LIBRARY_VERSION >= 130
 		_fp_rx.attach(callback(func));
-		_fp_rx_timeout.attach(callback(timedfunc));
 		#else
 		_fp_rx.attach(func);
-		_fp_rx_timeout.attach(timedfunc);
 		#endif
-		if(us==0){
-			_rx_tick.detach();
-		}
-		else{
-			_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);
-		}
 	}
 
     /**
 	 * Idem que el anterior, pero registrando un método de un objeto
      * @param obj objeto
      * @param method método público
-	 * @param us timeout para recibir una trama completa. Dejar a 0 para desactivar el timeout
      */
     template<typename T, typename M>
-    void attachRxCallback(T *obj, M method, M timedmethod=0, uint32_t us=0) {
+    void attachRxCallback(T *obj, M method) {
 		#if MBED_LIBRARY_VERSION >= 130
 		_fp_rx.attach(callback(obj,method));
-		_fp_rx_timeout.attach(callback(obj,timedmethod));
 		#else
 		_fp_rx.attach(obj,method);
-		_fp_rx_timeout.attach(obj,timedmethod);
 		#endif
-		if(us==0){
-			_rx_tick.detach();
-		}
-		else{
-			_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);
-		}
     }
 	
     /**
@@ -260,11 +233,6 @@ public:
     void txCallback(); 
     
     /**
-     * Callback propia para manejar las interrupciones de timeout en recepción
-     */
-    void timeoutCallback(); 
-    
-    /**
      * Estructura de datos por defecto para los topics aceptados por este componente en el
 	 * mecanismo pub-sub
      */
@@ -307,10 +275,9 @@ protected:
     enum Flags {
         FLAG_EOT = 		1,  ///< Flag de fin de transmisión
 		FLAG_EOR = 		2,	///< Flag de fin de recepción
-		FLAG_RTIMED =   4,	///< Flag para indicar que ha ocurrido timeout en recepción
-		FLAG_SENDING = 	8,	///< Flag para indicar que hay un proceso de envío en marcha
-		FLAG_RXFULL =  16,	///< Flag para indicar que el buffer de recepción está lleno
-		FLAG_STARTED = 32,	///< Flag para indicar que el objeto está iniciado
+		FLAG_SENDING = 	4,	///< Flag para indicar que hay un proceso de envío en marcha
+		FLAG_RXFULL = 	8,	///< Flag para indicar que el buffer de recepción está lleno
+		FLAG_STARTED = 16,	///< Flag para indicar que el objeto está iniciado
     };
 
 	int _stat;
@@ -322,14 +289,11 @@ protected:
     RawSerial *_serial;
 	#if MBED_LIBRARY_VERSION >= 130
 	Callback<void()> _fp_rx;
-	Callback<void()> _fp_rx_timeout;
 	Callback<void()> _fp_tx;
 	#else
 	FunctionPointer _fp_rx;
-	FunctionPointer _fp_rx_timeout;
 	FunctionPointer _fp_tx;
 	#endif
-	Ticker _rx_tick;
 	topic_t _cmd_topic;
 	char _cmd[SERIALMON_MAX_COMMAND_LENGTH];
 	#if SERIALMON_ENABLE_THREAD==1

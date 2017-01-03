@@ -77,8 +77,6 @@ void SerialMon::rxCallback(){
         }
 		// al detectar el caracter de fín de recepción, notifica en callback
         if(c == _auto_detect_char){
-			_rx_tick.detach();
-			_stat &= ~FLAG_RTIMED;
 			_stat |= FLAG_EOR;
 			_fp_rx.call();
 			// en caso de trabajar en modo thread, notifica el flag a su hilo
@@ -89,17 +87,6 @@ void SerialMon::rxCallback(){
     }
 }
 
-
-/*************************************************************************************/
-void SerialMon::timeoutCallback(){
-	_rx_tick.detach();
-	_stat |= FLAG_RTIMED;
-	_fp_rx_timeout.call();
-	// en caso de trabajar en modo thread, notifica el flag a su hilo
-	#if SERIALMON_ENABLE_THREAD==1
-    _thread.signal_set(FLAG_EOR);
-	#endif         
-}
 
 //--------------------------------------------------------------------------------------------------------------
 //-- TOPIC UPDATE CALLBACKS ------------------------------------------------------------------------------------
@@ -236,17 +223,6 @@ void SerialMon::start(){
             // publica el mensaje a los subscriptores
 			_cmd_topic.data = (uint8_t*)_cmd;
 			_cmd_topic.size = n;
-            MsgBroker::publish("/cmd", &_cmd_topic, sizeof(topic_t), &e);
-			#endif
-        }
-
-        // si es un flag de timeout, lo notifica
-        if(oe.status == osEventSignal && (oe.value.signals & FLAG_RTIMED) != 0){
-			_thread.signal_clr(FLAG_RTIMED);
-            #if SERIALMON_ENABLE_MSGBOX==1
-            // publica el mensaje a los subscriptores
-			_cmd_topic.data = (uint8_t*)0;
-			_cmd_topic.size = 0;
             MsgBroker::publish("/cmd", &_cmd_topic, sizeof(topic_t), &e);
 			#endif
         }

@@ -14,6 +14,15 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 03.01.2017 ->commit :/"Incluyo callback y Ticker para timeout de recepción"
+- [x] Modifico SerialMon añadiendo callback de timeout en recepción, así como su flag y su Ticker
+- [ ] Falta validar los cambios para ver si funciona bien.
+- [!] No he probado mi código basado en MsgBroker porque acabo de tener un dilema sobre la conveniencia
+	  del modelo pub-sub vs req-res en cierto tipo de casos. Y éste es uno de ellos, o sea que lo tengo
+	  que pensar un poco mejor para ver cómo lo dejo finalmente.
+
+- [ ] Continuar con la appnote de mbed.
+----------------------------------------------------------------------------------------------
 ##### 22.12.2016 ->commit :/"Refactorizo SerialMon"
 - [x] Refactorizo SerialMon para que quede un código más claro y sencillo.
 - [!] No he probado mi código basado en MsgBroker porque acabo de tener un dilema sobre la conveniencia
