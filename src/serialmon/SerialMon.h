@@ -210,12 +210,22 @@ public:
 	
     /**
      * Método para enviar un string
-     * @param data string a enviar
+     * @param text string a enviar
+	 * @param size número de bytes a enviar
 	 * @param ntc flag para indicar si hay que enviar el caracter de terminación '\0' o no.
 	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
      */
-    bool send(char *text, bool ntc=true){
-		return send((uint8_t*)text, ((ntc)? (strlen(text)+1) : strlen(text)));
+    bool send(char *text, int size, bool ntc){
+		return send((uint8_t*)text, ((ntc)? (size+1) : size));
+	}		
+	
+    /**
+     * Método para enviar un string completo
+     * @param text string a enviar
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
+     */
+    bool send(char *text){
+		return send((uint8_t*)text, strlen(text));
 	}		
 
     /**
@@ -228,12 +238,22 @@ public:
 		
     /**
      * Idem que el anterior, pero bloqueante hasta que no se detecta el flag EOT
-     * @param data string a enviar
+     * @param text string a enviar
+	 * @param size tamaño del buffer a enviar
 	 * @param ntc flag para indicar si hay que enviar el caracter de terminación '\0' o no.
 	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
      */
-    bool sendComplete(char* text, bool ntc=true){
-		return sendComplete((uint8_t*)text, ((ntc)? (strlen(text)+1) : strlen(text)));
+    bool sendComplete(char* text, int size, bool ntc){
+		return sendComplete((uint8_t*)text, ((ntc)? (size+1) : size));
+	}		
+		
+    /**
+     * Idem que el anterior, pero bloqueante hasta que no se detecta el flag EOT
+     * @param text string a enviar
+	 * @return Resultado: true si se pudo enviar, false si no se pudo enviar
+     */
+    bool sendComplete(char* text){
+		return sendComplete((uint8_t*)text, strlen(text));
 	}		
     
     /**

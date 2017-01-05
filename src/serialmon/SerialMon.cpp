@@ -268,9 +268,9 @@ int SerialMon::move(char *s, int max, char end) {
         if(_rxbuf.in != _rxbuf.ou){
 			_stat &= ~FLAG_RXFULL;
         }
-        if (c == end) break;
         *(s++) = c;
         counter++;
+        if (c == end) break;
         if (counter == max) break;
     }
 	#if SERIALMON_ENABLE_THREAD==1
