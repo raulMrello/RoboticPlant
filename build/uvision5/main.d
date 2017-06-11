@@ -166,3 +166,6 @@
 .\build\uvision5\main.o: esp8266-driver/ESP8266/ATParser/ATParser.h
 .\build\uvision5\main.o: esp8266-driver/ESP8266/ATParser/BufferedSerial/BufferedSerial.h
 .\build\uvision5\main.o: esp8266-driver/ESP8266/ATParser/BufferedSerial/Buffer/MyBuffer.h
+.\build\uvision5\main.o: .\src\TrunkController\TrunkController.h
+.\build\uvision5\main.o: .\src\Shifter\Shifter.h
+.\build\uvision5\main.o: .\src\Stepper\Stepper.h

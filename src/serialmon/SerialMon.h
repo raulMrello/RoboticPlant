@@ -99,7 +99,7 @@ public:
      * @param name Nombre del objeto
      * @param rx_detect Caracter de fin de recepción
      */    
-    SerialMon(PinName tx, PinName rx, int txBufferSize = SERIALMON_DEFAULT_TX_BUFFER_SIZE, int rxBufferSize = SERIALMON_DEFAULT_RX_BUFFER_SIZE, int baud=9600, const char* name = (const char*)"NO NAME", char rx_detect = 0);
+    SerialMon(PinName tx, PinName rx, int txBufferSize = SERIALMON_DEFAULT_TX_BUFFER_SIZE, int rxBufferSize = SERIALMON_DEFAULT_RX_BUFFER_SIZE, int baud=115200, const char* name = (const char*)"NO NAME", char rx_detect = 0);
  
     
     /** Destructor */    
@@ -138,16 +138,24 @@ public:
 		#if MBED_LIBRARY_VERSION >= 130
 		_fp_rx.attach(callback(func));
 		_fp_rx_timeout.attach(callback(timedfunc));
-		#else
-		_fp_rx.attach(func);
-		_fp_rx_timeout.attach(timedfunc);
-		#endif
 		if(us==0){
 			_rx_tick.detach();
 		}
 		else{
-			_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);
+			//_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);
+			_rx_tick.attach(callback(this, &SerialMon::timeoutCallback), us*1000000);
 		}
+		#else
+		_fp_rx.attach(func);
+		_fp_rx_timeout.attach(timedfunc);
+		if(us==0){
+			_rx_tick.detach();
+		}
+		else{
+			_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);			
+		}
+		#endif
+		
 	}
 
     /**
@@ -161,16 +169,23 @@ public:
 		#if MBED_LIBRARY_VERSION >= 130
 		_fp_rx.attach(callback(obj,method));
 		_fp_rx_timeout.attach(callback(obj,timedmethod));
-		#else
+		if(us==0){
+			_rx_tick.detach();
+		}
+		else{
+			_rx_tick.attach(callback(this, &SerialMon::timeoutCallback), us*1000000);
+		}
+   		#else
 		_fp_rx.attach(obj,method);
 		_fp_rx_timeout.attach(obj,timedmethod);
-		#endif
 		if(us==0){
 			_rx_tick.detach();
 		}
 		else{
 			_rx_tick.attach_us(this, &SerialMon::timeoutCallback, us);
 		}
+		#endif
+		
     }
 	
     /**
@@ -288,15 +303,15 @@ public:
      * Estructura de datos por defecto para los topics aceptados por este componente en el
 	 * mecanismo pub-sub
      */
-    struct topic_t{
+    typedef struct {
         uint8_t * data;
 		int size;
-    };
+    }topic_t;
 	
 protected:
      
     /**
-     * Rutina para determinar si datos pendientes por leer en el buffer de recepción
+     * Rutina para determinar si hay datos pendientes por leer en el buffer de recepción
      * @return true si hay datos, false en caso contrario
      */
     bool readable() { return (((_rxbuf.in != _rxbuf.ou) || (_rxbuf.in == _rxbuf.ou && (_stat & FLAG_RXFULL)!=0))? true : false); }
@@ -310,7 +325,7 @@ protected:
     /**
      * Estructura de datos del buffer utilizado en transmisión y recepción
      */
-     struct buffer_t{
+     typedef struct {
 		#if SERIALMON_ENABLE_THREAD==1
         Mutex mtx;			///< Mutex de control de acceso, únicamente válido en entornos multithread
 		#endif
@@ -319,7 +334,7 @@ protected:
         char* in;			///< Posición de escritura en el buffer
         char* ou;			///< Posición de lectura del buffer
         int sz;				///< Tamaño del buffer
-    };
+    }buffer_t;
    
     /**
      * Flags de señalización de estados 
