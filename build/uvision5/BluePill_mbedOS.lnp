@@ -1,6 +1,8 @@
 --cpu Cortex-M3
 ".\build\uvision5\atparser.o"
 ".\build\uvision5\main.o"
+".\build\uvision5\test_cloudmanager.o"
+".\build\uvision5\test_trunkcontroller.o"
 ".\build\uvision5\mybuffer.o"
 ".\build\uvision5\bufferedprint.o"
 ".\build\uvision5\bufferedserial.o"

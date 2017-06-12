@@ -60,7 +60,7 @@ public:
      */
 	TrunkController(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk,
 					PinName gpio_srclk, PinName gpio_ser,
-					Stepper::Stepper_mode_t mode, uint8_t freq = 100);
+					Stepper::Stepper_mode_t mode, uint8_t freq = 100, RawSerial *serial = 0);
 
     /** ~TrunkController()
      *
@@ -83,6 +83,13 @@ public:
      */
 	void notifyReady(Callback<void()> cb_ready);
 
+    /** notifyStep()
+     *
+     * Permite instalar una callback, que será invocada al finalizar cada uno de los pasos de una acción.
+     * @param cb_step Callback a instalar. Puede ser un método o estático o un método de clase.
+     */
+	void notifyStep(Callback<void()> cb_step);
+
     /** exec()
      *
      * Ejecuta una acción concreta en el robot. Lógicamente los motores que no se deseen
@@ -101,6 +108,13 @@ public:
      * generación de acciones se detendría.
      */
 	void nextAction();
+
+    /** setLogger()
+     *
+     * Registra un objeto RawSerial para poder imprimir mensajes de logging
+     * @param serial Objeto RawSerial
+     */
+	void setLogger(RawSerial* serial){_serial = serial;}
 
 
 protected:
@@ -126,9 +140,11 @@ protected:
 	uint16_t _max_steps;
 	float _wait_sec;
 	Callback<void()> _cb_ready;
+    Callback<void()> _cb_step;
 	Ticker _tmr;
 	Callback<void()> _cb_tmr;
 	Thread* _th;
+    RawSerial* _serial;
 };
 
 #endif

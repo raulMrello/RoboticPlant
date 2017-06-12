@@ -30,9 +30,9 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
+#define PRINT_LOG(format, ...)   if(_serial){_serial->printf(format, ##__VA_ARGS__);}
 
-static void default_cb_ready(){
-}
+static void default_cb(){}
 
 
 //- IMPL. -------------------------------------------------------------------------
@@ -40,23 +40,31 @@ static void default_cb_ready(){
 TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
 								 PinName gpio_rclk, PinName gpio_srclk,
 								 PinName gpio_ser, Stepper::Stepper_mode_t mode,
-								 uint8_t freq)
-								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser){
+                                 uint8_t freq, RawSerial *serial)
+								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser, serial){
 
-	//ESP_LOGD(TAG, "Creando Steppers...");
+    _serial = serial;
+	PRINT_LOG("[TrunkCtrl] Creando Steppers...\r\n");
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
-				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i));
-				//ESP_LOGD(TAG, "Stepper[%d][%d] con id=%d listo!",i,j, (j+(SEGMENTS_PER_SECTION*i)));
+				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP, serial);
+				PRINT_LOG("[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
 			}
 	}
-	_cb_ready = 0;
-	_wait_sec = 1.0f/freq;
+    _cb_ready = callback(default_cb);
+    _cb_step = callback(default_cb);
+    
+    _wait_sec = 1.0f/freq;
+	
+//  #warning QUITAR ESTA MODIFICACION
+//  _wait_sec = 2.0f;
+    
 	_tmr.detach();
 	_cb_tmr = callback(this, &TrunkController::nextAction);
 }
 
 
+//------------------------------------------------------------------------------------------------                                    
 bool TrunkController::ready(){
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
@@ -69,18 +77,26 @@ bool TrunkController::ready(){
 }
 
 
+//------------------------------------------------------------------------------------------------                                    
 void TrunkController::notifyReady(Callback<void()> cb_ready){
-	_cb_ready = (cb_ready)? callback(default_cb_ready) : cb_ready;
+	_cb_ready = (cb_ready)? cb_ready : callback(default_cb);
 }
 
 
+//------------------------------------------------------------------------------------------------                                    
+void TrunkController::notifyStep(Callback<void()> cb_step){
+	_cb_step = (cb_step)? cb_step : callback(default_cb);
+}
+
+
+//------------------------------------------------------------------------------------------------                                    
 void TrunkController::exec(uint16_t* degrees, bool* clockwise){
 	uint8_t c = 0;
 	uint16_t curr_step;
 	_max_steps = 0;
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
-			//ESP_LOGD(TAG, "Solicitando acci?n a nodo [%d][%d], array_pos[%d]...",i,j,c/2);
+			PRINT_LOG("[TrunkCtrl] Solicitando acción a nodo [%d][%d], array_pos[%d]...\r\n",i,j,c/2);
 			_actions[i][j] = _steppers[i][j]->request(degrees[c], clockwise[c]);
 			curr_step = _steppers[i][j]->getSteps();
 			_max_steps = (curr_step > _max_steps)? curr_step : _max_steps;
@@ -95,14 +111,16 @@ void TrunkController::exec(uint16_t* degrees, bool* clockwise){
 			c++;
 		}
 	}
-	//ESP_LOGD(TAG, "Construyendo acci?n con %d pasos...", _max_steps);
+	PRINT_LOG("[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
 	buildAction();
-	//ESP_LOGD(TAG, "Escribiendo acci?n en Shifter!");
+	PRINT_LOG("[TrunkCtrl] Escribiendo acción en Shifter\r\n");
 	write(_next_action, SHIFTER_OUTPUTS);
 	_tmr.attach(_cb_tmr, _wait_sec);
+    _cb_step.call();
 }
 
 
+//------------------------------------------------------------------------------------------------                                    
 void TrunkController::buildAction(bool do_next){
 	uint8_t c = 0;
 	for(int i=0;i<SECTION_COUNT;i++){
@@ -124,14 +142,15 @@ void TrunkController::buildAction(bool do_next){
 }
 
 
+//------------------------------------------------------------------------------------------------                                    
 void TrunkController::nextAction(){
 	_max_steps = (_max_steps > 0)? (_max_steps-1) : 0;
-	//ESP_LOGD(TAG, "NextAction, quedan %d pasos!", _max_steps);
 	buildAction(true);
 	write(_next_action, SHIFTER_OUTPUTS);
+     _cb_step.call();
 	if(ready()){
 		_tmr.detach();
-		_cb_ready();
+		_cb_ready.call();
 	}
 }
 

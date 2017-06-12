@@ -30,11 +30,6 @@
 .\build\uvision5\tcpserver.o: mbed-os/features/netsocket/CellularInterface.h
 .\build\uvision5\tcpserver.o: mbed-os/features/netsocket/MeshInterface.h
 .\build\uvision5\tcpserver.o: mbed-os/features/netsocket/UDPSocket.h
-.\build\uvision5\tcpserver.o: mbed-os/./events/mbed_events.h
-.\build\uvision5\tcpserver.o: mbed-os/./events/equeue/equeue.h
-.\build\uvision5\tcpserver.o: mbed-os/events/equeue/equeue_platform.h
-.\build\uvision5\tcpserver.o: mbed-os/./events/EventQueue.h
-.\build\uvision5\tcpserver.o: mbed-os/./events/Event.h
 .\build\uvision5\tcpserver.o: mbed-os/./platform/platform.h
 .\build\uvision5\tcpserver.o: mbed-os/targets/TARGET_STM/TARGET_STM32F1/device.h
 .\build\uvision5\tcpserver.o: mbed-os/targets/TARGET_STM/TARGET_STM32F1/TARGET_NUCLEO_F103RB/objects.h

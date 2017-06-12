@@ -30,6 +30,7 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
+#define PRINT_LOG(format, ...)   //if(_serial){_serial->printf(format, ##__VA_ARGS__);}
 
 const uint8_t wave_drive[]={0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01};
 const uint8_t full_step[] ={0x0c, 0x06, 0x03, 0x09, 0x0c, 0x06, 0x03, 0x09};
@@ -38,8 +39,9 @@ const uint8_t half_step[] ={0x08, 0x0c, 0x04, 0x06, 0x02, 0x03, 0x01, 0x09};
 
 //- IMPL. -------------------------------------------------------------------------
 
-Stepper::Stepper(uint8_t id, Stepper_mode_t mode){
-	//ESP_LOGD(TAG, "[%d]: Configurando...",id);
+Stepper::Stepper(uint8_t id, Stepper_mode_t mode, RawSerial* serial){
+    _serial = serial;
+	PRINT_LOG("[Stepper %d]  Configurando...\r\n",id);
 
 	_id = id;
 	_steps = 0;
@@ -53,7 +55,7 @@ Stepper::Stepper(uint8_t id, Stepper_mode_t mode){
 	else if(mode == Stepper::HALF_STEP){
 		_sequence = half_step;
 	}
-	//ESP_LOGD(TAG, "[%d]: Listo!", _id);
+	PRINT_LOG("[Stepper %d]  Listo\r\n", _id);
 }
 
 
@@ -71,11 +73,11 @@ uint8_t Stepper::request(uint16_t degrees, bool clockwise){
 
 uint8_t Stepper::next(){
 	if(!_steps){
-		//ESP_LOGD(TAG, "[%d]: NO MAS PASOS!",_id);
+		PRINT_LOG("[Stepper %d]  NO MAS PASOS\r\n",_id);
 		return _sequence[_step];
 	}
 	_steps--;
-	//ESP_LOGD(TAG, "[%d]: Quedan %d pasos!", _id, _steps);
+	PRINT_LOG("[Stepper %d]  Quedan %d pasos\r\n", _id, _steps);
 	if(_clockwise){
 		_step = (_step < 7)? (_step+1) : 0;
 	}

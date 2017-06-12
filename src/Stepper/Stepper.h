@@ -54,7 +54,7 @@ public:
      * @param id Identificador
      * @param mode	Modo de funcionamiento
      */
-	Stepper(uint8_t id, Stepper_mode_t mode = Stepper::FULL_STEP);
+	Stepper(uint8_t id, Stepper_mode_t mode = Stepper::FULL_STEP, RawSerial* serial = 0);
 
     /** ready()
      *
@@ -94,6 +94,7 @@ protected:
 	Stepper_mode_t _mode;
 	uint8_t _step;
 	const uint8_t * _sequence;
+    RawSerial* _serial;
 private:
 };
 

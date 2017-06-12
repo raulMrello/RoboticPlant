@@ -14,7 +14,18 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
-##### 11.05.2017 ->commit :/"Añado código TrunkController para verificarlo"
+##### 12.06.2017 ->commit :/"TrunkController verificado"
+- [x] Termino implementación de TrunkController. Utilizo RawSerial en lugar de SerialMon para las trazas serie.
+- [x] Añado esquema de conexión en la subcarpeta /TrunkController/docs/
+- [ ] Montar hardware y verificar con motor
+- [ ] Estudiar la comunicación entre ROS y mbed:
+		> RawSerial
+		> esp8266 + MQTT
+		> [esp32 + MQTT] + RawSerial
+
+- [ ] Continuar con la appnote de mbed.
+----------------------------------------------------------------------------------------------
+##### 11.06.2017 ->commit :/"Añado código TrunkController para verificarlo"
 - [x] Añado TrunkController.
 - [ ] Falta validar los cambios para ver si funciona bien.
 - [!] No he probado mi código basado en MsgBroker porque acabo de tener un dilema sobre la conveniencia

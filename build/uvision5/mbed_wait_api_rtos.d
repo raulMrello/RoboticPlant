@@ -95,11 +95,6 @@
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/features/netsocket/UDPSocket.h
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/features/netsocket/TCPSocket.h
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/features/netsocket/TCPServer.h
-.\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./events/mbed_events.h
-.\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./events/equeue/equeue.h
-.\build\uvision5\mbed_wait_api_rtos.o: mbed-os/events/equeue/equeue_platform.h
-.\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./events/EventQueue.h
-.\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./events/Event.h
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./platform/platform.h
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./platform/mbed_interface.h
 .\build\uvision5\mbed_wait_api_rtos.o: mbed-os/./drivers/DigitalIn.h

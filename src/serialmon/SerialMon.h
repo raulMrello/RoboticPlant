@@ -69,7 +69,7 @@
  *  \brief Tamaño por defecto del buffer de transmisión
  */
 #ifndef SERIALMON_DEFAULT_TX_BUFFER_SIZE
-#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    32
+#define SERIALMON_DEFAULT_TX_BUFFER_SIZE    256
 #endif
 
 
@@ -298,6 +298,8 @@ public:
      * Callback propia para manejar las interrupciones de timeout en recepción
      */
     void timeoutCallback(); 
+    
+    int printf(const char *format, ...);
     
     /**
      * Estructura de datos por defecto para los topics aceptados por este componente en el

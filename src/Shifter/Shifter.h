@@ -52,7 +52,7 @@ public:
      * @param gpio_srclk Salida de reloj del registro de acumulación SRCLK _/\_
      * @param gpio_ser Salida para inyectar datos serie
      */
-	Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser);
+	Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, RawSerial* serial);
 
     /** write()
      *
@@ -68,6 +68,7 @@ protected:
 	DigitalOut* _out_rclk;
 	DigitalOut* _out_srclk;
 	DigitalOut* _out_ser;
+    RawSerial* _serial;
 private:
 };
 
