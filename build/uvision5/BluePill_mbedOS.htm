@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\build\uvision5\BluePill_mbedOS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\build\uvision5\BluePill_mbedOS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Mon Jun 12 14:08:58 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Wed Jun 21 10:01:41 2017
 <BR><P>
 <H3>Maximum Stack Usage =        640 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1845,7 +1845,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[83]"></a>TrunkController::nextAction()</STRONG> (Thumb, 194 bytes, Stack size 16 bytes, trunkcontroller.o(i._ZN15TrunkController10nextActionEv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 360 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 368 + Unknown Stack Size
 <LI>Call Chain = TrunkController::nextAction() &rArr; Shifter::write(unsigned char*, unsigned char) &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
@@ -2240,8 +2240,8 @@ Global Symbols
 
 <P><STRONG><a name="[232]"></a>rtos::Semaphore::Semaphore__sub_object(int)</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, semaphore.o(i._ZN4rtos9SemaphoreC1Ei), UNUSED)
 
-<P><STRONG><a name="[165]"></a>Shifter::write(unsigned char*, unsigned char)</STRONG> (Thumb, 268 bytes, Stack size 40 bytes, shifter.o(i._ZN7Shifter5writeEPhh))
-<BR><BR>[Stack]<UL><LI>Max Depth = 344 + Unknown Stack Size
+<P><STRONG><a name="[165]"></a>Shifter::write(unsigned char*, unsigned char)</STRONG> (Thumb, 280 bytes, Stack size 48 bytes, shifter.o(i._ZN7Shifter5writeEPhh))
+<BR><BR>[Stack]<UL><LI>Max Depth = 352 + Unknown Stack Size
 <LI>Call Chain = Shifter::write(unsigned char*, unsigned char) &rArr; mbed_assert_internal &rArr;  core_util_critical_section_enter (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal

@@ -14,6 +14,15 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 21.06.2017 ->commit:"Funcionamiento del motor verificado"
+- [x] Corrijo error en el cálculo de los patrones del shifter.
+- [x] Motor montado y verificado, OK!
+- [ ] Montar resto de cables y hacer una prueba con los 9 motores en vacío.
+- [ ] Implementar módulo RemoteController que procese solicitudes externas y las transmita a 
+      TrunkController. Este módulo podrá recibir las solicitudes vía serie o vía MQTT por medio
+	  del esp8266
+- [ ] (opcional) Cambiar el RawSerial por un buffer de datos al igual que hacía con SerialMon
+----------------------------------------------------------------------------------------------
 ##### 12.06.2017 ->commit :/"TrunkController verificado"
 - [x] Termino implementación de TrunkController. Utilizo RawSerial en lugar de SerialMon para las trazas serie.
 - [x] Añado esquema de conexión en la subcarpeta /TrunkController/docs/

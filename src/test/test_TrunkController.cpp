@@ -19,8 +19,8 @@ typedef struct{
 //------------------------------------------------------------------------------------------------                                    
 uint8_t action_idx=0;
 //------------------------------------------------------------------------------------------------                                    
-const tc_action action_list[] =  {	{{1,1,1,1,1,1,1,1,1},{true,true,true,true,true,true,true,true,true}},
-									{{2,2,2,2,2,2,2,2,2},{false,false,false,false,false,false,false,false,false}},
+const tc_action action_list[] =  {	{{30,30,30,30,30,30,30,30,30},{true,true,true,true,true,true,true,true,true}},
+									{{30,30,30,30,30,30,30,30,30},{true,true,true,true,true,true,true,true,true}},
 									{{30,30,30,30,30,30,30,30,30},{false,false,false,false,false,false,false,false,false}},
 									{{10,10,10,10,10,10,10,10,10},{false,false,false,false,false,false,false,false,false}},
 									{{30,30,30,30,30,30,30,30,30},{true,true,true,true,true,true,true,true,true}}};
@@ -42,7 +42,7 @@ static void thread_func(){
     serial.printf("[TEST] Iniciando test_TrunkController!\r\n");
         	
 	/** Configura el robot */
-	tc = new TrunkController(PA_12, PA_11, PA_14, PA_13, PA_15, Stepper::FULL_STEP, 100, &serial);
+	tc = new TrunkController(PB_12, PB_11, PB_14, PB_13, PB_15, Stepper::FULL_STEP, 100, &serial);
     tc->notifyReady(callback(tc_action_complete));
     tc->notifyStep(callback(tc_step_done));
     action_idx = 0;

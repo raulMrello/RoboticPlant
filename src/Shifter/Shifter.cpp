@@ -33,6 +33,7 @@
 #define PRINT_LOG(format, ...)   //if(_serial){_serial->printf(format, ##__VA_ARGS__);}
 
 
+
 //- IMPL. -------------------------------------------------------------------------
 
 Shifter::Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, RawSerial* serial){
@@ -59,8 +60,10 @@ void Shifter::write(uint8_t* data, uint8_t count){
 	const uint8_t mask[]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
 
 	// Cargo valores en los registros de desplazamiento
+    
 	for(int i=0;i<count;i++){
-		_out_ser->write((data)? ((data[i%8] & mask[i])? 1 : 0) : 0);
+        volatile uint8_t val = (data)? ((data[i/8] & mask[i%8])? 1 : 0) : 0;
+		_out_ser->write(val);
 		_out_srclk->write(1);
 		_out_srclk->write(0);
 	}
@@ -68,7 +71,7 @@ void Shifter::write(uint8_t* data, uint8_t count){
 	// Cargo valores en los registro de carga
 	_out_rclk->write(1);
 	_out_rclk->write(0);
-
+    
 	// habilito salidas (puede no tener efecto si ya est? previamente a 0).
 	_out_oe->write(0);
 }
