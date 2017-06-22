@@ -30,7 +30,7 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   if(_logger){_logger->mtx->lock(); _logger->serial->printf(format, ##__VA_ARGS__); _logger->mtx->unlock();}
+#define PRINT_LOG(format, ...)   if(_logger){_logger->printf(format, ##__VA_ARGS__);}
 
 
 

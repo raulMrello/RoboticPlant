@@ -30,7 +30,7 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   if(_logger){_logger->mtx->lock(); _logger->serial->printf(format, ##__VA_ARGS__); _logger->mtx->unlock();}
+#define PRINT_LOG(format, ...)   if(_logger){_logger->printf(format, ##__VA_ARGS__);}
 
 const uint8_t wave_drive[]={0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01};
 const uint8_t full_step[] ={0x0c, 0x06, 0x03, 0x09, 0x0c, 0x06, 0x03, 0x09};

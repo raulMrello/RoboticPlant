@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 22.06.2017 ->commit:"Modifico Logger e incluyo terminal de comandos"
+- [x] Modifico el objeto Logger para que derive de RawSerial pero definiendo un mutex para que diferentes
+	  módulos puedan compartirlo.
+- [ ] Definir el terminal de comandos, para ver de qué forma puedo probarlo fácilmente y que no sea una historia	  
+- [ ] Montar resto de cables y hacer una prueba con los 9 motores en vacío.
+----------------------------------------------------------------------------------------------
 ##### 22.06.2017 ->commit:"Incluyo Logger en lugar de RawSerial"
 - [x] Incluyo el objeto Logger para sustituir a RawSerial y tener la capacidad de acceder al puerto
 	  serie de forma exclusiva (mutex) de forma que no se solapen las trazas de depuración de distintas
