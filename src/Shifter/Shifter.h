@@ -30,7 +30,7 @@
 #define __SHIFTER_H
 
 #include "mbed.h"
-
+#include "Logger.h"
 
 /**
  * @author raulMrello
@@ -51,8 +51,9 @@ public:
      * @param gpio_rclk Salida de reloj del registro de desplazamiento RCLK _/\_
      * @param gpio_srclk Salida de reloj del registro de acumulación SRCLK _/\_
      * @param gpio_ser Salida para inyectar datos serie
+     * @param logger Objeto logger
      */
-	Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, RawSerial* serial);
+	Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, Logger* logger);
 
     /** write()
      *
@@ -68,7 +69,7 @@ protected:
 	DigitalOut* _out_rclk;
 	DigitalOut* _out_srclk;
 	DigitalOut* _out_ser;
-    RawSerial* _serial;
+    Logger* _logger;
 private:
 };
 

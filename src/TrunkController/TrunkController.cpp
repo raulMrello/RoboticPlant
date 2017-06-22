@@ -30,37 +30,46 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   if(_serial){_serial->printf(format, ##__VA_ARGS__);}
+/** Macro para la impresión de trazas de depuración */
+#define PRINT_LOG(format, ...)   if(_logger){_logger->mtx->lock(); _logger->serial->printf(format, ##__VA_ARGS__); _logger->mtx->unlock();}
 
+/** Callback de propósito general 'dummy' */
 static void default_cb(){}
 
 
-//- IMPL. -------------------------------------------------------------------------
+//- PUBLIC ------------------------------------------------------------------------
 
 TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
 								 PinName gpio_rclk, PinName gpio_srclk,
 								 PinName gpio_ser, Stepper::Stepper_mode_t mode,
-                                 uint8_t freq, RawSerial *serial)
-								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser, serial){
-
-    _serial = serial;
+                                 uint8_t freq, Logger *logger)
+								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser, logger){
+    // Instalo serial logger
+    _logger = logger;
 	PRINT_LOG("[TrunkCtrl] Creando Steppers...\r\n");
+                                    
+    // Inicializo motores paso a paso por segmentos
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
-				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP, serial);
+				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP);
 				PRINT_LOG("[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
 			}
 	}
-    _cb_ready = callback(default_cb);
-    _cb_step = callback(default_cb);
     
+    // Inicializo callbacks de notificación de fin de paso
+    _cb_step = callback(default_cb);
+    _cb_ready = callback(default_cb);
+    
+    // Establezco periodo de refresco de los motores (max 100Hz)
     _wait_sec = 1.0f/freq;
 	
-//  #warning QUITAR ESTA MODIFICACION
-//  _wait_sec = 2.0f;
-    
+    // Inicializo callback para la ejecución temporizada
 	_tmr.detach();
 	_cb_tmr = callback(this, &TrunkController::nextAction);
+    
+    // Inicializo y arranco thread de control
+    _th = new Thread();    
+    _th->start(callback(this, &TrunkController::task));
 }
 
 
@@ -90,14 +99,99 @@ void TrunkController::notifyStep(Callback<void()> cb_step){
 
 
 //------------------------------------------------------------------------------------------------                                    
-void TrunkController::exec(uint16_t* degrees, bool* clockwise){
+bool TrunkController::actionRequested(int16_t* degrees){
+    Action_t* a = (Action_t*)_mail.alloc();
+    if(!a){
+        return false;
+    }
+	for(int i=0; i<SECTION_COUNT; i++){
+        for(int j=0;j<SEGMENTS_PER_SECTION;j++){
+            a->degrees[i][j] = *degrees;
+            degrees++;
+        }
+    }
+    if(_mail.put(a) != osOK){
+        _mail.free(a);
+        return false;
+    }
+    return true;
+}
+
+
+//------------------------------------------------------------------------------------------------                                    
+void TrunkController::task(){
+    PRINT_LOG("[TrunkCtrl] Thread %d running...\r\n", _th->gettid());
+    
+    // inicialmente esperará hasta que llegue alguna acción
+    uint32_t timeout = osWaitForever;
+    
+    // inicia el contador de acciones ejecutadas
+    _action_count = 0;
+    
+    // inicia el flag de cancelación de acciones
+    bool cancelled = false;
+    
+    for(;;){
+        osEvent oe = _mail.get(timeout);
+        if(oe.status == osEventMail && oe.value.p != 0){
+            Action_t* a = (Action_t*)oe.value.p;
+            // si la acción se permite, se ejecuta. En caso contrario, se descarta
+            if(!cancelled){
+                // inicia la acción que se completa a través de las callbacks de ISR
+                exec((int16_t*)a->degrees);
+                // espera el final de la acción
+                osEvent oe_sig = _th->signal_wait(TYPE_SIGNAL_ACTION_COMPLETED, osWaitForever);
+                // una vez completada...
+                if((oe_sig.value.signals & TYPE_SIGNAL_ACTION_COMPLETED) != 0){
+                    // incrementa el contador
+                    _action_count++;
+                    // y vuelve al bucle principal para ver si hay más acciones pendientes 
+                    // para ello, elimina el timeout de espera.                    
+                    timeout = 0;
+                }  
+                // si se ha solicitado la cancelación del resto de acciones...
+                oe_sig = _th->signal_wait(TYPE_SIGNAL_ACTION_CANCELLED, 0);
+                if((oe_sig.value.signals & TYPE_SIGNAL_ACTION_CANCELLED) != 0){
+                    // marca el flag
+                    cancelled = true;
+                    timeout = 0;
+                    PRINT_LOG("[TrunkCtrl] Resto de Acciones CANCELADAS!!\r\n");
+                }
+            }     
+            // si la acción se ha cancelado...
+            else{
+                // y vuelve al bucle principal para ver si hay más acciones pendientes 
+                // para ello, elimina el timeout de espera.                    
+                timeout = 0;
+                PRINT_LOG("[TrunkCtrl] Acción descartada.\r\n");
+            }   
+            // libera la memoria del mensaje procesado
+            _mail.free(a);
+        }
+        // si no quedan más acciones pendientes, notifica y vuelve a restaurar el timeout y el flag de cancelación
+        else{
+            timeout = osWaitForever;
+            cancelled = false;
+            _cb_ready.call();            
+        }
+    }
+}
+
+
+//- PRIVATE --------------------------------------------------------------------------------------
+
+
+void TrunkController::exec(int16_t* degrees){
 	uint8_t c = 0;
 	uint16_t curr_step;
 	_max_steps = 0;
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
-			PRINT_LOG("[TrunkCtrl] Solicitando acción a nodo [%d][%d], array_pos[%d]...\r\n",i,j,c/2);
-			_actions[i][j] = _steppers[i][j]->request(degrees[c], clockwise[c]);
+			//PRINT_LOG("[TrunkCtrl] Solicitando acción a nodo [%d][%d], array_pos[%d]...\r\n",i,j,c/2);
+            uint16_t u16deg = (*degrees >= 0)? (uint16_t)(*degrees) : (uint16_t)(-(*degrees));
+            bool clockwise = (*degrees >= 0)? true : false;
+            degrees++;
+			_actions[i][j] = _steppers[i][j]->request(u16deg, clockwise);
 			curr_step = _steppers[i][j]->getSteps();
 			_max_steps = (curr_step > _max_steps)? curr_step : _max_steps;
 			if((c & 1) == 0){
@@ -111,9 +205,9 @@ void TrunkController::exec(uint16_t* degrees, bool* clockwise){
 			c++;
 		}
 	}
-	PRINT_LOG("[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
+	//PRINT_LOG("[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
 	buildAction();
-	PRINT_LOG("[TrunkCtrl] Escribiendo acción en Shifter\r\n");
+	//PRINT_LOG("[TrunkCtrl] Escribiendo acción en Shifter\r\n");
 	write(_next_action, SHIFTER_OUTPUTS);
 	_tmr.attach(_cb_tmr, _wait_sec);
     _cb_step.call();
@@ -150,8 +244,7 @@ void TrunkController::nextAction(){
      _cb_step.call();
 	if(ready()){
 		_tmr.detach();
-		_cb_ready.call();
+        _th->signal_set(TYPE_SIGNAL_ACTION_COMPLETED);
 	}
 }
-
 

@@ -151,3 +151,4 @@
 .\build\uvision5\stepper.o: mbed-os/./hal/sleep_api.h
 .\build\uvision5\stepper.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5\stepper.o: mbed-os/./platform/FunctionPointer.h
+.\build\uvision5\stepper.o: .\src\Logger\Logger.h

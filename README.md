@@ -14,6 +14,19 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 22.06.2017 ->commit:"Incluyo Logger en lugar de RawSerial"
+- [x] Incluyo el objeto Logger para sustituir a RawSerial y tener la capacidad de acceder al puerto
+	  serie de forma exclusiva (mutex) de forma que no se solapen las trazas de depuración de distintas
+	  tareas.
+- [x] Modifico TrunkController para que tenga su propio hilo de control mediante la api 'actionRequested'	  
+      y que notifique al módulo llamante mediante la callback instalada por medio de 'notifyReady', cuando
+	  no queden más acciones a ejecutar.
+- [x] Añado a TrunkController un servicio para consultar el número de acciones completadas y otro que permita
+      borrar ese contador.
+- [x] Añado a TrunkController un servicio que permite detener la ejecución de acciones en curso.	  
+- [ ] Montar resto de cables y hacer una prueba con los 9 motores en vacío.
+- [ ] Montar el componente esp8266
+----------------------------------------------------------------------------------------------
 ##### 21.06.2017 ->commit:"Funcionamiento del motor verificado"
 - [x] Corrijo error en el cálculo de los patrones del shifter.
 - [x] Motor montado y verificado, OK!

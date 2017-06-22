@@ -30,14 +30,14 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   //if(_serial){_serial->printf(format, ##__VA_ARGS__);}
+#define PRINT_LOG(format, ...)   if(_logger){_logger->mtx->lock(); _logger->serial->printf(format, ##__VA_ARGS__); _logger->mtx->unlock();}
 
 
 
 //- IMPL. -------------------------------------------------------------------------
 
-Shifter::Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, RawSerial* serial){
-    _serial = serial;
+Shifter::Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, Logger* logger){
+    _logger = logger;
 	PRINT_LOG("[Shifter] Configurando GPIOs...\r\n");
 
 	// referencio gpio pins

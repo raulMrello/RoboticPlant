@@ -30,6 +30,7 @@
 #define __TRUNKCONTROLLER_H
 
 #include "mbed.h"
+#include "Logger.h"
 #include "Shifter.h"
 #include "Stepper.h"
 
@@ -43,7 +44,13 @@
  */
 class TrunkController : Shifter {
 public:
-    
+        
+    /** Parámetros de configuración públicos */
+    static const uint8_t SECTION_COUNT = 3;
+	static const uint8_t SEGMENTS_PER_SECTION = 3;
+	static const uint8_t MOTOR_COUNT = SECTION_COUNT * SEGMENTS_PER_SECTION;
+
+
     /** TrunkController()
      *
      * Constructor.
@@ -57,10 +64,11 @@ public:
      * @param gpio_ser Salida para inyectar datos serie
      * @param mode	Modo de funcionamiento
      * @param freq	Velocidad de refresco (max 100Hz)
+     * @param logger Objeto logger
      */
 	TrunkController(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk,
 					PinName gpio_srclk, PinName gpio_ser,
-					Stepper::Stepper_mode_t mode, uint8_t freq = 100, RawSerial *serial = 0);
+					Stepper::Stepper_mode_t mode, uint8_t freq = 100, Logger *logger = 0);
 
     /** ~TrunkController()
      *
@@ -69,12 +77,12 @@ public:
      */
 	~TrunkController();
 
-    /** ready()
+    /** task()
      *
-     * Consulta si hay alguna operación en curso para saber si está listo o no para otra.
+     * Función asociada al hilo de ejecución.
      * @return Estado actual [true|false] [listo|ocupado]
      */
-	bool ready();
+	void task();
 
     /** notifyReady()
      *
@@ -90,17 +98,93 @@ public:
      */
 	void notifyStep(Callback<void()> cb_step);
 
-    /** exec()
+    /** setLogger()
      *
-     * Ejecuta una acción concreta en el robot. Lógicamente los motores que no se deseen
-     * modificar, basta con pasarles un número de grados nulo (degrees = 0). Cuando la
-     * acción finalice, se invocará la callback registrada mediante "notifyReady", para
-     * indicar que está listo para una nueva acción.
-     * @param degrees Array con el número de grados a girar, para cada motor
-     * @param clockwise Array con el flag para indicar el sentido de giro, de cada motor
+     * Registra un objeto RawSerial para poder imprimir mensajes de logging
+     * @param serial Objeto RawSerial
      */
-	void exec(uint16_t* degrees, bool* clockwise);
+	void setLogger(Logger* logger){_logger = logger;}
 
+	/** actionRequested
+     *
+	 *	Permite solicitar la ejecución de una nueva acción. Esta solicitud se insertará en la cola de
+     *  ejecución
+     *  @param degrees Array con los grados a mover cada motor. Valores positivos giran en el sentido de
+     *         de las agujas del reloj. Valores negativos, giran en sentido contrario.
+     *  @return True si la acción se ha podido añadir a la cola de procesos o False si no se puede añadir
+     */
+	bool actionRequested(int16_t* degrees);
+
+	/** stop
+     *
+	 *	Permite detener la ejecución de acciones pendientes. Si hay una acción en curso, se finalizará y las
+     *  siguientes serán descartadas. Será un servicio bloqueante que no devolverá el control hasta que el
+     *  proceso no haya finalizado completamente. Las acciones en la cola de espera se eliminarán.
+     */
+	void stop(){ _th->signal_set(TYPE_SIGNAL_ACTION_CANCELLED); }
+
+	/** getActionCount
+     *
+	 *	Permite obtener el número de acciones ejecutadas.
+     */
+	uint32_t getActionCount(){ return _action_count;}
+
+	/** clearActionCount
+     *
+	 *	Permite borrar (reiniciar) el número de acciones ejecutadas.
+     */
+	void clearActionCount(){ _action_count=0;}
+    
+protected:
+	static const uint8_t GPIO_PER_MOTOR = 4;
+	static const uint8_t ACTION_BITS_COUNT = 8;
+	static const uint8_t SHIFTER_OUTPUTS = MOTOR_COUNT * GPIO_PER_MOTOR;
+	static const uint8_t ACTION_ARRAY_LENGTH = (SHIFTER_OUTPUTS/ACTION_BITS_COUNT)+1;
+
+	/** Recursos asociados a los mensajes insertables en la cola asociada al hilo de ejecución */
+	static const uint32_t TYPE_SIGNAL_ACTION_REQUESTED = (1<<0);
+	static const uint32_t TYPE_SIGNAL_ACTION_COMPLETED = (1<<1);
+    static const uint32_t TYPE_SIGNAL_ACTION_CANCELLED = (1<<2);
+	typedef struct {
+		int16_t degrees[SECTION_COUNT][SEGMENTS_PER_SECTION];
+	}Action_t;
+	static const uint8_t MAX_QUEUE_SIZE = 8;	
+	Mail< Action_t, MAX_QUEUE_SIZE > _mail;
+
+    /** Recursos asociados a la activación sincronizada de los motores paso a paso */
+	Stepper* _steppers[SECTION_COUNT][SEGMENTS_PER_SECTION];
+	uint8_t _actions[SECTION_COUNT][SEGMENTS_PER_SECTION];
+    uint8_t _next_action[ACTION_ARRAY_LENGTH];
+	uint16_t _max_steps;
+    uint32_t _action_count;
+	float _wait_sec;
+	Callback<void()> _cb_ready;
+    Callback<void()> _cb_step;
+	Callback<void()> _cb_tmr;
+	Ticker _tmr;
+    
+	Thread* _th;
+    Logger* _logger;
+    
+    
+    /** Métodos protegidos de este componente */
+    
+    
+    /** ready()
+     *
+     * Consulta si hay alguna operación en curso para saber si está listo o no para otra.
+     * @return Estado actual [true|false] [listo|ocupado]
+     */
+	bool ready();
+
+    /** buildAction()
+     *
+     * Forma la siguiente acción a enviar al shifter, a partir de las lecturas obtenidas
+     * de los Steppers. Opcionalmente se puede invocar a "next" de cada stepper.
+     * @param do_next Flag para invocar o no previamente a "next".
+     */
+	void buildAction(bool do_next = false);
+    
     /** nextAction()
      *
      * Ejecuta una nueva acción que se traduce en un env?o al shifter. En caso de que la
@@ -109,42 +193,14 @@ public:
      */
 	void nextAction();
 
-    /** setLogger()
+    /** exec()
      *
-     * Registra un objeto RawSerial para poder imprimir mensajes de logging
-     * @param serial Objeto RawSerial
+     * Ejecuta una acción concreta en el robot solicitada mediante un 'actionRequest'
+     * @param degrees Array con el número de grados a girar, para cada motor. Valores 
+     *        positivos giran en el sentido de las agujas del reloj. Valores negativos
+     *        giran en sentido contrario.
      */
-	void setLogger(RawSerial* serial){_serial = serial;}
-
-
-protected:
-    /** buildAction()
-     *
-     * Forma la siguiente acción a enviar al shifter, a partir de las lecturas obtenidas
-     * de los Steppers. Opcionalmente se puede invocar a "next" de cada stepper.
-     * @param do_next Flag para invocar o no previamente a "next".
-     */
-	void buildAction(bool do_next = false);
-
-	static const uint8_t SECTION_COUNT = 3;
-	static const uint8_t SEGMENTS_PER_SECTION = 3;
-	static const uint8_t MOTOR_COUNT = SECTION_COUNT * SEGMENTS_PER_SECTION;
-	static const uint8_t GPIO_PER_MOTOR = 4;
-	static const uint8_t ACTION_BITS_COUNT = 8;
-	static const uint8_t SHIFTER_OUTPUTS = MOTOR_COUNT * GPIO_PER_MOTOR;
-	static const uint8_t ACTION_ARRAY_LENGTH = (SHIFTER_OUTPUTS/ACTION_BITS_COUNT)+1;
-
-	Stepper* _steppers[SECTION_COUNT][SEGMENTS_PER_SECTION];
-	uint8_t _actions[SECTION_COUNT][SEGMENTS_PER_SECTION];
-	uint8_t _next_action[ACTION_ARRAY_LENGTH];
-	uint16_t _max_steps;
-	float _wait_sec;
-	Callback<void()> _cb_ready;
-    Callback<void()> _cb_step;
-	Ticker _tmr;
-	Callback<void()> _cb_tmr;
-	Thread* _th;
-    RawSerial* _serial;
+	void exec(int16_t* degrees);
 };
 
 #endif

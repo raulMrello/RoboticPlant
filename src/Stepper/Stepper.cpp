@@ -30,7 +30,7 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   //if(_serial){_serial->printf(format, ##__VA_ARGS__);}
+#define PRINT_LOG(format, ...)   if(_logger){_logger->mtx->lock(); _logger->serial->printf(format, ##__VA_ARGS__); _logger->mtx->unlock();}
 
 const uint8_t wave_drive[]={0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01};
 const uint8_t full_step[] ={0x0c, 0x06, 0x03, 0x09, 0x0c, 0x06, 0x03, 0x09};
@@ -39,8 +39,8 @@ const uint8_t half_step[] ={0x08, 0x0c, 0x04, 0x06, 0x02, 0x03, 0x01, 0x09};
 
 //- IMPL. -------------------------------------------------------------------------
 
-Stepper::Stepper(uint8_t id, Stepper_mode_t mode, RawSerial* serial){
-    _serial = serial;
+Stepper::Stepper(uint8_t id, Stepper_mode_t mode, Logger* logger){
+    _logger = logger;
 	PRINT_LOG("[Stepper %d]  Configurando...\r\n",id);
 
 	_id = id;

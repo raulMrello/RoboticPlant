@@ -30,6 +30,7 @@
 #define __STEPPER_H
 
 #include "mbed.h"
+#include "Logger.h"
 
 /**
  * @author raulMrello
@@ -53,8 +54,9 @@ public:
      * Configura el modo de funcionamiento, por defecto FULL_STEP y asigna un identificador
      * @param id Identificador
      * @param mode	Modo de funcionamiento
+     * @param logger Objeto logger    
      */
-	Stepper(uint8_t id, Stepper_mode_t mode = Stepper::FULL_STEP, RawSerial* serial = 0);
+	Stepper(uint8_t id, Stepper_mode_t mode = Stepper::FULL_STEP, Logger* logger = 0);
 
     /** ready()
      *
@@ -94,7 +96,7 @@ protected:
 	Stepper_mode_t _mode;
 	uint8_t _step;
 	const uint8_t * _sequence;
-    RawSerial* _serial;
+    Logger* _logger;
 private:
 };
 

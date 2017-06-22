@@ -3,10 +3,12 @@
 
 int main() {    
     test_TrunkController();
-    for(;;){
-        Thread::yield();
-    }
     return 0;
+}
+
+void mbed_die(void){
+    volatile int i=0;
+    i++;
 }
 
 
