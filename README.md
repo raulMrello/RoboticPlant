@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 29.06.2017 ->commit:"Defino terminal de test"
+- [x] Defino terminal de test "T,seccion,motor,grados"+$00 
+- [x] Montados resto de cables
+- [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
+
+----------------------------------------------------------------------------------------------
 ##### 22.06.2017 ->commit:"Modifico Logger e incluyo terminal de comandos"
 - [x] Modifico el objeto Logger para que derive de RawSerial pero definiendo un mutex para que diferentes
 	  módulos puedan compartirlo.
