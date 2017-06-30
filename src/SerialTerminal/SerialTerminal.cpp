@@ -36,6 +36,7 @@
 //---------------------------------------------------------------------------------
 
 static void unhandled_callback(){}
+static bool unhandled_callback_2(uint8_t* data, uint16_t size){return false;}
 
 //---------------------------------------------------------------------------------
 //- ISR ---------------------------------------------------------------------------
@@ -59,19 +60,30 @@ void SerialTerminal::onTxData(){
 //---------------------------------------------------------------------------------
 void SerialTerminal::onRxData(){
     while(readable()){
+        // lee un byte
         char d = (char)getc();
+        // si excede el buffer, termina y notifica error
         if(_recv >= _bufsize){
             _tmr.detach();
             attach(0, (SerialBase::IrqType)RxIrq);
             _cb_rx_ovf.call();
             return;
         }
+        // almacena el dato en el buffer de recepción
         _databuf[_recv++] = d;        
-        if(d == _eof){
+        // en modo eof, si coincide con él, termina y notifica
+        if(_mode == RECV_WITH_EOF_CHARACTER && d == _eof){
             _tmr.detach();
             attach(0, (SerialBase::IrqType)RxIrq);
             _cb_rx.call();
         }
+        // en modo proc, si el proceso cumple la condición de finalización, termina y notifica
+        else if(_mode == RECV_WITH_DEDICATED_HANDLING && _cb_proc.call((uint8_t*)_databuf, _recv)){
+            _tmr.detach();
+            attach(0, (SerialBase::IrqType)RxIrq);
+            _cb_rx.call();
+        }
+        // si es el primer byte, inicia el timer
         else if(_recv == 1){
             _tmr.attach_us(callback(this, &SerialTerminal::onRxTimeout), _us_timeout);
         }
@@ -91,9 +103,10 @@ void SerialTerminal::onRxTimeout(){
 //- IMPL. -------------------------------------------------------------------------
 //---------------------------------------------------------------------------------
 
-SerialTerminal::SerialTerminal(PinName tx, PinName rx, uint16_t maxbufsize, int baud) : RawSerial(tx, rx, baud){
+SerialTerminal::SerialTerminal(PinName tx, PinName rx, uint16_t maxbufsize, int baud, Receiver_mode mode) : RawSerial(tx, rx, baud){
     attach(0, (SerialBase::IrqType)RxIrq);
     attach(0, (SerialBase::IrqType)TxIrq);
+    _mode = mode;
     _recv = 0;
     _eof = 0;
     _bufsize = maxbufsize;
@@ -105,6 +118,7 @@ SerialTerminal::SerialTerminal(PinName tx, PinName rx, uint16_t maxbufsize, int 
     _cb_rx = callback(unhandled_callback);
     _cb_rx_tmr = callback(unhandled_callback);
     _cb_rx_ovf = callback(unhandled_callback);
+    _cb_proc = callback(unhandled_callback_2);
     tx_managed = false;
     rx_managed = false;
 }

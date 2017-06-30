@@ -65,12 +65,20 @@ static void error_timeout(){
 static void error_ovf(){
 	th->signal_set(SIG_ERR_OVF);
 }
+static bool stream_processing(uint8_t* buffer, uint16_t size){
+    if(strncmp((char*)buffer, "HOLA", 4)==0){
+        return true;
+    }
+    return false;	
+}
 
 //------------------------------------------------------------------------------------------------                                    
 static void thread_func(){
     // Configuro el terminal y lo inicio
-    SerialTerminal* st = new SerialTerminal(PA_2, PA_3, 64);  
+    //SerialTerminal* st = new SerialTerminal(PA_2, PA_3, 64);  
+    SerialTerminal* st = new SerialTerminal(PA_2, PA_3, 64, MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE, SerialTerminal::RECV_WITH_DEDICATED_HANDLING);  
     st->config(callback(stream_received), callback(error_timeout), callback(error_ovf), 500, 0);  
+    st->dedicatedHandling(callback(stream_processing));
     st->startReceiver();
     st->printf("Test iniciado\r\n");
     for(;;){

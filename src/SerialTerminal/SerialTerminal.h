@@ -40,6 +40,17 @@
 class SerialTerminal : public RawSerial {
 
 public:
+    /** Receiver_mode
+     *  Enumeración para listar los diferentes modos de operación del receptor:
+     *  RECV_WITH_EOF_CHARACTER - Utiliza un caracter concreto como detección de fin de trama
+     *  RECV_WITH_DEDICATED_HANDLING - Utiliza una callback bool(uint8_t*,uint_16_t) para procesar
+     *      cada byte recibido. Cuando la trama se haya completado, devolverá (true).
+     */
+    typedef enum{
+        RECV_WITH_EOF_CHARACTER,
+        RECV_WITH_DEDICATED_HANDLING
+    }Receiver_mode;
+    
     /** SerialTerminal()
      *  Crea el objeto asignando un puerto serie para la interfaz con el equipo digital, un tamaño
      *  de buffer para recibir las tramas y la velocidad de transmisión
@@ -48,7 +59,7 @@ public:
      *  @param maxbufsize Tamaño del buffer de recepción (no se podrán recibir tramas de mayor tamaño)
      *  @param baud Velocidad del puerto serie
      */
-    SerialTerminal(PinName tx, PinName rx, uint16_t maxbufsize = 256, int baud = MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE);
+    SerialTerminal(PinName tx, PinName rx, uint16_t maxbufsize = 256, int baud = MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE, Receiver_mode mode = RECV_WITH_EOF_CHARACTER);
 
     /** config()
      *  Configura las callbacks, el timeout y el caracter de fin de trama
@@ -60,6 +71,12 @@ public:
      *  @return Flag para indicar si la configuración es correcta (True) o incorrecta (False)
      */
     bool config(Callback<void()> rx_done, Callback <void()> rx_timeout, Callback <void()> rx_ovf, uint32_t millis, char eof = 0);
+
+    /** dedicatedHandling()
+     *  Configura la callbacks de procesamiento dedicado
+     *  @param cb_proc Callback a invocar tras la recepción de cada byte, para su procesado
+     */
+    void dedicatedHandling(Callback<bool(uint8_t*,uint16_t)> cb_proc) {_cb_proc = cb_proc;}
 
     /** startReceiver()
      *  Habilita el receptor en modo isr-managed y por lo tanto lo deja listo para recibir
@@ -176,8 +193,10 @@ protected:
     Callback <void()> _cb_rx;       ///!< Callback para notificar trama recibida
     Callback <void()> _cb_rx_tmr;   ///!< Callback para notificar error por timeout
     Callback <void()> _cb_rx_ovf;   ///!< Callback para notificar error por debordamiento de buffer
+    Callback <bool(uint8_t*, uint16_t)> _cb_proc;   ///!< Callback para procesar los bytes recibidos
     bool tx_managed;                ///!< Flag de estado del transmisor en modo isr-managed
     bool rx_managed;                ///!< Flag de estado del receptor en modo isr-managed
+    Receiver_mode _mode;            ///!< Modo de operación del receptor
 };
 
 

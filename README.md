@@ -14,6 +14,11 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 29.06.2017 ->commit:"Incluyo modo procesamiento dedicado en SerialTerminal"
+- [x] Actualizo SerialTerminal pero mantengo versión (versión 1.0.0-03.06.2017)
+- [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
+
+----------------------------------------------------------------------------------------------
 ##### 29.06.2017 ->commit:"Modifico todo para funcionar con el SerialTerminal"
 - [x] Implemento y verifico el módulo SerialTerminal (versión 1.0.0-03.06.2017)
 - [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
