@@ -151,4 +151,5 @@
 .\build\uvision5\shifter.o: mbed-os/./hal/sleep_api.h
 .\build\uvision5\shifter.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5\shifter.o: mbed-os/./platform/FunctionPointer.h
-.\build\uvision5\shifter.o: .\src\Logger\Logger.h
+.\build\uvision5\shifter.o: .\src\SerialTerminal\Logger.h
+.\build\uvision5\shifter.o: .\src\SerialTerminal\SerialTerminal.h

@@ -151,6 +151,7 @@
 .\build\uvision5\trunkcontroller.o: mbed-os/./hal/sleep_api.h
 .\build\uvision5\trunkcontroller.o: mbed-os/./platform/rtc_time.h
 .\build\uvision5\trunkcontroller.o: mbed-os/./platform/FunctionPointer.h
-.\build\uvision5\trunkcontroller.o: .\src\Logger\Logger.h
+.\build\uvision5\trunkcontroller.o: .\src\SerialTerminal\Logger.h
+.\build\uvision5\trunkcontroller.o: .\src\SerialTerminal\SerialTerminal.h
 .\build\uvision5\trunkcontroller.o: .\src\Shifter\Shifter.h
 .\build\uvision5\trunkcontroller.o: .\src\Stepper\Stepper.h

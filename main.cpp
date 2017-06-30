@@ -2,7 +2,7 @@
 #include "test.h" 
 
 int main() {    
-    test_TrunkController();
+    DO_TEST();
     return 0;
 }
 

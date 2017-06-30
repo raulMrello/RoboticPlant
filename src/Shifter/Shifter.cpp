@@ -30,15 +30,13 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-#define PRINT_LOG(format, ...)   if(_logger){_logger->printf(format, ##__VA_ARGS__);}
-
 
 
 //- IMPL. -------------------------------------------------------------------------
 
 Shifter::Shifter(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk, PinName gpio_srclk, PinName gpio_ser, Logger* logger){
     _logger = logger;
-	PRINT_LOG("[Shifter] Configurando GPIOs...\r\n");
+	PRINT_LOG(_logger, "[Shifter] Configurando GPIOs...\r\n");
 
 	// referencio gpio pins
 	_out_oe = new DigitalOut(gpio_oe);

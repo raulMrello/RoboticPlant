@@ -31,43 +31,9 @@
 
 /** Archivos de cabecera */
 #include "mbed.h"
+#include "SerialTerminal.h"
 
-class Logger : public RawSerial {
-
-public:
-    /** Create a RawSerial port, connected to the specified transmit and receive pins, with the specified baud.
-     *
-     *  @param tx Transmit pin
-     *  @param rx Receive pin
-     *  @param baud The baud rate of the serial port (optional, defaults to MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE)
-     *
-     *  @note
-     *    Either tx or rx may be specified as NC if unused
-     */
-    Logger(PinName tx, PinName rx, int baud = MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE) : RawSerial(tx,rx,baud){}
-    
-protected:
-
-    Mutex _mtx;
-    /** Acquire exclusive access to this serial port
-     */
-    virtual void lock(void){
-        _mtx.lock();
-    }
-
-    /** Release exclusive access to this serial port
-     */
-    virtual void unlock(void){
-        _mtx.unlock();
-    }
-};
-
-
-
-//typedef struct {
-//    RawSerial* serial;
-//    Mutex* mtx;
-//}Logger;
-
+#define PRINT_LOG(obj, format, ...)     if(obj){(obj)->printf(format, ##__VA_ARGS__);}
+typedef class SerialTerminal Logger;
 
 #endif

@@ -6,14 +6,16 @@
 #include "TrunkController.h"
 
 //------------------------------------------------------------------------------------------------                                    
-#define SIG_ACTION_COMPLETE     1
-#define SIG_COMMAND_RECEIVED    2
+#define SIG_ACTION_COMPLETE     (1 << 0)
+#define SIG_COMMAND_RECEIVED    (1 << 1)
+#define SIG_COMMAND_TIMEOUT     (1 << 2)
+#define SIG_COMMAND_OVF         (1 << 3)
+//------------------------------------------------------------------------------------------------                                    
 #define ACTION_COUNT            5
 //------------------------------------------------------------------------------------------------                                    
 static TrunkController *tc;
 //------------------------------------------------------------------------------------------------                                    
-static Logger logger(PA_2, PA_3);
-#define PRINT_LOG(format, ...)   logger.printf(format, ##__VA_ARGS__);
+static SerialTerminal logger(PA_2, PA_3);
 char cmdbuf[256];
 int cmdsize = 0;
 //------------------------------------------------------------------------------------------------                                    
@@ -35,23 +37,27 @@ static void tc_action_complete(){
 	th->signal_set(SIG_ACTION_COMPLETE);
 }
 //------------------------------------------------------------------------------------------------                                    
-static void onRxData(void){
-    while(logger.readable()){
-        char d = (char)logger.getc();
-        cmdbuf[cmdsize++] = d;
-        if(d==0){
-            th->signal_set(SIG_COMMAND_RECEIVED);
-        }
-    }    
+static void stream_received(){
+	th->signal_set(SIG_COMMAND_RECEIVED);
 }
+static void error_timeout(){
+	th->signal_set(SIG_COMMAND_TIMEOUT);
+}
+static void error_ovf(){
+	th->signal_set(SIG_COMMAND_OVF);
+}
+
 //------------------------------------------------------------------------------------------------                                    
-static void thread_func(){
-    PRINT_LOG("[TEST] Iniciando test_TrunkController!\r\n");
-    
-    // Configuro el logger para que permita recibir comandos a través suyo
-    logger.attach(callback(onRxData), RawSerial::RxIrq);    
-    logger.attach(0, RawSerial::TxIrq);
+#define IS_FLAG(f)  ((oe.value.signals & (f)) == (f))
+
+//------------------------------------------------------------------------------------------------                                    
+static void thread_func(){    
+    // Configuro el logger para que permita recibir comandos a través suyo (terminados en '\0')
+    logger.config(stream_received, error_timeout, error_ovf, 500, 0);
+    logger.startReceiver();
         	
+    PRINT_LOG(&logger, "[TEST] Iniciando test_TrunkController!\r\n");
+
 	/** Configura el robot */
 	tc = new TrunkController(PB_12, PB_11, PB_14, PB_13, PB_15, Stepper::FULL_STEP, 100, &logger);
     // instala callback de notificación cuando no queden más operaciones pendientes
@@ -59,14 +65,23 @@ static void thread_func(){
     action_idx = 0;
     
     for(;;){
-        PRINT_LOG("[TEST] Esperando comandos...\r\n");
-        osEvent oe = th->signal_wait(SIG_COMMAND_RECEIVED, osWaitForever);
-        if((oe.value.signals & SIG_COMMAND_RECEIVED) == SIG_COMMAND_RECEIVED){
+        PRINT_LOG(&logger, "[TEST] Esperando comandos...\r\n");
+        osEvent oe = th->signal_wait(0, osWaitForever);
+        
+        if(IS_FLAG(SIG_COMMAND_TIMEOUT) || IS_FLAG(SIG_COMMAND_OVF)){
+            PRINT_LOG(&logger, "[TEST] ERROR. Descarto comando.\r\n");
+            // descarta los datos recibidos
+            logger.recv(0, 0);
+        }
+        
+        
+        if(IS_FLAG(SIG_COMMAND_RECEIVED)){        
             /** Los comandos pueden ser de la siguiente forma:
                 Test:  "T,Seccion,Motor,Grados"
                   ej:   "T,0,2,45" -> Mover 45º (clockwise) el motor 2 de la sección 0
                   ej:   "T,1,0,-20"  -> Mover 30º (anti-clockwise) el motor 0 de la sección 1
              */
+            cmdsize = logger.recv(cmdbuf, 256);
             if(strncmp(cmdbuf,"T", 1)==0){
                 char* token = strtok(cmdbuf,",");                
                 int section_id = atoi(strtok(0,","));                
@@ -74,29 +89,21 @@ static void thread_func(){
                 int16_t degree = atoi(strtok(0,","));      
                 tc_action action = {{0,0,0,0,0,0,0,0,0}};
                 action.degrees[(TrunkController::MOTOR_COUNT * section_id) + motor_id] = degree;
-                PRINT_LOG("[TEST] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
+                PRINT_LOG(&logger, "[TEST] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
                 bool done;
                 do{
                     done = tc->actionRequested((int16_t*)action.degrees);
                     th->yield();
                 }while(!done);                        
                 
-                
-        //        // Esto es para detener las acciones en curso
-        //        wait(rand()%((7 - 2) + 1) + 2);
-        //        PRINT_LOG("\r\n\r\n[TEST] DETENGO acciones!\r\n");
-        //        tc->stop();
-                
-                
                 osEvent oe = th->signal_wait(0, osWaitForever);
-                if((oe.value.signals & SIG_ACTION_COMPLETE) == SIG_ACTION_COMPLETE){
-                    PRINT_LOG("[TEST] Acciones completadas %d!!!!\r\n", tc->getActionCount()); 
+                if(IS_FLAG(SIG_ACTION_COMPLETE)){
+                    PRINT_LOG(&logger, "[TEST] Acciones completadas %d!!!!\r\n", tc->getActionCount()); 
                     tc->clearActionCount();
                 }                  
-            }
-            cmdsize = 0;
+            }            
         }  
-              
+        cmdsize = 0;              
     }
 }
 

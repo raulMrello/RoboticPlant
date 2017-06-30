@@ -30,8 +30,6 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
-/** Macro para la impresión de trazas de depuración */
-#define PRINT_LOG(format, ...)   if(_logger){_logger->printf(format, ##__VA_ARGS__);}
 
 /** Callback de propósito general 'dummy' */
 static void default_cb(){}
@@ -46,13 +44,13 @@ TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
 								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser, logger){
     // Instalo serial logger
     _logger = logger;
-	PRINT_LOG("[TrunkCtrl] Creando Steppers...\r\n");
+	PRINT_LOG(_logger, "[TrunkCtrl] Creando Steppers...\r\n");
                                     
     // Inicializo motores paso a paso por segmentos
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
 				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP);
-				PRINT_LOG("[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
+				PRINT_LOG(_logger, "[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
 			}
 	}
     
@@ -120,7 +118,7 @@ bool TrunkController::actionRequested(int16_t* degrees){
 
 //------------------------------------------------------------------------------------------------                                    
 void TrunkController::task(){
-    PRINT_LOG("[TrunkCtrl] Thread %d running...\r\n", _th->gettid());
+    PRINT_LOG(_logger, "[TrunkCtrl] Thread %d running...\r\n", _th->gettid());
     
     // inicialmente esperará hasta que llegue alguna acción
     uint32_t timeout = osWaitForever;
@@ -155,7 +153,7 @@ void TrunkController::task(){
                     // marca el flag
                     cancelled = true;
                     timeout = 0;
-                    PRINT_LOG("[TrunkCtrl] Resto de Acciones CANCELADAS!!\r\n");
+                    PRINT_LOG(_logger, "[TrunkCtrl] Resto de Acciones CANCELADAS!!\r\n");
                 }
             }     
             // si la acción se ha cancelado...
@@ -163,7 +161,7 @@ void TrunkController::task(){
                 // y vuelve al bucle principal para ver si hay más acciones pendientes 
                 // para ello, elimina el timeout de espera.                    
                 timeout = 0;
-                PRINT_LOG("[TrunkCtrl] Acción descartada.\r\n");
+                PRINT_LOG(_logger, "[TrunkCtrl] Acción descartada.\r\n");
             }   
             // libera la memoria del mensaje procesado
             _mail.free(a);
