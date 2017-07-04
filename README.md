@@ -14,6 +14,11 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 04.07.2017 ->commit:"Cambio terminal a PA_9,PA_10"
+- [x] Cambio terminal a PA_9 y PA_10 para hacer pruebas con el módulo HC05 via bluetooth
+- [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
+
+----------------------------------------------------------------------------------------------
 ##### 29.06.2017 ->commit:"Incluyo modo procesamiento dedicado en SerialTerminal"
 - [x] Actualizo SerialTerminal pero mantengo versión (versión 1.0.0-03.06.2017)
 - [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)

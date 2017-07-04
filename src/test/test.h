@@ -3,8 +3,8 @@
 #define __TEST__
 
 #define TEST_CLOUDMANAGER       0
-#define TEST_TRUNKCONTROLLER    0
-#define TEST_SERIALTERMINAL     1
+#define TEST_TRUNKCONTROLLER    1
+#define TEST_SERIALTERMINAL     0
 
 #if TEST_CLOUDMANAGER == 1
 int test_CloudManager();
