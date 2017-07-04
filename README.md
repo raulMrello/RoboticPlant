@@ -14,6 +14,11 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 04.07.2017 ->commit:"Corrijo bug en cálculo de grados"
+- [x] Corrijo error en cálculo de grados en test_trunkcontroller.cpp
+- [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
+
+----------------------------------------------------------------------------------------------
 ##### 04.07.2017 ->commit:"Cambio terminal a PA_9,PA_10"
 - [x] Cambio terminal a PA_9 y PA_10 para hacer pruebas con el módulo HC05 via bluetooth
 - [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)

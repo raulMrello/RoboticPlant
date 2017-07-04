@@ -49,7 +49,7 @@ TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
     // Inicializo motores paso a paso por segmentos
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
-				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP);
+				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP/*, logger*/);
 				PRINT_LOG(_logger, "[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
 			}
 	}
@@ -203,9 +203,9 @@ void TrunkController::exec(int16_t* degrees){
 			c++;
 		}
 	}
-	//PRINT_LOG("[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
+	PRINT_LOG(_logger, "[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
 	buildAction();
-	//PRINT_LOG("[TrunkCtrl] Escribiendo acción en Shifter\r\n");
+	PRINT_LOG(_logger, "[TrunkCtrl] Escribiendo acción en Shifter\r\n");
 	write(_next_action, SHIFTER_OUTPUTS);
 	_tmr.attach(_cb_tmr, _wait_sec);
     _cb_step.call();

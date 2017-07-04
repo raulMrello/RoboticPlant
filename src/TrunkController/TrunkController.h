@@ -59,8 +59,8 @@ public:
      * motores (max. 100Hz).
      * @param gpio_oe	Salida para controla el registro de salida a los pines físicos /OE
      * @param gpio_srclr Salida para controlar el reset del registro de desplazamiento /SRCLR
-     * @param gpio_rclk Salida de reloj del registro de desplazamiento RCLK _/\_
-     * @param gpio_srclk Salida de reloj del registro de acumulaci?n SRCLK _/\_
+     * @param gpio_rclk Salida de reloj del registro de acumulación RCLK _/\_
+     * @param gpio_srclk Salida de reloj del registro de desplazamiento SRCLK _/\_
      * @param gpio_ser Salida para inyectar datos serie
      * @param mode	Modo de funcionamiento
      * @param freq	Velocidad de refresco (max 100Hz)

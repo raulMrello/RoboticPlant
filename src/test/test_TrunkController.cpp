@@ -88,7 +88,7 @@ static void thread_func(){
                 int motor_id = atoi(strtok(0,","));
                 int16_t degree = atoi(strtok(0,","));      
                 tc_action action = {{0,0,0,0,0,0,0,0,0}};
-                action.degrees[(TrunkController::MOTOR_COUNT * section_id) + motor_id] = degree;
+                action.degrees[(TrunkController::SEGMENTS_PER_SECTION * section_id) + motor_id] = degree;
                 PRINT_LOG(&logger, "[TEST] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
                 bool done;
                 do{
