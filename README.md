@@ -14,6 +14,11 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 05.07.2017 ->commit:"Corrijo callback en timer"
+- [x] Corrijo callback del timer ya que no se puede destruir el timer y luego hacer un signal_set.
+- [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
+
+----------------------------------------------------------------------------------------------
 ##### 04.07.2017 ->commit:"Corrijo bug en cálculo de grados"
 - [x] Corrijo error en cálculo de grados en test_trunkcontroller.cpp
 - [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)

@@ -133,6 +133,7 @@ void TrunkController::task(){
         osEvent oe = _mail.get(timeout);
         if(oe.status == osEventMail && oe.value.p != 0){
             Action_t* a = (Action_t*)oe.value.p;
+			_th->signal_clr(0xffff);
             // si la acción se permite, se ejecuta. En caso contrario, se descarta
             if(!cancelled){
                 // inicia la acción que se completa a través de las callbacks de ISR
@@ -241,8 +242,8 @@ void TrunkController::nextAction(){
 	write(_next_action, SHIFTER_OUTPUTS);
      _cb_step.call();
 	if(ready()){
-		_tmr.detach();
         _th->signal_set(TYPE_SIGNAL_ACTION_COMPLETED);
+		_tmr.detach();
 	}
 }
 
