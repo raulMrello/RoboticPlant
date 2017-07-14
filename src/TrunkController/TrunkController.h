@@ -148,7 +148,7 @@ protected:
 	typedef struct {
 		int16_t degrees[SECTION_COUNT][SEGMENTS_PER_SECTION];
 	}Action_t;
-	static const uint8_t MAX_QUEUE_SIZE = 8;	
+	static const uint8_t MAX_QUEUE_SIZE = 16;	
 	Mail< Action_t, MAX_QUEUE_SIZE > _mail;
 
     /** Recursos asociados a la activación sincronizada de los motores paso a paso */

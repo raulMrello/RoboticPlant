@@ -14,6 +14,15 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 14.07.2017 ->commit:"Incluyo tests avanzados"
+- [x] Incluyo tests para realizar movimientos combinados por sección, por segmento y de rotación.
+- [x] Funciona bien con fuente de alimentación de 5V@5A (cada motor 85mA)
+- [ ] Definir un algoritmo de trayectorias IK incluyendo zonas límite para evitar tensar demasiado
+	  los tendones. Estudiar ROS. O definir un conjunto de posibles estados|posiciones y su transición
+	  a otra cualquiera.
+- [ ] Comprar sensores de presencia, led de colores, cámara¿?	 
+
+----------------------------------------------------------------------------------------------
 ##### 05.07.2017 ->commit:"Corrijo callback en timer"
 - [x] Corrijo callback del timer ya que no se puede destruir el timer y luego hacer un signal_set.
 - [ ] Realizar prueba con fuente de alimentación Rpi o de 5V@2A (cada motor 85mA)
