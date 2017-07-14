@@ -114,12 +114,13 @@ static void thread_func(){
                 for(uint8_t i=0;i<6;i++){
                     int motor_id = (TrunkController::SEGMENTS_PER_SECTION * section_id) + (i/2);
                     action.degrees[motor_id] = ((i & 1)==0)? degree : (-degree);                
-                    PRINT_LOG(&logger, "[TEST_M] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
+                    PRINT_LOG(&logger, "[TEST_M] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, action.degrees[motor_id]);
                     bool done;
                     do{
                         done = tc->actionRequested((int16_t*)action.degrees);
                         th->yield();
-                    }while(!done);                        
+                    }while(!done); 
+					action.degrees[motor_id] = 0;
                 }                
                 osEvent oe = th->signal_wait(0, osWaitForever);
                 if(IS_FLAG(SIG_ACTION_COMPLETE)){
@@ -143,12 +144,13 @@ static void thread_func(){
                     for(int j=section_id; j<TrunkController::SECTION_COUNT; j++){
                         int motor_id = (TrunkController::SEGMENTS_PER_SECTION * j) + (i/2);
                         action.degrees[motor_id] = ((i & 1)==0)? degree : (-degree);                
-                        PRINT_LOG(&logger, "[TEST_W] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
+                        PRINT_LOG(&logger, "[TEST_W] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, action.degrees[motor_id]);
                         bool done;
                         do{
                             done = tc->actionRequested((int16_t*)action.degrees);
                             th->yield();
-                        }while(!done);          
+                        }while(!done);         
+						action.degrees[motor_id] = 0;						
                     }                        
                 }                
                 osEvent oe = th->signal_wait(0, osWaitForever);

@@ -14,6 +14,16 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 14.07.2017 ->commit:"Revisar tests avanzados"
+- [x] Después de probar los tests. He corregido algún bug, pero me falta revisar los movimientos combinados 
+	  porque debe haber algún errror. De todas formas, los movimientos son buenos para unos ángulos máximos 
+	  de unos 50 grados.
+- [ ] Definir un algoritmo de trayectorias IK incluyendo zonas límite para evitar tensar demasiado
+	  los tendones. Estudiar ROS. O definir un conjunto de posibles estados|posiciones y su transición
+	  a otra cualquiera.
+- [ ] Comprar sensores de presencia, led de colores, cámara¿?	 
+
+----------------------------------------------------------------------------------------------
 ##### 14.07.2017 ->commit:"Incluyo tests avanzados"
 - [x] Incluyo tests para realizar movimientos combinados por sección, por segmento y de rotación.
 - [x] Funciona bien con fuente de alimentación de 5V@5A (cada motor 85mA)
