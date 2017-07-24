@@ -461,13 +461,13 @@ ARM Macro Assembler    Page 8
 
 Command Line: --debug --xref --cpreproc --diag_suppress=9931 --cpu=Cortex-M3 --
 apcs=interwork --depend=.\build\uvision5\startup_stm32f103xb.d -o.\build\uvisio
-n5\startup_stm32f103xb.o -ID:\_workspace\bluepill_mbedos\RTE -IC:\Keil_v5\ARM\P
-ACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include --pr
-edefine="__UVISION_VERSION SETA 516" --predefine="STM32F10X_MD SETA 1" --cprepr
-oc_opts=-D__ASSERT_MSG,-D__CORTEX_M3,-D__CMSIS_RTOS,-DARM_MATH_CM3,-D__MBED_CMS
-IS_RTOS_CM --list=.\build\startup_stm32f103xb.lst mbed-os/targets/TARGET_STM/TA
-RGET_STM32F1/TARGET_NUCLEO_F103RB/device/TOOLCHAIN_ARM_STD/startup_stm32f103xb.
-S
+n5\startup_stm32f103xb.o -IC:\Users\raulm\workspace\mbed\BluePill_mbedOS\RTE -I
+C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include -IC:\Keil_v5\ARM\CM
+SIS\Include --predefine="__UVISION_VERSION SETA 521" --predefine="STM32F10X_MD 
+SETA 1" --cpreproc_opts=-D__ASSERT_MSG,-D__CORTEX_M3,-D__CMSIS_RTOS,-DARM_MATH_
+CM3,-D__MBED_CMSIS_RTOS_CM --list=.\build\startup_stm32f103xb.lst mbed-os/targe
+ts/TARGET_STM/TARGET_STM32F1/TARGET_NUCLEO_F103RB/device/TOOLCHAIN_ARM_STD/star
+tup_stm32f103xb.S
 
 
 

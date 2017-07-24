@@ -30,6 +30,7 @@
 
 //- PRIVATE -----------------------------------------------------------------------
 
+#define STEP_RESOLUTION     0.087890625f        // (360º)/4096steps
 
 const uint8_t wave_drive[]={0x08, 0x04, 0x02, 0x01, 0x08, 0x04, 0x02, 0x01};
 const uint8_t full_step[] ={0x0c, 0x06, 0x03, 0x09, 0x0c, 0x06, 0x03, 0x09};
@@ -44,6 +45,9 @@ Stepper::Stepper(uint8_t id, Stepper_mode_t mode, Logger* logger){
 
 	_id = id;
 	_steps = 0;
+    _max_deg_limit = MAX_DEG_DEFAULT;
+    _min_deg_limit = MIN_DEG_DEFAULT;
+    _degrees = 0; 
 	_clockwise = true;
 	_step = 0;
 	_sequence = full_step;
@@ -75,13 +79,29 @@ uint8_t Stepper::next(){
 		PRINT_LOG(_logger, "[Stepper %d]  NO MAS PASOS\r\n",_id);
 		return _sequence[_step];
 	}
+    if(isOOL()){
+        _steps = 0;
+        PRINT_LOG(_logger, "[Stepper %d]  OUT OF RANGE\r\n",_id);
+		return _sequence[_step];
+    }
 	_steps--;
-	PRINT_LOG(_logger, "[Stepper %d]  Quedan %d pasos\r\n", _id, _steps);
 	if(_clockwise){
 		_step = (_step < 7)? (_step+1) : 0;
+        _degrees += STEP_RESOLUTION;
 	}
 	else{
 		_step = (_step > 0)? (_step-1) : 7;
+        _degrees -= STEP_RESOLUTION;
 	}
+	PRINT_LOG(_logger, "[Stepper %d] Ang=%f  Quedan %d pasos\r\n", _id, _degrees, _steps);
 	return _sequence[_step];
+}
+
+
+bool Stepper::isOOL(){
+    int16_t ideg = (int16_t)_degrees;
+    if(ideg <= _min_deg_limit || ideg >= _max_deg_limit){
+        return true;
+    }
+    return false;
 }

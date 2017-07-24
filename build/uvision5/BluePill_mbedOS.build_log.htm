@@ -3,30 +3,32 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.16a
-Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Raul Martin, raulMrello, LIC=VGX2Z-J5T0F-T31MI-T3M7U-6CJLI-CIJ5Y
+IDE-Version: µVision V5.21.1.0
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Raul Martin, ORBIS TECNOLOGIA ELECTRICA S.A., LIC=ZB4Y8-35ATQ-43QM6-DNRDV-8AHNP-W3DZ8
  
 Tool Versions:
-Toolchain:       MDK-ARM Standard  Version: 5.16a
+Toolchain:       MDK-ARM Plus  Version: 5.21a
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 (build 20)
-Assembler:       Armasm.exe V5.06 (build 20)
-Linker/Locator:  ArmLink.exe V5.06 (build 20)
-Library Manager: ArmAr.exe V5.06 (build 20)
-Hex Converter:   FromElf.exe V5.06 (build 20)
-CPU DLL:         SARMCM3.DLL V5.16a
-Dialog DLL:      DARMSTM.DLL V1.65.0.0
-Target DLL:      Segger\JL2CM3.dll V2.99.15.2
-Dialog DLL:      TARMSTM.DLL V1.64.0.0
+C Compiler:      Armcc.exe V5.06 update 3 (build 300)
+Assembler:       Armasm.exe V5.06 update 3 (build 300)
+Linker/Locator:  ArmLink.exe V5.06 update 3 (build 300)
+Library Manager: ArmAr.exe V5.06 update 3 (build 300)
+Hex Converter:   FromElf.exe V5.06 update 3 (build 300)
+CPU DLL:         SARMCM3.DLL V5.21a
+Dialog DLL:      DARMSTM.DLL V1.66.0.1
+Target DLL:      Segger\JL2CM3.dll V2.99.23.0
+Dialog DLL:      TARMSTM.DLL V1.65.0.0
  
 <h2>Project:</h2>
-D:\_workspace\bluepill_mbedos\BluePill_mbedOS.uvprojx
-Project File Date:  07/14/2017
+C:\Users\raulm\workspace\mbed\BluePill_mbedOS\BluePill_mbedOS.uvprojx
+Project File Date:  07/24/2017
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 (build 20)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'BluePill_mbedOS'
+compiling Stepper.cpp...
+compiling TrunkController.cpp...
 compiling test_TrunkController.cpp...
 src\test\test_TrunkController.cpp(59): warning:  #236-D: controlling expression is constant
       
@@ -66,18 +68,18 @@ src\test\test_TrunkController.cpp(232): warning:  #236-D: controlling expression
                       
 RINT_LOG(&logger, "[TEST_J] Acciones completadas %d!!!!\r\n", tc->getActionCount()); 
 src\test\test_TrunkController.cpp(28): warning:  #177-D: variable "action_list" was declared but never referenced
-  const tc_action action_list[] =  {    {-30,-30,-30,-30,-30,-30,-30,-30,-30},
+  const tc_action action_list[] =  {	{-30,-30,-30,-30,-30,-30,-30,-30,-30},
 src\test\test_TrunkController.cpp: 14 warnings, 0 errors
 linking...
-Program Size: Code=41384 RO-data=1676 RW-data=260 ZI-data=6596  
+Program Size: Code=42264 RO-data=1676 RW-data=260 ZI-data=6596  
 ".\build\uvision5\BluePill_mbedOS.axf" - 0 Error(s), 14 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
-  D:\_workspace\bluepill_mbedos\RTE
-  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include
+  C:\Users\raulm\workspace\mbed\BluePill_mbedOS\RTE
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:32
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

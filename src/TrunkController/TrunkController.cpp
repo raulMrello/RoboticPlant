@@ -205,7 +205,10 @@ void TrunkController::exec(int16_t* degrees){
 		}
 	}
 	PRINT_LOG(_logger, "[TrunkCtrl] Construyendo acción con %d pasos...\r\n", _max_steps);
-	buildAction();
+	if(!buildAction()){
+        PRINT_LOG(_logger, "[TrunkCtrl] ERROR Stepper fuera de rango\r\n");
+        return;
+    }
 	PRINT_LOG(_logger, "[TrunkCtrl] Escribiendo acción en Shifter\r\n");
 	write(_next_action, SHIFTER_OUTPUTS);
 	_tmr.attach(_cb_tmr, _wait_sec);
@@ -214,12 +217,16 @@ void TrunkController::exec(int16_t* degrees){
 
 
 //------------------------------------------------------------------------------------------------                                    
-void TrunkController::buildAction(bool do_next){
+bool TrunkController::buildAction(bool do_next){
 	uint8_t c = 0;
+    bool result = true;
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
 			if(do_next){
 				_actions[i][j] = _steppers[i][j]->next();
+                if(_steppers[i][j]->isOOL()){
+                    result = false;
+                }
 			}
 			if((c & 1) == 0){
 				_next_action[c/2] &= 0x0f;
@@ -232,13 +239,19 @@ void TrunkController::buildAction(bool do_next){
 			c++;
 		}
 	}
+    return result;
 }
 
 
 //------------------------------------------------------------------------------------------------                                    
 void TrunkController::nextAction(){
 	_max_steps = (_max_steps > 0)? (_max_steps-1) : 0;
-	buildAction(true);
+	if(!buildAction(true)){
+        _max_steps = 0;
+        _th->signal_set(TYPE_SIGNAL_ACTION_COMPLETED);
+		_tmr.detach();
+        return;
+    }
 	write(_next_action, SHIFTER_OUTPUTS);
      _cb_step.call();
 	if(ready()){

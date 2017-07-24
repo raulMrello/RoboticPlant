@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 24.07.2017 ->commit:"Desarrollando IKModel"
+- [x] Comienzo la codificación del módulo IKModel para definir los movimientos que puede realizar el robot.
+- [ ] Realizar fotos de inclinación para facilitar la codificación IK
+- [ ] Comprar sensores de presencia, led de colores, cámara¿?	 
+
+----------------------------------------------------------------------------------------------
 ##### 14.07.2017 ->commit:"Revisar tests avanzados"
 - [x] Después de probar los tests. He corregido algún bug, pero me falta revisar los movimientos combinados 
 	  porque debe haber algún errror. De todas formas, los movimientos son buenos para unos ángulos máximos 

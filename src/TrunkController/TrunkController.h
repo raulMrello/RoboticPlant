@@ -180,10 +180,14 @@ protected:
     /** buildAction()
      *
      * Forma la siguiente acción a enviar al shifter, a partir de las lecturas obtenidas
-     * de los Steppers. Opcionalmente se puede invocar a "next" de cada stepper.
+     * de los Steppers. Opcionalmente se puede invocar a "next" de cada stepper. Si alguno de 
+     * los steppers se sale del rango permitido, se devolverá un "false" ya que la acción no se
+     * puede realizar.
      * @param do_next Flag para invocar o no previamente a "next".
+     * @return True si la acción se puede realizar. False si no se puede realizar (algún stepper fuera
+     *         de rango).
      */
-	void buildAction(bool do_next = false);
+	bool buildAction(bool do_next = false);
     
     /** nextAction()
      *

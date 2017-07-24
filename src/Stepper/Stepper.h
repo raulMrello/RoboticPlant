@@ -58,6 +58,14 @@ public:
      */
 	Stepper(uint8_t id, Stepper_mode_t mode = Stepper::FULL_STEP, Logger* logger = 0);
 
+    /** setRange()
+     *
+     * Establece el rango angular permitido
+     * @param maxdeg Límite positivo
+     * @param mindeg Límite negativo
+     */
+	void setRange(int16_t maxdeg, int16_t mindeg){_max_deg_limit = maxdeg; _min_deg_limit = mindeg;}
+    
     /** ready()
      *
      * Obtiene el estado del driver, indicando si está listo para una nueva operación o si por lo
@@ -89,10 +97,30 @@ public:
      * @return Número de pasos pendientes
      */
 	uint16_t getSteps(){return _steps;}
+    
+    /** getDegrees()
+     *
+     * Obtiene el ángulo de giro actual
+     * @return Número de pasos pendientes
+     */
+	float getDegrees(){return _degrees;}
+    
+    /** isOOL()
+     *
+     * Chequea si está fuera de rango
+     * @return True si está fuera de rango.
+     */
+	bool isOOL();
+    
 protected:
+    static const int16_t MAX_DEG_DEFAULT = 50;
+	static const int16_t MIN_DEG_DEFAULT = -50;
 	uint8_t _id;
 	bool _clockwise;
 	uint16_t _steps;
+    float _degrees;
+    int16_t _max_deg_limit;
+    int16_t _min_deg_limit;
 	Stepper_mode_t _mode;
 	uint8_t _step;
 	const uint8_t * _sequence;
