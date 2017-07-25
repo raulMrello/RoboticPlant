@@ -14,6 +14,13 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 25.07.2017 ->commit:"Completado IKModel"
+- [x] Completo y verifico el modelo IK para realizar los movimientos:
+		Izq, Dcha, Arriba, Abajo, Cabeza arriba, Cabeza abajo, En pie
+- [ ] Verificar con robot real y terminal TEST_I
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
 ##### 24.07.2017 ->commit:"Desarrollando IKModel"
 - [x] Comienzo la codificación del módulo IKModel para definir los movimientos que puede realizar el robot.
 - [ ] Realizar fotos de inclinación para facilitar la codificación IK

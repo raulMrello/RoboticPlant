@@ -42,7 +42,17 @@
  */
 class IKModel {
 public:
-    
+
+    /** Enumeración para calibrar el movimiento a realizar */
+    typedef enum{
+        NONE,
+        VERY_SMALL,
+        SMALL,
+        MEDIUM,
+        HIGH,
+        VERY_HIGH
+    }IKLevel_enum;    
+
     /** IKModel()
      *
      * Constructor.
@@ -61,33 +71,66 @@ public:
     /** goLeft()
      *
      * Inclina hacia la izquierda
+     * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	int16_t* goLeft();
+	int16_t* goLeft(IKLevel_enum level);
 
     /** goRight()
      *
      * Inclina hacia la derecha
+     * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	int16_t* goRight();
+	int16_t* goRight(IKLevel_enum level);
 
     /** goUp()
      *
      * Inclina menos en la última dirección seleccionada
+     * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	int16_t* goUp();
+	int16_t* goUp(IKLevel_enum level);
 
     /** goDown()
      *
      * Inclina más hacia la última dirección seleccionada
+     * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	int16_t* goDown();
+     int16_t* goDown(IKLevel_enum level);
 
+    /** headUp()
+     *
+     * Inclina menos (la cabeza) 
+     * @param level Cantidad (potencia) del movimiento a realizar
+     * @return array de acción con los grados a girar cada motor
+     */
+	int16_t* headUp(IKLevel_enum level);
 
+    /** headDown()
+     *
+     * Inclina más (la cabeza)
+     * @param level Cantidad (potencia) del movimiento a realizar
+     * @return array de acción con los grados a girar cada motor
+     */
+     int16_t* headDown(IKLevel_enum level);    
+     
+    /** update()
+     *
+     * Actualiza la posición. Esta rutina se invoca para notificar que
+     * la acción correspondiente a la posición _next_pos se ha llevado a 
+     * cabo y por lo tanto hay que actualizar _curr_pos.
+     */
+	void update();
+
+    
 protected:
+    /** Resolución del paso de rotación */
+    static const int16_t ORIENTATION_STEP = 5;
+    /** Resolución del paso de inclinación */
+    static const int16_t INCLINATION_STEP = 5;
+
     /** Estructura de datos de una acción tipo */
     typedef struct{
         int16_t degrees[TrunkController::MOTOR_COUNT];
@@ -109,14 +152,16 @@ protected:
         LESS
     }IKCommand_enum;
     
-	Logger* _logger;
-    IKAction_t _action;
-    IKAction_t _curr_pos;
-    IKDirection_enum _direction;
-    IKDirection_enum _last_direction;
-    IKCommand_enum _command;
-    IKCommand_enum _last_command;
+    
+    int16_t     _orientation;
+    int16_t     _inclination[TrunkController::SECTION_COUNT];
+	IKAction_t  _action;
+    IKAction_t  _curr_pos;
+    IKAction_t  _next_pos;
+    Logger*     _logger;
+    
 private:
+    int16_t* computeAction();
 };
 
 #endif

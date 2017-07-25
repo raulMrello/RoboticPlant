@@ -50,6 +50,7 @@ TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
 	for(int i=0;i<SECTION_COUNT;i++){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
 				_steppers[i][j] = new Stepper(j+(SEGMENTS_PER_SECTION*i), Stepper::FULL_STEP/*, logger*/);
+                _steppers[i][j]->setRange(MAX_POSITIVE_MOTOR_ROTATION, MAX_NEGATIVE_MOTOR_ROTATION);
 				PRINT_LOG(_logger, "[TrunkCtrl] Stepper[%d][%d] con id=%d listo\r\n",i,j, (j+(SEGMENTS_PER_SECTION*i)));
 			}
 	}

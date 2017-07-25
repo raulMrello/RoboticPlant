@@ -114,7 +114,7 @@ public:
     
 protected:
     static const int16_t MAX_DEG_DEFAULT = 50;
-	static const int16_t MIN_DEG_DEFAULT = -50;
+	static const int16_t MIN_DEG_DEFAULT = 0;
 	uint8_t _id;
 	bool _clockwise;
 	uint16_t _steps;
