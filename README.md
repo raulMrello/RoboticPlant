@@ -14,6 +14,13 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 01.08.2017 ->commit:"Pruebas de movimiento IK"
+- [x] Corrijo bug en isOOL.
+- [x] Realizando TEST_I
+	* Aumento límites a 90º
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
 ##### 25.07.2017 ->commit:"Completado IKModel"
 - [x] Completo y verifico el modelo IK para realizar los movimientos:
 		Izq, Dcha, Arriba, Abajo, Cabeza arriba, Cabeza abajo, En pie

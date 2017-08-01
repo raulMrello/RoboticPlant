@@ -79,7 +79,7 @@ uint8_t Stepper::next(){
 		PRINT_LOG(_logger, "[Stepper %d]  NO MAS PASOS\r\n",_id);
 		return _sequence[_step];
 	}
-    if(isOOL()){
+    if(isOOL(_clockwise)){
         _steps = 0;
         PRINT_LOG(_logger, "[Stepper %d]  OUT OF RANGE\r\n",_id);
 		return _sequence[_step];
@@ -98,9 +98,18 @@ uint8_t Stepper::next(){
 }
 
 
-bool Stepper::isOOL(){
+bool Stepper::isOOL(bool clockwise, bool checklimit){
     int16_t ideg = (int16_t)_degrees;
-    if(ideg <= _min_deg_limit || ideg >= _max_deg_limit){
+	if(checklimit){
+		if(ideg < _min_deg_limit || ideg > _max_deg_limit){
+			return true;
+		}
+		return false;
+	}
+    if(clockwise && ((ideg + STEP_RESOLUTION) > _max_deg_limit)){
+        return true;
+    }
+    if(!clockwise && ((ideg - STEP_RESOLUTION) < _min_deg_limit)){
         return true;
     }
     return false;

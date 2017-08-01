@@ -49,7 +49,7 @@ public:
     static const uint8_t SECTION_COUNT = 3;
 	static const uint8_t SEGMENTS_PER_SECTION = 3;
 	static const uint8_t MOTOR_COUNT = SECTION_COUNT * SEGMENTS_PER_SECTION;
-    static const int16_t MAX_POSITIVE_MOTOR_ROTATION = 50;
+    static const int16_t MAX_POSITIVE_MOTOR_ROTATION = 90;
     static const int16_t MAX_NEGATIVE_MOTOR_ROTATION = 0;
 
 

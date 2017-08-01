@@ -225,7 +225,7 @@ bool TrunkController::buildAction(bool do_next){
 		for(int j=0;j<SEGMENTS_PER_SECTION;j++){
 			if(do_next){
 				_actions[i][j] = _steppers[i][j]->next();
-                if(_steppers[i][j]->isOOL()){
+                if(_steppers[i][j]->isOOL(true, true)){
                     result = false;
                 }
 			}

@@ -107,13 +107,16 @@ public:
     
     /** isOOL()
      *
-     * Chequea si está fuera de rango
+     * Chequea si está fuera de rango en el siguiente movimiento
+	 * @param clockwise Sentido de giro
+	 * @param checklimit Chequea si está fuera de rango sin tener en cuenta el sentido
+	 *	de giro clockwise
      * @return True si está fuera de rango.
      */
-	bool isOOL();
+	bool isOOL(bool clockwise, bool checklimit = false);
     
 protected:
-    static const int16_t MAX_DEG_DEFAULT = 50;
+    static const int16_t MAX_DEG_DEFAULT = 90;
 	static const int16_t MIN_DEG_DEFAULT = 0;
 	uint8_t _id;
 	bool _clockwise;

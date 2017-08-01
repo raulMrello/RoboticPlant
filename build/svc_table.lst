@@ -72,12 +72,12 @@ ARM Macro Assembler    Page 2
    53 00000004                 END
 Command Line: --debug --xref --cpreproc --diag_suppress=9931 --cpu=Cortex-M3 --
 apcs=interwork --depend=.\build\uvision5\svc_table.d -o.\build\uvision5\svc_tab
-le.o -IC:\Users\raulm\workspace\mbed\BluePill_mbedOS\RTE -IC:\Keil_v5\ARM\PACK\
-Keil\STM32F1xx_DFP\2.1.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include --predef
-ine="__UVISION_VERSION SETA 521" --predefine="STM32F10X_MD SETA 1" --cpreproc_o
-pts=-D__ASSERT_MSG,-D__CORTEX_M3,-D__CMSIS_RTOS,-DARM_MATH_CM3,-D__MBED_CMSIS_R
-TOS_CM --list=.\build\svc_table.lst mbed-os/rtos/rtx/TARGET_CORTEX_M/TARGET_M3/
-TOOLCHAIN_ARM/SVC_Table.S
+le.o -ID:\_workspace\bluepill_mbedos\RTE -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_D
+FP\2.0.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__UVISION_V
+ERSION SETA 516" --predefine="STM32F10X_MD SETA 1" --cpreproc_opts=-D__ASSERT_M
+SG,-D__CORTEX_M3,-D__CMSIS_RTOS,-DARM_MATH_CM3,-D__MBED_CMSIS_RTOS_CM --list=.\
+build\svc_table.lst mbed-os/rtos/rtx/TARGET_CORTEX_M/TARGET_M3/TOOLCHAIN_ARM/SV
+C_Table.S
 
 
 
