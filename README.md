@@ -14,6 +14,13 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 04.08.2017 ->commit:"Mejorar rotación"
+- [x] Durante el giro sobre su eje (movimientos L,R) veo que es necesario iniciar el movimiento del
+	  segundo motor sin descontar el primero, hasta que la proporción sea 2:3. En ese momento desharé
+	  los movimientos del motor 1 para que el giro sea más fiel. De todas formas hay que hacer pruebas
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
 ##### 01.08.2017 ->commit:"Pruebas de movimiento IK"
 - [x] Corrijo bug en isOOL.
 - [x] Realizando TEST_I
