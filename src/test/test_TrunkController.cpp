@@ -4,8 +4,10 @@
 #include "mbed.h"
 #include "Logger.h"
 #include "TrunkController.h"
-#include "IKModel.h"
+#include "IK9.h"
 
+//------------------------------------------------------------------------------------------------                                    
+#define SIMULATE_MOVEMENT		1
 //------------------------------------------------------------------------------------------------                                    
 #define SIG_ACTION_COMPLETE     (1 << 0)
 #define SIG_COMMAND_RECEIVED    (1 << 1)
@@ -15,7 +17,7 @@
 #define ACTION_COUNT            5
 //------------------------------------------------------------------------------------------------                                    
 static TrunkController *tc;
-static IKModel *ik;
+static IK9 *ik;
 //------------------------------------------------------------------------------------------------                                    
 static SerialTerminal logger(PA_9, PA_10);
 char cmdbuf[256];
@@ -56,13 +58,18 @@ static void thread_func(){
     PRINT_LOG(&logger, "[TEST] Iniciando test_TrunkController!\r\n");
 
 	/** Configura el robot */
-	tc = new TrunkController(PB_12, PB_11, PB_14, PB_13, PB_15, Stepper::FULL_STEP, 100, &logger);
+	bool simulate = false;
+	#if SIMULATE_MOVEMENT==1
+	simulate = true;
+	#warning "MOVIMIENTO SIMULADO"
+	#endif
+	tc = new TrunkController(PB_12, PB_11, PB_14, PB_13, PB_15, Stepper::FULL_STEP, simulate, 100, &logger);
     // instala callback de notificación cuando no queden más operaciones pendientes
     tc->notifyReady(callback(tc_action_complete));   
     action_idx = 0;
     
     /** Configura el modelo kinemático */
-    ik = new IKModel(&logger);
+    ik = new IK9(&logger);
     
     for(;;){
         PRINT_LOG(&logger, "[TEST] Esperando comandos...\r\n");

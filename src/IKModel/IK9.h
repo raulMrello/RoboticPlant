@@ -19,19 +19,18 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
     
-    @file          IKModel.h
-    @purpose       Librería con diversos modelos IK para el TrunkRobot
+    @file          IK9.h
+    @purpose       Especialización IKModel con 9 grados de libertad 3sections x 3segments
     @version       v1.0
     @date          Jul 2017
     @author        @raulMrello
 */
 
-#ifndef __IKMODEL_H
-#define __IKMODEL_H
+#ifndef __IK9_H
+#define __IK9_H
 
 #include "mbed.h"
-#include "TrunkController.h"
-#include "Logger.h"
+#include "IKModel.h"
 
 /**
  * @author raulMrello
@@ -40,18 +39,8 @@
  * <b>IKModel</b> Clase que proporciona una serie de modelos IK para la generación de movimiento
  * del TrunkRobot.
  */
-class IKModel {
+class IK9 : public IKModel {
 public:
-
-    /** Enumeración para calibrar el movimiento a realizar */
-    typedef enum{
-        NONE,
-        VERY_SMALL,
-        SMALL,
-        MEDIUM,
-        HIGH,
-        VERY_HIGH
-    }IKLevel_enum;    
 
     /** IKModel()
      *
@@ -59,14 +48,14 @@ public:
      * Configura la máquina de estados del modelo IK por defecto
      * @param logger Objeto logger
      */
-	IKModel(Logger *logger = 0);
+	IK9(Logger *logger = 0) : IKModel(logger){}
 
     /** goStand()
      *
      * Deshace cualquier inclinación para volver al punto inicial
      * @return array de acción con los grados a girar cada motor
      */
-	virtual int16_t* goStand() = 0;
+	virtual int16_t* goStand();
 
     /** goLeft()
      *
@@ -74,7 +63,7 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	virtual int16_t* goLeft(IKLevel_enum level) = 0;
+	virtual int16_t* goLeft(IKLevel_enum level);
 
     /** goRight()
      *
@@ -82,7 +71,7 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	virtual int16_t* goRight(IKLevel_enum level) = 0;
+	virtual int16_t* goRight(IKLevel_enum level);
 
     /** goUp()
      *
@@ -90,7 +79,7 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	virtual int16_t* goUp(IKLevel_enum level) = 0;
+	virtual int16_t* goUp(IKLevel_enum level);
 
     /** goDown()
      *
@@ -98,7 +87,7 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-     virtual int16_t* goDown(IKLevel_enum level) = 0;
+     virtual int16_t* goDown(IKLevel_enum level);
 
     /** headUp()
      *
@@ -106,7 +95,7 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-	virtual int16_t* headUp(IKLevel_enum level) = 0;
+	virtual int16_t* headUp(IKLevel_enum level);
 
     /** headDown()
      *
@@ -114,54 +103,9 @@ public:
      * @param level Cantidad (potencia) del movimiento a realizar
      * @return array de acción con los grados a girar cada motor
      */
-     virtual int16_t* headDown(IKLevel_enum level) = 0;    
-     
-    /** update()
-     *
-     * Actualiza la posición. Esta rutina se invoca para notificar que
-     * la acción correspondiente a la posición _next_pos se ha llevado a 
-     * cabo y por lo tanto hay que actualizar _curr_pos.
-     */
-	void update();
-
-    
-protected:
-    /** Resolución del paso de rotación */
-    static const int16_t ORIENTATION_STEP = 5;
-    /** Resolución del paso de inclinación */
-    static const int16_t INCLINATION_STEP = 5;
-
-    /** Estructura de datos de una acción tipo */
-    typedef struct{
-        int16_t degrees[TrunkController::MOTOR_COUNT];
-    }IKAction_t;
-    
-    /** Lista de comandos hacia los que puede dirigirse */
-    typedef enum{
-        STAND,
-        AHEAD,
-        LEFT,
-        RIGHT,
-        BACK
-    }IKDirection_enum;
-    
-    /** Lista de comandos para generar movimientos */
-    typedef enum{
-        STOP,
-        MORE,
-        LESS
-    }IKCommand_enum;
-    
-    
-    int16_t     _orientation;
-    int16_t     _inclination[TrunkController::SECTION_COUNT];
-	IKAction_t  _action;
-    IKAction_t  _curr_pos;
-    IKAction_t  _next_pos;
-    Logger*     _logger;
-
-    int16_t* computeAction();
-	void oi2section(int16_t odeg, int16_t ideg, int16_t* section);
+     virtual int16_t* headDown(IKLevel_enum level);    
+         
+protected:    
 };
 
 #endif

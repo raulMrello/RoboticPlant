@@ -14,6 +14,13 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 04.08.2017 ->commit:"Nuevos modelos IK9 e IK3"
+- [x] Modifico IKModel para que sea un interfaz común e implemento IK9 e IK3 como clases derivadas
+	  de IKModel para realizar diferentes implementaciones.
+- [ ] Definiendo movimiento de rotación	  
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
 ##### 04.08.2017 ->commit:"Mejorar rotación"
 - [x] Durante el giro sobre su eje (movimientos L,R) veo que es necesario iniciar el movimiento del
 	  segundo motor sin descontar el primero, hasta que la proporción sea 2:3. En ese momento desharé

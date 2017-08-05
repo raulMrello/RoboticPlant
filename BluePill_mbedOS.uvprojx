@@ -631,6 +631,26 @@
               <FileType>8</FileType>
               <FilePath>.\src\IKModel\IKModel.cpp</FilePath>
             </File>
+            <File>
+              <FileName>IK3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\IKModel\IK3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IK3.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\IKModel\IK3.h</FilePath>
+            </File>
+            <File>
+              <FileName>IK9.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\IKModel\IK9.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IK9.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\IKModel\IK9.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

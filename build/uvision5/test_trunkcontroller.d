@@ -156,4 +156,5 @@
 .\build\uvision5\test_trunkcontroller.o: .\src\TrunkController\TrunkController.h
 .\build\uvision5\test_trunkcontroller.o: .\src\Shifter\Shifter.h
 .\build\uvision5\test_trunkcontroller.o: .\src\Stepper\Stepper.h
+.\build\uvision5\test_trunkcontroller.o: .\src\IKModel\IK9.h
 .\build\uvision5\test_trunkcontroller.o: .\src\IKModel\IKModel.h

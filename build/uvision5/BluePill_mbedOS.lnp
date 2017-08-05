@@ -15,6 +15,8 @@
 ".\build\uvision5\stepper.o"
 ".\build\uvision5\trunkcontroller.o"
 ".\build\uvision5\ikmodel.o"
+".\build\uvision5\ik3.o"
+".\build\uvision5\ik9.o"
 ".\build\uvision5\hal_cm.o"
 ".\build\uvision5\rt_cmsis.o"
 ".\build\uvision5\rt_event.o"

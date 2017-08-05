@@ -63,6 +63,15 @@ public:
      */
 	void write(uint8_t* data, uint8_t count);
 
+    /** simulate()
+     *
+     * Simula un envío de datos. Útil para realizar pruebas funcionales sin enviar movimientos a los motores y poder verificar
+	 * rangos máximos sin que sufra la estructura si hay algún error de implementación.
+     * @param data	Stream de datos para actualizar las salidas del registro a un valor deseado.
+     * @param count Número de bits del registro a controlar
+     */
+	void simulate(uint8_t* data, uint8_t count){}
+		
 protected:
 	DigitalOut* _out_oe;
 	DigitalOut* _out_srclr;

@@ -40,7 +40,7 @@ static void default_cb(){}
 TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
 								 PinName gpio_rclk, PinName gpio_srclk,
 								 PinName gpio_ser, Stepper::Stepper_mode_t mode,
-                                 uint8_t freq, Logger *logger)
+                                 bool simulated, uint8_t freq, Logger *logger)
 								: Shifter(gpio_oe, gpio_srclr, gpio_rclk, gpio_srclk, gpio_ser, logger){
     // Instalo serial logger
     _logger = logger;
@@ -61,6 +61,9 @@ TrunkController::TrunkController(PinName gpio_oe, PinName gpio_srclr,
     
     // Establezco periodo de refresco de los motores (max 100Hz)
     _wait_sec = 1.0f/freq;
+	
+	// Inicializo flag de simulación para forzar o no movimiento
+	_simulated = simulated;
 	
     // Inicializo callback para la ejecución temporizada
 	_tmr.detach();
@@ -100,6 +103,7 @@ void TrunkController::notifyStep(Callback<void()> cb_step){
 //------------------------------------------------------------------------------------------------                                    
 bool TrunkController::actionRequested(int16_t* degrees){
     Action_t* a = (Action_t*)_mail.alloc();
+
     if(!a){
         return false;
     }
@@ -210,8 +214,14 @@ void TrunkController::exec(int16_t* degrees){
         PRINT_LOG(_logger, "[TrunkCtrl] ERROR Stepper fuera de rango\r\n");
         return;
     }
-	PRINT_LOG(_logger, "[TrunkCtrl] Escribiendo acción en Shifter\r\n");
-	write(_next_action, SHIFTER_OUTPUTS);
+	if(!_simulated){
+		PRINT_LOG(_logger, "[TrunkCtrl] Escribiendo acción en Shifter\r\n");
+		write(_next_action, SHIFTER_OUTPUTS);
+	}
+	else{
+		PRINT_LOG(_logger, "[TrunkCtrl] Simulando acción en Shifter\r\n");
+		simulate(_next_action, SHIFTER_OUTPUTS);
+	}
 	_tmr.attach(_cb_tmr, _wait_sec);
     _cb_step.call();
 }
@@ -253,7 +263,12 @@ void TrunkController::nextAction(){
 		_tmr.detach();
         return;
     }
-	write(_next_action, SHIFTER_OUTPUTS);
+	if(!_simulated){
+		write(_next_action, SHIFTER_OUTPUTS);
+	}
+	else{
+		simulate(_next_action, SHIFTER_OUTPUTS);
+	}
      _cb_step.call();
 	if(ready()){
         _th->signal_set(TYPE_SIGNAL_ACTION_COMPLETED);

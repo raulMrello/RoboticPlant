@@ -65,12 +65,13 @@ public:
      * @param gpio_srclk Salida de reloj del registro de desplazamiento SRCLK _/\_
      * @param gpio_ser Salida para inyectar datos serie
      * @param mode	Modo de funcionamiento
+	 * @param simulated Flag para indicar si el movimiento es una simulación o es real. Por defecto es real.
      * @param freq	Velocidad de refresco (max 100Hz)
      * @param logger Objeto logger
      */
 	TrunkController(PinName gpio_oe, PinName gpio_srclr, PinName gpio_rclk,
 					PinName gpio_srclk, PinName gpio_ser,
-					Stepper::Stepper_mode_t mode, uint8_t freq = 100, Logger *logger = 0);
+					Stepper::Stepper_mode_t mode, bool simulated = false, uint8_t freq = 100, Logger *logger = 0);
 
     /** ~TrunkController()
      *
@@ -159,6 +160,7 @@ protected:
     uint8_t _next_action[ACTION_ARRAY_LENGTH];
 	uint16_t _max_steps;
     uint32_t _action_count;
+	bool _simulated;
 	float _wait_sec;
 	Callback<void()> _cb_ready;
     Callback<void()> _cb_step;
