@@ -14,7 +14,14 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
-##### 04.08.2017 ->commit:"Nuevos modelos IK9 e IK3"
+##### 06.08.2017 ->commit:"Validados modelos IK9 e IK3"
+- [x] Corrijo bug en movimiento oi2section en IKModel
+- [x] Movimiento de rotación verificado	  
+- [ ] Definir test de movimientos encadenados
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
+##### 05.08.2017 ->commit:"Nuevos modelos IK9 e IK3"
 - [x] Modifico IKModel para que sea un interfaz común e implemento IK9 e IK3 como clases derivadas
 	  de IKModel para realizar diferentes implementaciones.
 - [ ] Definiendo movimiento de rotación	  

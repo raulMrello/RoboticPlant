@@ -93,37 +93,38 @@ void IKModel::oi2section(int16_t odeg, int16_t ideg, int16_t* section){
     // en función de la orientación odeg.
     
     // Calculo proporción de la componente A
-    if(odeg >= 0 && odeg < 100){
-        a_comp = ((0.2f * ((float)(100-odeg)))/100)+0.8f;
+    if(odeg >=300 || odeg < 60){
+        a_comp = 1.0f;
     }
-	else if(odeg >= 100 && odeg < 120){
-        a_comp = (0.8f * ((float)(120-odeg)))/20;
+	if(odeg >= 60 && odeg < 120){
+        a_comp = ((float)(120-odeg))/60;
     }
-    else if(odeg >= 240){
-        a_comp = ((float)(odeg-240))/120;
-    }
+	else if(odeg >= 240 && odeg < 300){
+        a_comp = ((float)(odeg-240))/60;
+    }    
     
     // Calculo proporción de la componente B
-    if(odeg >= 120 && odeg < 220){
-        b_comp = ((0.2f * ((float)(220-odeg)))/100)+0.8f; 
+    if(odeg >=60 && odeg < 180){
+        b_comp = 1.0f;
     }
-    else if(odeg >= 220 && odeg < 240){
-        b_comp = (0.8f * ((float)(240-odeg)))/20;
+	if(odeg >= 180 && odeg < 240){
+        b_comp = ((float)(240-odeg))/60;
     }
-    else if(odeg <= 120){
-        b_comp = ((float)odeg)/120;
-    }
-    
+	else if(odeg < 60){
+        b_comp = ((float)(odeg))/60;
+    }    
+
     // Calculo proporción de la componente C
-    if(odeg >= 240 && odeg < 340){
-        c_comp = ((0.2f * ((float)(340-odeg)))/100)+0.8f;
+    if(odeg >=180 && odeg < 300){
+        c_comp = 1.0f;
     }
-    else if(odeg >= 340){
-        c_comp = (0.8f * ((float)(360-odeg)))/20;
+	if(odeg >= 300){
+        c_comp = ((float)(360-odeg))/60;
     }
-    else if(odeg >= 120 && odeg <= 240){
-        c_comp = ((float)(odeg-120))/120;
-    }
+	else if(odeg >= 120 && odeg < 180){
+        c_comp = ((float)(odeg-120))/60;
+    }    
+ 
     
     // En segundo lugar, multiplico la inclinación a las proporciones anteriores
     a_comp *= ideg;

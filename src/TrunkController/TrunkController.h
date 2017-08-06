@@ -51,7 +51,7 @@ public:
 	static const uint8_t MOTOR_COUNT = SECTION_COUNT * SEGMENTS_PER_SECTION;
     static const int16_t MAX_POSITIVE_MOTOR_ROTATION = 90;
     static const int16_t MAX_NEGATIVE_MOTOR_ROTATION = 0;
-
+	static const uint8_t MAX_QUEUED_ACTIONS = 16;
 
     /** TrunkController()
      *
@@ -151,8 +151,7 @@ protected:
 	typedef struct {
 		int16_t degrees[SECTION_COUNT][SEGMENTS_PER_SECTION];
 	}Action_t;
-	static const uint8_t MAX_QUEUE_SIZE = 16;	
-	Mail< Action_t, MAX_QUEUE_SIZE > _mail;
+	Mail< Action_t, MAX_QUEUED_ACTIONS > _mail;
 
     /** Recursos asociados a la activación sincronizada de los motores paso a paso */
 	Stepper* _steppers[SECTION_COUNT][SEGMENTS_PER_SECTION];
