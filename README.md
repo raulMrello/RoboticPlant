@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 06.08.2017 ->commit:"Incluyo tests J con movimientos acumulados"
+- [x] Incluyo tests con varios movimientos enlazados
+- [ ] En los movimientos enlazados alguna vez he tenido HardFault. Hay que revisar a que se debe
+- [ ] Definir cómo será el juego y la cabeza a colocar. Ya tengo sensores de presencia.
+
+----------------------------------------------------------------------------------------------
 ##### 06.08.2017 ->commit:"Validados modelos IK9 e IK3"
 - [x] Corrijo bug en movimiento oi2section en IKModel
 - [x] Movimiento de rotación verificado	  

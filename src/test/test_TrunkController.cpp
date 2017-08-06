@@ -80,7 +80,11 @@ static void thread_func(){
             // descarta los datos recibidos
             logger.recv(0, 0);
         }
-        
+		
+		if(IS_FLAG(SIG_ACTION_COMPLETE)){
+			PRINT_LOG(&logger, "[TEST_J] Acciones completadas %d!!!!\r\n", tc->getActionCount()); 
+			tc->clearActionCount();
+		}           
         
         if(IS_FLAG(SIG_COMMAND_RECEIVED)){        
             cmdsize = logger.recv(cmdbuf, 256);
@@ -153,7 +157,67 @@ static void thread_func(){
                         tc->clearActionCount();
                     }        
                 }                    
-            }   
+            } 
+			
+			if(strncmp(cmdbuf,"J", 1)==0){
+                char* token = strtok(cmdbuf,",");                
+                char* type = strtok(0,",");                
+                char* level = strtok(0,",");
+                PRINT_LOG(&logger, "[TEST_J] Move %s Power %s\r\n", type, level);
+                IKModel::IKLevel_enum iklevel = IKModel::NONE;
+                if(level[0] == 'N'){
+                    iklevel = IKModel::NONE;
+                }
+                else if(level[0] == 'V' && level[1] == 'S'){
+                    iklevel = IKModel::VERY_SMALL;
+                }
+                else if(level[0] == 'S'){
+                    iklevel = IKModel::SMALL;
+                }
+                else if(level[0] == 'M'){
+                    iklevel = IKModel::MEDIUM;
+                }
+                else if(level[0] == 'H'){
+                    iklevel = IKModel::HIGH;
+                }
+                else if(level[0] == 'V' && level[1] == 'H'){
+                    iklevel = IKModel::VERY_HIGH;
+                }
+                
+                int16_t* action = 0;
+                if(type[0] == 'S'){
+                    action = ik->goStand();
+                }
+                else if(type[0] == 'L'){
+                    action = ik->goLeft(iklevel);
+                }
+                else if(type[0] == 'R'){
+                    action = ik->goRight(iklevel);
+                }
+                else if(type[0] == 'U'){
+                    action = ik->goUp(iklevel);
+                }
+                else if(type[0] == 'D'){
+                    action = ik->goDown(iklevel);
+                }
+                else if(type[0] == 'H' && type[1] == 'U'){
+                    action = ik->headUp(iklevel);
+                }
+                else if(type[0] == 'H' && type[1] == 'D'){
+                    action = ik->headDown(iklevel);
+                }
+                if(!action){
+                    PRINT_LOG(&logger, "[TEST_J] ERROR. No hay acciones\r\n"); 
+                }
+                else{                
+                    if(!tc->actionRequested(action)){
+						PRINT_LOG(&logger, "[TEST_J] ERROR. action = NULL\r\n");
+					}    
+					else{
+						ik->update();
+					}
+                }                    
+            } 			
 
             /** TEST_T: Realiza movimientos simples por motor
                 Test:  "T,Seccion,Motor,Grados"
