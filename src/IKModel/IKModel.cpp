@@ -67,6 +67,23 @@ void IKModel::update(){
     
 }
 
+
+//------------------------------------------------------------------------------------------------                                    
+void IKModel::restart(){
+    // situo en la posición inicial (totalmente erguido)
+    _curr_pos = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
+    _next_pos = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
+    _action   = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
+    _curr_orientation = 0;
+	_next_orientation = 0;
+	_curr_inclination = 0;
+	_next_inclination = 0;
+    for(uint8_t i=0;i<TrunkController::SECTION_COUNT;i++){
+        _inclination[i] = 0;
+    }    
+	PRINT_LOG(_logger, "[IKModel] Restarted\r\n");
+}	
+
 //------------------------------------------------------------------------------------------------                                    
 int16_t* IKModel::computeAction(){    
     // Calculo disparidad de la posición deseada con la actual

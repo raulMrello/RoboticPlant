@@ -14,6 +14,11 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 11.08.2017 ->commit:"Modo 3PIR con terminal remoto"
+- [x] Incluyo terminal remoto con comandos T para recalibrar
+- [ ] Definir otros módulos y juegos.
+
+----------------------------------------------------------------------------------------------
 ##### 11.08.2017 ->commit:"Terminado modo seguimiento 3PIR"
 - [x] Incluyo función de posicionamiento
 - [x] Dejo activado simulación de presencia con 3PIR

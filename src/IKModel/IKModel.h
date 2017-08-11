@@ -139,6 +139,12 @@ public:
      */
 	void update();
 	
+    /** restart()
+     *
+     * Reinicia los valores a la posición por defecto
+     */
+	void restart();
+	
     /** getOrientation()
      *
      * Obtiene la orientación actual

@@ -97,11 +97,11 @@ static void thread_func(){
 	int timeout = osWaitForever;
     
     for(;;){
-		int16_t* action;
-        PRINT_LOG(&logger, "[TEST] Esperando eventos de proximidad...\r\n");
+		PRINT_LOG(&logger, "[TEST] Esperando eventos de proximidad...\r\n");
         osEvent oe = th->signal_wait(0, timeout);
 		
 		if(oe.status == osEventTimeout){
+			int16_t* action;        
 			PRINT_LOG(&logger, "[TEST] STAND!\r\n");
 			orientation = 0;
 			inclination = 0;
@@ -196,7 +196,26 @@ static void thread_func(){
 		if(IS_FLAG(SIG_ACTION_COMPLETE)){
 			PRINT_LOG(&logger, "[TEST_J] Acciones completadas %d!!!!\r\n", tc->getActionCount()); 
 			tc->clearActionCount();
-		}                          
+		}   
+
+		if(IS_FLAG(SIG_COMMAND_RECEIVED)){        
+			cmdsize = logger.recv(cmdbuf, 256);
+			/** TEST_T: Realiza movimientos simples por motor
+                Test:  "T,Seccion,Motor,Grados"
+                  ej:   "T,0,2,45" -> Mover 45º (clockwise) el motor 2 de la sección 0
+                  ej:   "T,1,0,-20"  -> Mover 30º (anti-clockwise) el motor 0 de la sección 1
+             */
+            if(strncmp(cmdbuf,"T", 1)==0){
+                char* token = strtok(cmdbuf,",");                
+                int section_id = atoi(strtok(0,","));                
+                int motor_id = atoi(strtok(0,","));
+                int16_t degree = atoi(strtok(0,","));      
+                tc_action action = {{0,0,0,0,0,0,0,0,0}};
+                action.degrees[(TrunkController::SEGMENTS_PER_SECTION * section_id) + motor_id] = degree;
+                PRINT_LOG(&logger, "[TEST_T] Seccion[%d] Motor[%d] Angulo[%d]\r\n", section_id, motor_id, degree);
+				tc->actionRequested((int16_t*)action.degrees);                                
+            } 			
+		}        		
     }
 }
 

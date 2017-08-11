@@ -7,9 +7,11 @@ int main() {
 }
 
 void mbed_die(void){
-    volatile int i=0;
-    i++;
+    NVIC_SystemReset();
 }
 
+void HardFault_Handler(){
+    NVIC_SystemReset();
+}
 
 
