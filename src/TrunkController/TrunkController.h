@@ -49,7 +49,7 @@ public:
     static const uint8_t SECTION_COUNT = 3;
 	static const uint8_t SEGMENTS_PER_SECTION = 3;
 	static const uint8_t MOTOR_COUNT = SECTION_COUNT * SEGMENTS_PER_SECTION;
-    static const int16_t MAX_POSITIVE_MOTOR_ROTATION = 90;
+    static const int16_t MAX_POSITIVE_MOTOR_ROTATION = 60;
     static const int16_t MAX_NEGATIVE_MOTOR_ROTATION = 0;
 	static const uint8_t MAX_QUEUED_ACTIONS = 16;
 
@@ -137,7 +137,8 @@ public:
 	 *	Permite borrar (reiniciar) el número de acciones ejecutadas.
      */
 	void clearActionCount(){ _action_count=0;}
-    
+
+	
 protected:
 	static const uint8_t GPIO_PER_MOTOR = 4;
 	static const uint8_t ACTION_BITS_COUNT = 8;

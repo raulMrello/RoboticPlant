@@ -41,7 +41,10 @@ IKModel::IKModel(Logger* logger){
     _curr_pos = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
     _next_pos = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
     _action   = (IKAction_t){{0,0,0,0,0,0,0,0,0}};
-    _orientation = 0;
+    _curr_orientation = 0;
+	_next_orientation = 0;
+	_curr_inclination = 0;
+	_next_inclination = 0;
     for(uint8_t i=0;i<TrunkController::SECTION_COUNT;i++){
         _inclination[i] = 0;
     }    
@@ -53,10 +56,14 @@ void IKModel::update(){
     for(uint8_t i=0;i<TrunkController::MOTOR_COUNT;i++){
         _curr_pos.degrees[i] = _next_pos.degrees[i];
     }    
-    PRINT_LOG(_logger, "[IKModel] Position: [%d,%d,%d] [%d,%d,%d] [%d,%d,%d]\r\n",
+	_curr_orientation = _next_orientation;
+	_curr_inclination = _next_inclination;
+	PRINT_LOG(_logger, "[IKModel] Position: [%d,%d,%d] [%d,%d,%d] [%d,%d,%d]\r\n",
                 _curr_pos.degrees[0],_curr_pos.degrees[1],_curr_pos.degrees[2],
                 _curr_pos.degrees[3],_curr_pos.degrees[4],_curr_pos.degrees[5],
                 _curr_pos.degrees[6],_curr_pos.degrees[7],_curr_pos.degrees[8]);
+    PRINT_LOG(_logger, "[IKModel] Orientation=[%d] Inclination=[%d]\r\n",
+                _curr_orientation, _curr_inclination);
     
 }
 

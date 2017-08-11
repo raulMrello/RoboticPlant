@@ -50,7 +50,10 @@ public:
         SMALL,
         MEDIUM,
         HIGH,
-        VERY_HIGH
+        VERY_HIGH,
+		ULTRA_HIGH,
+		EXTREME,
+		DEGx90,
     }IKLevel_enum;    
 
     /** IKModel()
@@ -115,7 +118,19 @@ public:
      * @return array de acción con los grados a girar cada motor
      */
      virtual int16_t* headDown(IKLevel_enum level) = 0;    
-     
+
+	/** setPosition
+     *
+	 *	Fuerza a colocar el efector en una posición concreta según la orientación e inclinación. Como máximo
+	 *	podrá hacer movimientos dentro de un sector AB, BC, CA, por lo que para hacer un movimiento en varios
+	 *	sectores, habrá que invocar a la función varias veces, hasta que el resultado sea True (posición alcanzada)
+	 *	@param orientation Orientación 0..359º
+	 *	@param inclination Inclinación 0.. MAX_RANGE
+	 *	@param action Puntero a la acción a realizar
+	 *	@return True si la posición se ha alcanzado.
+     */
+	virtual bool setPosition(int16_t orientation, int16_t inclination, int16_t **action) = 0;
+	
     /** update()
      *
      * Actualiza la posición. Esta rutina se invoca para notificar que
@@ -123,8 +138,23 @@ public:
      * cabo y por lo tanto hay que actualizar _curr_pos.
      */
 	void update();
+	
+    /** getOrientation()
+     *
+     * Obtiene la orientación actual
+	 *	@return Orientación actual
+     */
+	int16_t getOrientation(){return _curr_orientation;}
+	
+    /** getInclination()
+     *
+     * Obtiene la inclinación de la sección indicada
+	 *	@param sect Sección
+	 *	@return incl Inclinación de la sección
+     */
+	int16_t getInclination(uint8_t sect){return _inclination[sect];}  
 
-    
+	
 protected:
     /** Resolución del paso de rotación */
     static const int16_t ORIENTATION_STEP = 5;
@@ -153,8 +183,11 @@ protected:
     }IKCommand_enum;
     
     
-    int16_t     _orientation;
-    int16_t     _inclination[TrunkController::SECTION_COUNT];
+    int16_t     _curr_orientation;
+	int16_t     _next_orientation;
+    int16_t     _curr_inclination;
+    int16_t     _next_inclination;
+	int16_t     _inclination[TrunkController::SECTION_COUNT];
 	IKAction_t  _action;
     IKAction_t  _curr_pos;
     IKAction_t  _next_pos;

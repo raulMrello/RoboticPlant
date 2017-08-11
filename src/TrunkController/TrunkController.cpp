@@ -275,4 +275,3 @@ void TrunkController::nextAction(){
 		_tmr.detach();
 	}
 }
-

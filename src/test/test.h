@@ -3,8 +3,9 @@
 #define __TEST__
 
 #define TEST_CLOUDMANAGER       0
-#define TEST_TRUNKCONTROLLER    1
+#define TEST_TRUNKCONTROLLER    0
 #define TEST_SERIALTERMINAL     0
+#define TEST_PROXIMITY     		1
 
 #if TEST_CLOUDMANAGER == 1
 int test_CloudManager();
@@ -19,6 +20,11 @@ int test_TrunkController();
 #if TEST_SERIALTERMINAL == 1
 int test_SerialTerminal();
 #define DO_TEST   test_SerialTerminal
+#endif
+
+#if TEST_PROXIMITY == 1
+int test_Proximity();
+#define DO_TEST   test_Proximity
 #endif
 
 #endif

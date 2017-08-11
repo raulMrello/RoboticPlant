@@ -33,7 +33,7 @@
 #include "mbed.h"
 #include "SerialTerminal.h"
 
-#define PRINT_LOG(obj, format, ...)     if(obj){(obj)->printf(format, ##__VA_ARGS__);}
+#define PRINT_LOG(obj, format, ...)     if((void*)obj){(obj)->printf(format, ##__VA_ARGS__);}
 typedef class SerialTerminal Logger;
 
 #endif

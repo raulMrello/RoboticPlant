@@ -104,6 +104,18 @@ public:
      * @return array de acción con los grados a girar cada motor
      */
      virtual int16_t* headDown(IKLevel_enum level);    
+
+	/** setPosition
+     *
+	 *	Fuerza a colocar el efector en una posición concreta según la orientación e inclinación. Como máximo
+	 *	podrá hacer movimientos dentro de un sector AB, BC, CA, por lo que para hacer un movimiento en varios
+	 *	sectores, habrá que invocar a la función varias veces, hasta que el resultado sea True (posición alcanzada)
+	 *	@param orientation Orientación 0..359º
+	 *	@param inclination Inclinación 0.. MAX_RANGE
+	 *	@param action Puntero a la acción a realizar
+	 *	@return True si la posición se ha alcanzado.
+     */
+	virtual bool setPosition(int16_t orientation, int16_t inclination, int16_t **action);
          
 protected:    
 };

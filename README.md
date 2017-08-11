@@ -14,6 +14,12 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 11.08.2017 ->commit:"Terminado modo seguimiento 3PIR"
+- [x] Incluyo función de posicionamiento
+- [x] Dejo activado simulación de presencia con 3PIR
+- [ ] Definir otros módulos y juegos.
+
+----------------------------------------------------------------------------------------------
 ##### 06.08.2017 ->commit:"Incluyo tests J con movimientos acumulados"
 - [x] Incluyo tests con varios movimientos enlazados
 - [ ] En los movimientos enlazados alguna vez he tenido HardFault. Hay que revisar a que se debe
