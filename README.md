@@ -14,6 +14,30 @@ La diferencia radica en los PinName.h ya que el segundo carece de los puertos C 
 ## Changelog
 
 ----------------------------------------------------------------------------------------------
+##### 26.08.2017 ->commit:"Replanteamiento general"
+- [x] El robot es funcional en cuanto a motores y detección de presencia
+- [ ] Hay que mejorar y/o corregir los siguientes aspectos:
+
+	. Los motores sufren mucho calentamiento si están alimentados constantemente. Es necesario 
+	  incluir un regulador por driver con una línea de activación de forma que se puedan des-
+	  activar cuando se quiera (todos a la vez). BUSCAR REGULADOR 5V@2A con EN.
+	  
+	. Los sensores de presencia no pueden estar en la base, ya que el propio movimiento del robot
+	  genera eventos de presencia. Deberian situarse en el borde exterior de la maceta. REPLANTEAR.
+	  
+	. Los movimientos de cambio de dirección, inicio y parada son bruscos y generan oscilaciones 
+	  en la estructura. Habría que modificar el modelo IK para que se inicien y finalicen de forma
+	  suave. REDISEÑAR. 
+	  
+	. Buscar un led RGB para la copa de la flor y redifinir su formato. Quizás múltiples led colocados
+	  en las flores y controlados por una salida PWM y otro para el cuerpo de la copa. BUSCAR LED.
+	  
+	. Reutilizar RasPi con micrófono y altavoz para implementar servicios y funcionalidades avanzadas:
+		- Librería Node para implementar un medidor de decibelios y detectar chillidos y/o gritos.
+		- Librería Node/C++ para implementar protocolo serie mediante bluetooth y comunicar con el robot.
+	
+
+----------------------------------------------------------------------------------------------
 ##### 11.08.2017 ->commit:"Modo 3PIR con terminal remoto"
 - [x] Incluyo terminal remoto con comandos T para recalibrar
 - [ ] Definir otros módulos y juegos.
