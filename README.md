@@ -1,15 +1,12 @@
-# BluePill_mbedOS
+# Planta robotizada (proyecto XR+Inst)
 
-Proyecto en uVision5 utilizando mbed-os 5, compilado para 2 targets muy similares:
+Proyecto en uVision5 utilizando arm-mbed v5, compilado para:
 
 - NUCLEO_F103RB
 - BLUEPILL_F103C8
 
-Usan un procesador de la familia STM32F103xB. El primero con 64 pines y 128KB de flash y el segundo con 48 pines
-y 64KB de flash.
-
-La diferencia radica en los PinName.h ya que el segundo carece de los puertos C y D.
-
+El continuum robot es funcional a falta de solventar el calentamiento de los motores. Se puede seguir parte del proceso
+de montaje [aquí](https://photos.app.goo.gl/LPMHRP82iHefyZrRA)
   
 ## Changelog
 
